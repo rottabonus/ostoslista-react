@@ -7,14 +7,14 @@ morgan.token('body', function (request, response) {
   return JSON.stringify(request.body)})
 
 groceriesRouter.get('/', (request, response) => {
-    db.query('select * from groceries', (err, results) => {
-        if(err){
-            console.log('Something went wrong: ', err)
-            response.status(404).end()
-        }
-        console.log('Data received')
-        response.json(results)
-    })
+  db.query('select * from groceries', (err, results) => {
+    if(err){
+      console.log('Something went wrong: ', err)
+      response.status(404).end()
+    }
+    console.log('Data received')
+    response.json(results)
+  })
 })
 
 groceriesRouter.get('/:id', (request, response) => {
@@ -36,18 +36,29 @@ groceriesRouter.put('/:id', (request, response) => {
     name: body.name,
     price: body.price,
     amount: body.amount,
-    id: request.params.id
+    id: request.params.id,
+    category: body.cat_id,
+    brand: body.brand_id
   }
-  
-  db.query('update groceries SET name = ?, amount = ?, price = ? WHERE gr_id = ?', [item.name, item.amount, item.price, item.id],
-function (err, results) {
-  if (err){
-    console.log('Something went wrong:', err)
-    response.status(404).end()
-  }
-  console.log('Updated')
-  response.json(results)
+
+  db.query('update groceries SET name = ?, amount = ?, price = ?, cat_id = ?, brand_id = ? WHERE gr_id = ?', [item.name, item.amount, item.price, item.category, item.brand, item.id],
+    function (err, results) {
+      if (err){
+        console.log('Something went wrong:', err)
+        response.status(404).end()
+      }
+      console.log('Updated')
+      response.json(results)
+    })
 })
+
+groceriesRouter.delete('/:id', (request, response) => {
+  const id = request.params.id
+
+  db.query('delete from groceries where gr_id = ?', [id], function (err, results) {
+    if(err) throw err
+    response.json(results)
+  })
 })
 
 

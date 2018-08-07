@@ -28,6 +28,9 @@ INSERT INTO brand (name) VALUES
 ('Fazer'),
 ('Paulig');
 
+INSERT INTO brand (name) VALUES
+('Ei merkkiä');
+
 CREATE TABLE groceries (
 gr_id int(11) NOT NULL AUTO_INCREMENT,
 name varchar(100),
@@ -38,13 +41,18 @@ FOREIGN KEY (cat_id) REFERENCES category(cat_id),
 FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
 );
 
-INSERT INTO groceries (name, cat_id, brand_id) VALUES
-('Banaani', 1, 9),
-('Maito', 2, 6),
-('Jauheliha', 3, 5),
-('Sininen suklaalevy', 6, 7),
-('Kurkku', 1, 9),
-('Kahvi', 2, 8);
+ALTER TABLE groceries ADD price VARCHAR(100);
+ALTER TABLE groceries ADD amount VARCHAR(100);
+
+
+
+INSERT INTO groceries (name, cat_id, brand_id, price, amount) VALUES
+('Banaani', 1, 9, '0,20', '50g'),
+('Maito', 2, 6, '0,85', '1l'),
+('Jauheliha', 3, 5, '3,0', '400g'),
+('Sininen suklaalevy', 6, 7, '2,0', '200g'),
+('Kurkku', 1, 9, '1,0', '50g'),
+('Kahvi', 2, 8, '3,0', '500g');
 
 CREATE TABLE order_row (
 or_id int(11) NOT NULL AUTO_INCREMENT,

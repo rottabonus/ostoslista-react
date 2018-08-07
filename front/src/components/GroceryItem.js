@@ -1,14 +1,23 @@
 import React from 'react'
 
-const GroceryItem = (props) => {
-  return (
+const GroceryItem = ({ item, show, maximize }) => {
 
-    <div className="groceryItem">
-      <h3>{props.name}</h3>
-      <div>Price: {props.price} €</div>
-      <div>Amount: {props.amount}</div>
-    </div>
-  )
+  if (item.gr_id === maximize.gr_id) {
+    return (
+      <tr onClick={() => show(maximize)}>
+        <td>{maximize.name}</td>
+        <td>Price: {maximize.price} €</td>
+        <td>Amount: {maximize.amount}</td>
+        <td><button>edit</button></td>
+      </tr>
+    )
+  } else {
+    return (
+      <tr onClick={() => show(item)}>
+        <td>{item.name}</td>
+      </tr>
+    )
+  }
 }
 
 export default GroceryItem

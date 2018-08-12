@@ -29,27 +29,43 @@ groceriesRouter.get('/:id', (request, response) => {
   })
 })
 
+groceriesRouter.post('/', (request, response) => {
+  const body = request.body
+  const newItem = {
+    name: body.name,
+    price: body.price,
+    amount: body.amount,
+    cat_id: body.cat_id,
+    brand_id: body.brand_id
+  }
+
+  db.query('insert into groceries SET ?', newItem, function (err, results) {
+    if(err) throw err
+    response.json(results.insertId)
+  })
+})
+
+
 groceriesRouter.put('/:id', (request, response) => {
   const body = request.body
+  const id = request.params.id
 
   const item = {
     name: body.name,
     price: body.price,
     amount: body.amount,
-    id: request.params.id,
-    category: body.cat_id,
-    brand: body.brand_id
+    cat_id: body.cat_id,
+    brand_id: body.brand_id
   }
 
-  db.query('update groceries SET name = ?, amount = ?, price = ?, cat_id = ?, brand_id = ? WHERE gr_id = ?', [item.name, item.amount, item.price, item.category, item.brand, item.id],
-    function (err, results) {
-      if (err){
-        console.log('Something went wrong:', err)
-        response.status(404).end()
-      }
-      console.log('Updated')
-      response.json(results)
-    })
+  db.query('update groceries SET ? WHERE gr_id = ?', [item, id], function (err, results) {
+    if (err){
+      console.log('Something went wrong:', err)
+      response.status(404).end()
+    }
+    console.log('Updated')
+    response.json(results)
+  })
 })
 
 groceriesRouter.delete('/:id', (request, response) => {

@@ -2,32 +2,35 @@ import React from 'react'
 import './index.css'
 import GroceryDatabaseList from './components/GroceryDatabaseList'
 import About from './components/About'
-import axios from 'axios'
+import GroceryForm from './components/groceryForm'
+import EditGrocery from './components/EditGrocery'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import groceryService from './services/groceries'
+import categoryService from './services/categories'
+import brandService from './services/brands'
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      counter: 0,
       groceries: [],
+        categories: [],
+        brands: [],
+        brand: '',
+        category: '',
+        price: '',
+        amount: '',
         filter: '',
-        maximize: ''
+        maximize: '',
+        newName: ''
     }
   }
 
-  componentDidMount() {
-    axios
-      .get('http://localhost:3001/api/groceries')
-      .then(response => {
-        const groceries = response.data
-        console.log(groceries)
-      this.setState({groceries})
-      })
-  }
-
-  onClick = () =>  {
-    this.setState({ counter: this.state.counter + 1})
+  async componentDidMount() {
+          const groceries = await groceryService.getAll()
+            const categories = await categoryService.getAll()
+                const brands = await brandService.getAll()
+            this.setState({groceries, categories, brands})
   }
 
   handleFieldChange = (event) => {
@@ -47,6 +50,28 @@ class App extends React.Component {
       }
   }
 
+  create = async (event) => {
+
+      event.preventDefault()
+      console.log('click!')
+      const item = {
+          name: this.state.newName,
+          brand_id: this.state.brand,
+          cat_id: this.state.category,
+          price: this.state.price,
+          amount: this.state.amount
+      }
+      await groceryService.create(item)
+      const updatedGroceries = await groceryService.getAll()
+      console.log('item:',item)
+    this.setState({
+        groceries: updatedGroceries,
+        newName: '',
+        amount: '',
+        price: ''
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -54,15 +79,17 @@ class App extends React.Component {
       <div className="header">
       <ul>
         <li><Link to="/about">About</Link></li>
-        <li><Link to="/groceries">Groceries</Link></li>
+        <li><Link to="/">Groceries</Link></li>
+          <li><Link to="/create">Create</Link></li>
       </ul>
       </div>
       <div className="container">
-        <p>hello webpack {this.state.counter} clicks</p>
-        <button onClick={this.onClick}>click</button>
-        <Route path="/groceries" render={() => <GroceryDatabaseList show={this.show} maximize={this.state.maximize}
+        <Route exact path="/" render={() => <GroceryDatabaseList show={this.show} maximize={this.state.maximize}
         groceries={this.state.groceries} changeFilter={this.handleFieldChange} filter={this.state.filter}/>}/>
-         <Route path="/about" render={() => <About />}/>                   
+         <Route path="/about" render={() => <About />}/>
+         <Route path="/create" render={() => <GroceryForm newName={this.state.newName} changeField={this.handleFieldChange} create={this.create} brand={this.state.brand} price={this.state.price} amount={this.state.amount}
+                                                          category={this.state.category} changeOption={this.handleFieldChange} categories={this.state.categories} brands={this.state.brands}/>}/>
+          <Route path="/groceries/:id" render={() => <EditGrocery maximize={this.state.maximize}/>}/>
       </div>
       </div>
       </Router>

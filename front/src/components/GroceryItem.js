@@ -9,9 +9,9 @@ const GroceryItem = ({ item, show, maximize }) => {
         <td>{maximize.name}</td>
         <td>Price: {maximize.price} €</td>
         <td>Amount: {maximize.amount}</td>
-        <td><button onClick={(e) => e.stopPropagation()}><Link to={`groceries/${maximize.gr_id}`}>edit</Link></button></td>
+        <td onClick={(e) => e.stopPropagation()}><Link to={`/edit`} onClick={(e) => e.stopPropagation()}><button  onClick={(e) => e.stopPropagation()}>edit</button></Link></td>
       </tr>
-    )
+     )
   } else {
     return (
       <tr onClick={() => show(item)}>

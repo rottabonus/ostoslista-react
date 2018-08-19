@@ -6,11 +6,7 @@ const brandsRouter = require('./controllers/brands')
 const categoryRouter = require('./controllers/categories')
 const cors = require('cors')
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors())
 app.use(bodyParser.json())
 app.use('/api/groceries', groceriesRouter)
 app.use('/api/brands', brandsRouter)

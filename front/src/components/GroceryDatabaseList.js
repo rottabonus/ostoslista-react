@@ -1,7 +1,7 @@
 import React from 'react'
 import GroceryItem from './GroceryItem'
 
-const GroceryDatabaseList = ({ groceries, maximize, show, filter, changeFilter }) => {
+const GroceryDatabaseList = ({ groceries, maximize, show, filter, changeFilter, toEdit, remove }) => {
 
   const filtered = groceries.filter((grocery) =>
     grocery.name.toLowerCase().includes(filter.toLowerCase()))
@@ -14,9 +14,8 @@ const GroceryDatabaseList = ({ groceries, maximize, show, filter, changeFilter }
       <table>
         <tbody>
           {filtered.map(grocery =>
-            <GroceryItem key={grocery.gr_id} show={show} item={grocery} maximize={maximize}> </GroceryItem>
-          )
-          }
+            <GroceryItem key={grocery.gr_id} show={show} item={grocery} maximize={maximize} toEdit={toEdit} remove={remove}> </GroceryItem>
+          )}
         </tbody>
       </table>
     </div>

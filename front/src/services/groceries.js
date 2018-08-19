@@ -10,4 +10,13 @@ const create = async (newItem) => {
   return response.data
 }
 
-export default { getAll, create }
+const updateGrocery = async (id, item) => {
+  const response = await axios.put(`http://localhost:3001/api/groceries/${id}`, item)
+  return response.data
+}
+
+const remove = async (id) => {
+  const response = await axios.delete(`http://localhost:3001/api/groceries/${id}`)
+  return response.data
+}
+export default { getAll, create, updateGrocery, remove }

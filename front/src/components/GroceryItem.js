@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const GroceryItem = ({ item, show, maximize }) => {
+const GroceryItem = ({ item, show, maximize, toEdit, remove }) => {
 
   if (item.gr_id === maximize.gr_id) {
     return (
@@ -9,9 +9,10 @@ const GroceryItem = ({ item, show, maximize }) => {
         <td>{maximize.name}</td>
         <td>Price: {maximize.price} €</td>
         <td>Amount: {maximize.amount}</td>
-        <td onClick={(e) => e.stopPropagation()}><Link to={`/edit`} onClick={(e) => e.stopPropagation()}><button  onClick={(e) => e.stopPropagation()}>edit</button></Link></td>
+        <td onClick={(e) => toEdit(e)}><Link to={'/edit'}><button>edit</button></Link></td>
+        <td onClick={(e) => remove(e, maximize)}><button>delete</button></td>
       </tr>
-     )
+    )
   } else {
     return (
       <tr onClick={() => show(item)}>

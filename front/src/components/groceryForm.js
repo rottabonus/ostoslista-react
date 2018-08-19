@@ -1,29 +1,31 @@
 import React from 'react'
 
-const GroceryForm = ({ categories, category, create, newName, changeField, brands, brand, changeOption, amount, price }) => {
+const GroceryForm = ({ categories, create, changeField, brands }) => {
 
   return (
     <div>
       <form onSubmit={create}>
         <h2>groceryForm</h2>
         <div>
-          <p>name<input type="text" name="newName" value={newName} onChange={changeField} /></p>
+          <p>name<input type="text" name="newName"  onChange={changeField} /></p>
         </div>
         <div>
-          <p>price<input type="text" name="price" value={price} onChange={changeField} /></p>
+          <p>price<input type="text" name="price" onChange={changeField} /></p>
         </div>
         <div>
-          <p>amount<input type="text" name="amount" value={amount} onChange={changeField} /></p>
+          <p>amount<input type="text" name="amount" onChange={changeField} /></p>
         </div>
         <div>
-          <select onChange={changeOption} name="category" value={category}>
+          <select onChange={changeField} defaultValue="choose" name="category">
+            <option className="defaultOption" value="">choose</option>
             {categories.map(item =>
               <option key={item.cat_id} value={item.cat_id}>{item.name}</option>
             )}
           </select>
         </div>
         <div>
-          <select onChange={changeOption} name="brand" value={brand}>
+          <select onChange={changeField} name="brand">
+            <option className="defaultOption" value="">choose</option>
             {brands.map(item =>
               <option key={item.brand_id} value={item.brand_id}>{item.name}</option>
             )}

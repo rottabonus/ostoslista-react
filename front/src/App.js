@@ -4,6 +4,8 @@ import GroceryDatabaseList from './components/GroceryDatabaseList'
 import About from './components/About'
 import GroceryForm from './components/groceryForm'
 import EditGrocery from './components/EditGrocery'
+import BrandsAndCategories from './components/BrandsAndCategories'
+import BrandForm from './components/BrandForm'
 import { Router, Route, Link } from 'react-router-dom'
 import groceryService from './services/groceries'
 import categoryService from './services/categories'
@@ -23,7 +25,8 @@ class App extends React.Component {
         amount: '',
         filter: '',
         maximize: '',
-        newName: ''
+        newName: '',
+        borc: ''
     }
   }
 
@@ -65,12 +68,10 @@ class App extends React.Component {
   create = async (event) => {
       event.preventDefault()
       console.log('create clicked!')
-      const brand = parseInt(this.state.brand)
-      const category = parseInt(this.state.category)
       const item = {
           name: this.state.newName,
-          brand_id: brand,
-          cat_id: category,
+          brand_id: parseInt(this.state.brand),
+          cat_id: parseInt(this.state.category),
           price: this.state.price,
           amount: this.state.amount
       }
@@ -86,16 +87,44 @@ class App extends React.Component {
       history.push('/')
   }
 
+  createBrandOrCategory = async (event) => {
+    event.preventDefault()
+    console.log('createBrandOrCategory clicked!')
+    const item = {
+      name: this.state.newName
+    }
+
+    if(this.state.borc === "brand"){
+      await brandService.create(item)
+      const updatedBrands = await brandService.getAll()
+      this.setState({
+        brands: updatedBrands,
+        newName: ''
+      })
+      history.push('/b&c')
+    }
+    else if (this.state.borc === 'category'){
+      console.log('creating new category')
+      await categoryService.create(item)
+      const updatedCategories = await categoryService.getAll()
+      this.setState({
+        categories: updatedCategories,
+        newName: ''
+      })
+      history.push('/b&c')
+    } else {
+      alert('choose category or brand!')
+    }
+  }
+
   update = async (event) => {
       event.preventDefault()
       console.log('update clicked!')
-      const brand = parseInt(this.state.brand)
-      const category = parseInt(this.state.category)
       const id = this.state.maximize.gr_id
       const updateItem = {
           name: this.state.newName,
-          brand_id: brand,
-          cat_id: category,
+          brand_id: parseInt(this.state.brand),
+          cat_id: parseInt(this.state.category),
           price: this.state.price,
           amount: this.state.amount
       }
@@ -127,14 +156,12 @@ class App extends React.Component {
     return (
       <Router history={history}>
       <div>
-      <div className="header">
-      <ul>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/">Groceries</Link></li>
-          <li><Link to="/create">Create</Link></li>
-
-      </ul>
+      <div className="header">   
+        <div><Link to="/about">About</Link></div>
+        <div><Link to="/">Groceries</Link></div>
+          <div><Link to="/b&c">Brands&Categories</Link></div>
       </div>
+      
       <div className="container">
         <Route exact path="/" render={() => <GroceryDatabaseList show={this.show} maximize={this.state.maximize} toEdit={this.toEdit} remove={this.delete}
                                                                  groceries={this.state.groceries} changeFilter={this.handleFieldChange} filter={this.state.filter}/>}/>
@@ -143,6 +170,8 @@ class App extends React.Component {
                                                           categories={this.state.categories} brands={this.state.brands}/>}/>
           <Route path="/edit" render={() => <EditGrocery maximize={this.state.maximize} categories={this.state.categories} save={this.update}
                                                                     brands={this.state.brands} changeField={this.handleFieldChange} />}/>
+          <Route path="/b&c" render={() => <BrandsAndCategories brands={this.state.brands} categories={this.state.categories} changeField={this.handleFieldChange} borc={this.state.borc} />}/>
+          <Route path="/cb" render={() => <BrandForm create={this.createBrandOrCategory} changeField={this.handleFieldChange} newName={this.state.newName} borc={this.state.borc}/>}/>                                                         
       </div>
       </div>
       </Router>

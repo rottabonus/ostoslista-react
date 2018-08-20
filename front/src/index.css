@@ -11,3 +11,9 @@
 .defaultOption {
   color: gray;
 }
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}

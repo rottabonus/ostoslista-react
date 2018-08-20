@@ -5,4 +5,9 @@ const getAll = async () => {
   return request.data
 }
 
-export default { getAll }
+const create = async (newItem) => {
+  const response = await axios.post('http://localhost:3001/api/brands', newItem)
+  return response.data
+}
+
+export default { getAll, create }

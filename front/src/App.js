@@ -11,6 +11,7 @@ import groceryService from './services/groceries'
 import categoryService from './services/categories'
 import brandService from './services/brands'
 import history from './history/history'
+import EditBrand from './components/EditBrand'
 
 class App extends React.Component {
   constructor() {
@@ -56,13 +57,20 @@ class App extends React.Component {
 
   toEdit = (event) => {
       event.stopPropagation()
-      this.setState({
+      if(this.state.maximize.gr_id !== undefined) {
+          this.setState({
           newName: this.state.maximize.name,
           price: this.state.maximize.price,
           amount: this.state.maximize.amount,
           brand: this.state.maximize.brand_id,
           category: this.state.maximize.cat_id
       })
+    } else {
+      this.setState({
+        newName: this.state.maximize.name
+      })
+    }
+      
   }
 
   create = async (event) => {
@@ -140,6 +148,47 @@ class App extends React.Component {
       history.push('/')
   }
 
+//updatee tyhjän !!!!
+
+
+  updateBrandOrCategory = async (event) => {
+    event.preventDefault()
+    console.log('updateBrandOrCategory clicked!')
+    if(this.state.borc === 'brands') {
+      console.log('brands!')
+      const id = this.state.maximize.brand_id
+      const item = {
+        name: this.state.newName
+      }
+      await brandService.update(id, item)
+      console.log('id', id, 'name', item)
+      const updatedBrands = await brandService.getAll()
+      this.setState({
+        brands: updatedBrands,
+        newName: '',
+        maximize: '',
+        borc: ''
+      })
+      history.push('/b&c')
+    }
+    else {
+      console.log('categories!')
+      const id = this.state.maximize.cat_id
+      const item = {
+        name: this.state.newName
+      }
+      await categoryService.update(id, item)
+      const updatedCategories = await categoryService.getAll()
+      this.setState({
+        categories: updatedCategories,
+        newName: '',
+        maximize: '',
+        borc: ''
+      })
+      history.push('/b&c')
+    }
+  }
+
   delete = async (event, maximized) => {
       event.stopPropagation()
       console.log('delete clicked!, to delete', maximized.name)
@@ -151,6 +200,7 @@ class App extends React.Component {
           maximized: ''
       })
   }
+
 
   render() {
     return (
@@ -170,8 +220,10 @@ class App extends React.Component {
                                                           categories={this.state.categories} brands={this.state.brands}/>}/>
           <Route path="/edit" render={() => <EditGrocery maximize={this.state.maximize} categories={this.state.categories} save={this.update}
                                                                     brands={this.state.brands} changeField={this.handleFieldChange} />}/>
-          <Route path="/b&c" render={() => <BrandsAndCategories brands={this.state.brands} categories={this.state.categories} changeField={this.handleFieldChange} borc={this.state.borc} />}/>
-          <Route path="/cb" render={() => <BrandForm create={this.createBrandOrCategory} changeField={this.handleFieldChange} newName={this.state.newName} borc={this.state.borc}/>}/>                                                         
+          <Route path="/b&c" render={() => <BrandsAndCategories brands={this.state.brands} categories={this.state.categories} changeField={this.handleFieldChange} borc={this.state.borc} show={this.show}
+                                                              toEdit={this.toEdit} maximize={this.state.maximize}/>}/>
+          <Route path="/cb" render={() => <BrandForm create={this.createBrandOrCategory} changeField={this.handleFieldChange} newName={this.state.newName} borc={this.state.borc}/>}/>
+          <Route path="/editb&c" render={() => <EditBrand update={this.updateBrandOrCategory} newName={this.state.newName} changeField={this.handleFieldChange} />}/>                                                         
       </div>
       </div>
       </Router>

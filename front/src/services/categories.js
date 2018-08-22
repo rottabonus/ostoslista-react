@@ -10,4 +10,9 @@ const create = async (newItem) => {
   return response.data
 }
 
-export default { getAll, create }
+const update = async (id, item) => {
+  const response = await axios.put(`http://localhost:3001/api/categories/${id}`, item)
+  return response.data
+}
+
+export default { getAll, create, update }

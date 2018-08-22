@@ -15,5 +15,10 @@ const update = async (id, item) => {
   return response.data
 }
 
+const remove = async (id) => {
+  const response = await axios.delete(`http://localhost:3001/api/brands/${id}`)
+  return response.data
+}
 
-export default { getAll, create, update }
+
+export default { getAll, create, update, remove }

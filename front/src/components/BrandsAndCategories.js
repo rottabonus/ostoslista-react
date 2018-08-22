@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Item from './Item'
 
-const BrandsAndCategories = ({ brands, categories, changeField, borc, show, maximize, toEdit }) => {
+const BrandsAndCategories = ({ brands, categories, changeField, borc, show, maximize, toEdit, remove }) => {
 	
 	if(borc === ''){
 		return (
@@ -27,9 +27,9 @@ const BrandsAndCategories = ({ brands, categories, changeField, borc, show, maxi
 	
 	{borc === 'categories' 
 		? 
-	categories.map(category => <Item toEdit={toEdit} maximize={maximize} item={category} show={show} key={category.cat_id}>{category.name}</Item>)
+	categories.map(category => <Item toEdit={toEdit} maximize={maximize} item={category} show={show} key={category.cat_id} remove={remove}>{category.name}</Item>)
 		: 
-	brands.map(brand => <Item toEdit={toEdit} item={brand} maximize={maximize} show={show} key={brand.brand_id}>{brand.name}</Item>)}		
+	brands.map(brand => <Item toEdit={toEdit} item={brand} maximize={maximize} show={show} key={brand.brand_id} remove={remove}>{brand.name}</Item>)}		
 	</div>		
 	</div>
 	)

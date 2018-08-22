@@ -148,9 +148,6 @@ class App extends React.Component {
       history.push('/')
   }
 
-//updatee tyhjän !!!!
-
-
   updateBrandOrCategory = async (event) => {
     event.preventDefault()
     console.log('updateBrandOrCategory clicked!')
@@ -166,8 +163,7 @@ class App extends React.Component {
       this.setState({
         brands: updatedBrands,
         newName: '',
-        maximize: '',
-        borc: ''
+        maximize: ''
       })
       history.push('/b&c')
     }
@@ -182,8 +178,7 @@ class App extends React.Component {
       this.setState({
         categories: updatedCategories,
         newName: '',
-        maximize: '',
-        borc: ''
+        maximize: ''
       })
       history.push('/b&c')
     }
@@ -197,8 +192,30 @@ class App extends React.Component {
       await groceryService.remove(id)
       this.setState({
           groceries: groceries.filter(g => g.gr_id !== id),
-          maximized: ''
+          maximize: ''
       })
+  }
+
+  deleteBrandOrCategory = async (event, maximized) => {
+    event.stopPropagation()
+    console.log('deleteBrandOrCategory clicked! to delete:', maximized.name)
+    if(this.state.borc === 'brands'){
+      const id = maximized.brand_id
+      await brandService.remove(id)
+      const updatedBrands = await brandService.getAll()
+      this.setState({
+        brands: updatedBrands,
+        maximize: ''
+      })
+    } else {
+      const id = maximized.cat_id
+      await categoryService.remove(id)
+      const updatedCategories = await categoryService.getAll()
+      this.setState({
+        categories: updatedCategories,
+        maximize: ''
+      })
+    }
   }
 
 
@@ -221,7 +238,7 @@ class App extends React.Component {
           <Route path="/edit" render={() => <EditGrocery maximize={this.state.maximize} categories={this.state.categories} save={this.update}
                                                                     brands={this.state.brands} changeField={this.handleFieldChange} />}/>
           <Route path="/b&c" render={() => <BrandsAndCategories brands={this.state.brands} categories={this.state.categories} changeField={this.handleFieldChange} borc={this.state.borc} show={this.show}
-                                                              toEdit={this.toEdit} maximize={this.state.maximize}/>}/>
+                                                              toEdit={this.toEdit} maximize={this.state.maximize} remove={this.deleteBrandOrCategory}/>}/>
           <Route path="/cb" render={() => <BrandForm create={this.createBrandOrCategory} changeField={this.handleFieldChange} newName={this.state.newName} borc={this.state.borc}/>}/>
           <Route path="/editb&c" render={() => <EditBrand update={this.updateBrandOrCategory} newName={this.state.newName} changeField={this.handleFieldChange} />}/>                                                         
       </div>

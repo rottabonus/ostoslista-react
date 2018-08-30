@@ -17,3 +17,8 @@
 	flex-direction: row;
 	justify-content: space-around;
 }
+
+.shopItem {
+	display: flex;
+	flex-direction: row;
+}

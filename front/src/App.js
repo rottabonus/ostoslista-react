@@ -6,12 +6,14 @@ import GroceryForm from './components/groceryForm'
 import EditGrocery from './components/EditGrocery'
 import BrandsAndCategories from './components/BrandsAndCategories'
 import BrandForm from './components/BrandForm'
+import EditBrand from './components/EditBrand'
+import Shoppinglist from './components/Shoppinglist'
 import { Router, Route, Link } from 'react-router-dom'
 import groceryService from './services/groceries'
 import categoryService from './services/categories'
 import brandService from './services/brands'
+import shopService from './services/shoppinglist'
 import history from './history/history'
-import EditBrand from './components/EditBrand'
 
 class App extends React.Component {
   constructor() {
@@ -27,7 +29,9 @@ class App extends React.Component {
         filter: '',
         maximize: '',
         newName: '',
-        borc: ''
+        borc: '',
+        listitems: '',
+        quantity: ''
     }
   }
 
@@ -35,7 +39,8 @@ class App extends React.Component {
           const groceries = await groceryService.getAll()
             const categories = await categoryService.getAll()
                 const brands = await brandService.getAll()
-            this.setState({groceries, categories, brands})
+                  const listitems = await shopService.getAll()
+            this.setState({groceries, categories, brands, listitems})
   }
 
   handleFieldChange = (event) => {
@@ -218,6 +223,29 @@ class App extends React.Component {
     }
   }
 
+  addToList = async (event, maximized) => {
+    event.stopPropagation()
+    console.log('clicked addToList', maximized.name)
+    const quantity = parseInt(this.state.quantity)
+    const newListItem = {
+      quantity,
+      gr_id: maximized.gr_id
+    }
+    console.log(newListItem)
+    await shopService.add(newListItem)
+    const updatedShoppinglist = await shopService.getAll()
+    this.setState({
+      listitems: updatedShoppinglist,
+      maximize: '',
+      quantity: ''
+    })
+  }
+
+  removeFromList = async (event, item) => {
+    event.preventDefault()
+    console.log('removeFromList clicked', item)
+  }
+
 
   render() {
     return (
@@ -225,22 +253,24 @@ class App extends React.Component {
       <div>
       <div className="header">   
         <div><Link to="/about">About</Link></div>
+        <div><Link to="/shoppinglist">Shoppinglist</Link></div>
         <div><Link to="/">Groceries</Link></div>
           <div><Link to="/b&c">Brands&Categories</Link></div>
       </div>
       
       <div className="container">
-        <Route exact path="/" render={() => <GroceryDatabaseList show={this.show} maximize={this.state.maximize} toEdit={this.toEdit} remove={this.delete}
-                                                                 groceries={this.state.groceries} changeFilter={this.handleFieldChange} filter={this.state.filter}/>}/>
+        <Route exact path="/" render={() => <GroceryDatabaseList show={this.show} maximize={this.state.maximize} toEdit={this.toEdit} remove={this.delete} add={this.addToList}
+                                              groceries={this.state.groceries} changeFilter={this.handleFieldChange} filter={this.state.filter} quantity={this.state.quatity}/>}/>
          <Route path="/about" render={() => <About />}/>
          <Route path="/create" render={() => <GroceryForm changeField={this.handleFieldChange} create={this.create}
-                                                          categories={this.state.categories} brands={this.state.brands}/>}/>
+                                              categories={this.state.categories} brands={this.state.brands}/>}/>
           <Route path="/edit" render={() => <EditGrocery maximize={this.state.maximize} categories={this.state.categories} save={this.update}
-                                                                    brands={this.state.brands} changeField={this.handleFieldChange} />}/>
+                                              brands={this.state.brands} changeField={this.handleFieldChange} />}/>
           <Route path="/b&c" render={() => <BrandsAndCategories brands={this.state.brands} categories={this.state.categories} changeField={this.handleFieldChange} borc={this.state.borc} show={this.show}
-                                                              toEdit={this.toEdit} maximize={this.state.maximize} remove={this.deleteBrandOrCategory}/>}/>
+                                              toEdit={this.toEdit} maximize={this.state.maximize} remove={this.deleteBrandOrCategory}/>}/>
           <Route path="/cb" render={() => <BrandForm create={this.createBrandOrCategory} changeField={this.handleFieldChange} newName={this.state.newName} borc={this.state.borc}/>}/>
-          <Route path="/editb&c" render={() => <EditBrand update={this.updateBrandOrCategory} newName={this.state.newName} changeField={this.handleFieldChange} />}/>                                                         
+          <Route path="/editb&c" render={() => <EditBrand update={this.updateBrandOrCategory} newName={this.state.newName} changeField={this.handleFieldChange} />}/>
+          <Route path="/shoppinglist" render={() => <Shoppinglist list={this.state.listitems} remove={this.removeFromList} />}/>                                                         
       </div>
       </div>
       </Router>

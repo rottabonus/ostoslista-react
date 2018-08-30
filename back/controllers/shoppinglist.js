@@ -41,4 +41,63 @@ shopRouter.get('/:id', (request, response) => {
   })
 })
 
+// INSERT INTO order_row ( quantity, gr_id, shop_id )  VALUES (?, ?, (SELECT shop_id FROM shoppinglist WHERE resolved = 'N'));
+
+shopRouter.post('/', (request, response) => {
+  const body = request.body
+  const newItem = {
+    quantity: body.quantity,
+    gr_id: body.gr_id
+  }
+
+  db.query('INSERT INTO order_row (quantity, gr_id, shop_id) VALUES ('
+    +db.escape(newItem.quantity)+', '+db.escape(newItem.gr_id)+
+    ", (SELECT shop_id FROM shoppinglist WHERE resolved = 'N'))", 
+    function (err, results) {
+    if(err) throw err
+    response.json(results.insertId)
+  })
+})
+
+shopRouter.delete('/:id', (request, response) => {
+  const id = request.params.id
+
+  db.query('delete from order_row where or_id = ?', [id], function (err, results) {
+    if(err) throw err
+    response.json(results)
+  })
+})
+
+shopRouter.put('/:id', (request, response) => {
+  const quantity = request.body.quantity
+  const id = request.params.id
+
+  db.query('update order_row SET quantity = ? WHERE or_id = ?', [quantity, id],
+    function (err, results) {
+      if (err){
+        console.log('Something went wrong:', err)
+        response.status(404).end()
+      }
+      console.log('Updated')
+      response.json(results)
+    })
+})
+
+shopRouter.post('/resolve', (request, response) => {
+  if (request.body.length !== 0){
+      response.status(404).end
+  }
+db.query("update shoppinglist set resolved ='Y' WHERE resolved ='N'",
+  function (err, results) {
+    if (err){
+      console.log('Something went wrong:', err)
+      response.status(404).end()
+    }
+    console.log('Updated')
+    response.json(results)
+  })  
+})
+  
+
+
 module.exports = shopRouter

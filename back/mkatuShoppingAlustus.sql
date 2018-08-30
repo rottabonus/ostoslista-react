@@ -52,6 +52,13 @@ INSERT INTO groceries (name, cat_id, brand_id, price, amount) VALUES
 ('Kurkku', 1, 9, '1,0', '50g'),
 ('Kahvi', 2, 8, '3,0', '500g');
 
+CREATE TABLE shoppinglist (
+shop_id int(11) NOT NULL AUTO_INCREMENT,
+date varchar(200),
+resolved varchar(100),
+PRIMARY KEY (shop_id)
+);
+
 CREATE TABLE order_row (
 or_id int(11) NOT NULL AUTO_INCREMENT,
 quantity int(11),
@@ -62,18 +69,11 @@ FOREIGN KEY (gr_id) REFERENCES groceries(gr_id),
 FOREIGN KEY (shop_id) REFERENCES shoppinglist(shop_id)
 );
 
-CREATE TABLE shoppinglist (
-shop_id int(11) NOT NULL AUTO_INCREMENT,
-date varchar(200),
-resolved varchar(100),
-PRIMARY KEY (shop_id)
-);
-
 INSERT INTO shoppinglist (date, resolved) VALUES
 ('20-08-2018', 'N');
 
 INSERT INTO order_row (quantity, gr_id, shop_id) VALUES
-(2, 30, 1),
+(2, 13, 1),
 (1, 15, 1),
 (5, 14, 1),
 (1, 18, 1),

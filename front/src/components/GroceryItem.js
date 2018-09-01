@@ -7,6 +7,8 @@ const GroceryItem = ({ add, item, show, maximize, toEdit, remove, quantity, chan
     return (
       <tr onClick={() => show(maximize)}>
         <td>{maximize.name}</td>
+        <td>{item.brand}</td>
+        <td>{item.category}</td>
         <td>Price: {maximize.price} €</td>
         <td>Amount: {maximize.amount}</td>
         <td><input onClick={(e) => e.stopPropagation()} onChange={change} name="quantity" type="number" /></td>
@@ -19,6 +21,8 @@ const GroceryItem = ({ add, item, show, maximize, toEdit, remove, quantity, chan
     return (
       <tr onClick={() => show(item)}>
         <td>{item.name}</td>
+        <td>{item.brand}</td>
+        <td>{item.category}</td>
       </tr>
     )
   }

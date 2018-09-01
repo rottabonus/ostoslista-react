@@ -9,6 +9,11 @@ const config = {
     filename: 'main.js'
   },
   devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001'
+      },
+    },
     contentBase: path.resolve(__dirname, 'dist'),
     historyApiFallback: {disableDotRule: true},
     compress: true,
@@ -32,4 +37,5 @@ const config = {
     ]
   }
 }
+
 module.exports = config

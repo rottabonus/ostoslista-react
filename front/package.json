@@ -6,6 +6,7 @@
     "build": "webpack --mode=development",
     "start": "webpack-dev-server --mode=development"
   },
+  "proxy": "http://localhost:3001",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",

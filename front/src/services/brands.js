@@ -1,22 +1,22 @@
 import axios from 'axios'
 
 const getAll = async () => {
-  const request = await axios.get('http://localhost:3001/api/brands')
+  const request = await axios.get('/api/brands')
   return request.data
 }
 
 const create = async (newItem) => {
-  const response = await axios.post('http://localhost:3001/api/brands', newItem)
+  const response = await axios.post('/api/brands', newItem)
   return response.data
 }
 
 const update = async (id, item) => {
-  const response = await axios.put(`http://localhost:3001/api/brands/${id}`, item)
+  const response = await axios.put(`/api/brands/${id}`, item)
   return response.data
 }
 
 const remove = async (id) => {
-  const response = await axios.delete(`http://localhost:3001/api/brands/${id}`)
+  const response = await axios.delete(`/api/brands/${id}`)
   return response.data
 }
 

@@ -19,6 +19,11 @@
 }
 
 .shopItem {
-	display: flex;
-	flex-direction: row;
+    margin-bottom: 10;
+    padding-bottom: 10;
+}
+
+.archiveDivs {
+    display: flex;
+    flex-direction: row;
 }

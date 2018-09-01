@@ -8,6 +8,7 @@ import BrandsAndCategories from './components/BrandsAndCategories'
 import BrandForm from './components/BrandForm'
 import EditBrand from './components/EditBrand'
 import Shoppinglist from './components/Shoppinglist'
+import ListArchive from './components/ListArchive'
 import { Router, Route, Link } from 'react-router-dom'
 import groceryService from './services/groceries'
 import categoryService from './services/categories'
@@ -19,19 +20,9 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      groceries: [],
-        categories: [],
-        brands: [],
-        brand: '',
-        category: '',
-        price: '',
-        amount: '',
-        filter: '',
-        maximize: '',
-        newName: '',
-        borc: '',
-        listitems: '',
-        quantity: ''
+      groceries: [], categories: [], brands: [], brand: '', category: '', price: '', amount: '',
+        filter: '', maximize: '', newName: '', borc: '', listItems: [], quantity: '',
+        date: 'yyyy-mm-dd', history: [], listNum: '', oldList: []
     }
   }
 
@@ -39,8 +30,9 @@ class App extends React.Component {
           const groceries = await groceryService.getAll()
             const categories = await categoryService.getAll()
                 const brands = await brandService.getAll()
-                  const listitems = await shopService.getAll()
-            this.setState({groceries, categories, brands, listitems})
+                  const listItems = await shopService.getAll()
+                    const history = await shopService.getHistory()
+            this.setState({ groceries, categories, brands, listItems, history })
   }
 
   handleFieldChange = (event) => {
@@ -75,7 +67,6 @@ class App extends React.Component {
         newName: this.state.maximize.name
       })
     }
-      
   }
 
   create = async (event) => {
@@ -133,24 +124,28 @@ class App extends React.Component {
   update = async (event) => {
       event.preventDefault()
       console.log('update clicked!')
-      const id = this.state.maximize.gr_id
-      const updateItem = {
-          name: this.state.newName,
-          brand_id: parseInt(this.state.brand),
-          cat_id: parseInt(this.state.category),
-          price: this.state.price,
-          amount: this.state.amount
+      if (this.state.brand === undefined || this.state.category === undefined) {
+          console.log('cat or brand null')
+      } else {
+          const id = this.state.maximize.gr_id
+          const updateItem = {
+              name: this.state.newName,
+              brand_id: parseInt(this.state.brand),
+              cat_id: parseInt(this.state.category),
+              price: this.state.price,
+              amount: this.state.amount
+          }
+          await groceryService.updateGrocery(id, updateItem)
+          const updatedGroceries = await groceryService.getAll()
+          this.setState({
+              groceries: updatedGroceries,
+              newName: '',
+              amount: '',
+              price: '',
+              maximize: ''
+          })
+          history.push('/')
       }
-      await groceryService.updateGrocery(id, updateItem)
-      const updatedGroceries = await groceryService.getAll()
-      this.setState({
-          groceries: updatedGroceries,
-          newName: '',
-          amount: '',
-          price: '',
-          maximize: ''
-      })
-      history.push('/')
   }
 
   updateBrandOrCategory = async (event) => {
@@ -235,7 +230,7 @@ class App extends React.Component {
     await shopService.add(newListItem)
     const updatedShoppinglist = await shopService.getAll()
     this.setState({
-      listitems: updatedShoppinglist,
+      listItems: updatedShoppinglist,
       maximize: '',
       quantity: ''
     })
@@ -244,8 +239,55 @@ class App extends React.Component {
   removeFromList = async (event, item) => {
     event.preventDefault()
     console.log('removeFromList clicked', item)
+      const id = item.or_id
+      await shopService.remove(id)
+      const updatedListItems = await shopService.getAll()
+      this.setState({
+          listItems: updatedListItems
+      })
   }
 
+  resolve = async (event) => {
+      event.preventDefault()
+      if(window.confirm('Are you sure you want to resolve the shoppinglist?')){
+          console.log('resolve submitted')
+          const resolver = {}
+          await shopService.resolveList(resolver)
+          this.setState({
+              listItems: []
+          })
+      }
+  }
+
+  newShoppingList = async (event) => {
+      event.preventDefault()
+      console.log('new shoppingList!')
+      const reg = /(\d{4}-\d{2}-\d{2})/
+      const matches = this.state.date.match(reg)
+      console.log(matches)
+      if(matches === null){
+          window.confirm('did not match pattern yyyy-mm-dd')
+      } else {
+          const newItem = { date: this.state.date,
+                        resolved: 'N'}
+          await shopService.newlist(newItem)
+          this.setState({
+              listItems: []
+          })
+          history.push('/')
+      }
+  }
+
+  getOldList = async (event, id) => {
+      event.preventDefault()
+      console.log('pushed archiveItem', id)
+      const oldList = await shopService.getOne(id)
+      if (this.state.oldList.length === 0){
+          this.setState({ oldList })
+      } else {
+          this.setState({oldList: []})
+      }
+  }
 
   render() {
     return (
@@ -256,8 +298,9 @@ class App extends React.Component {
         <div><Link to="/shoppinglist">Shoppinglist</Link></div>
         <div><Link to="/">Groceries</Link></div>
           <div><Link to="/b&c">Brands&Categories</Link></div>
+          <div><Link to="/archive">Archive</Link></div>
       </div>
-      
+
       <div className="container">
         <Route exact path="/" render={() => <GroceryDatabaseList show={this.show} maximize={this.state.maximize} toEdit={this.toEdit} remove={this.delete} add={this.addToList}
                                               groceries={this.state.groceries} changeFilter={this.handleFieldChange} filter={this.state.filter} quantity={this.state.quatity}/>}/>
@@ -270,7 +313,8 @@ class App extends React.Component {
                                               toEdit={this.toEdit} maximize={this.state.maximize} remove={this.deleteBrandOrCategory}/>}/>
           <Route path="/cb" render={() => <BrandForm create={this.createBrandOrCategory} changeField={this.handleFieldChange} newName={this.state.newName} borc={this.state.borc}/>}/>
           <Route path="/editb&c" render={() => <EditBrand update={this.updateBrandOrCategory} newName={this.state.newName} changeField={this.handleFieldChange} />}/>
-          <Route path="/shoppinglist" render={() => <Shoppinglist list={this.state.listitems} remove={this.removeFromList} />}/>                                                         
+          <Route path="/shoppinglist" render={() => <Shoppinglist history={this.state.history} list={this.state.listItems} remove={this.removeFromList} resolve={this.resolve} newList={this.newShoppingList} changeField={this.handleFieldChange}/>}/>
+          <Route path="/archive" render={() => <ListArchive history={this.state.history} getOld={this.getOldList} old={this.state.oldList}/>}/>
       </div>
       </div>
       </Router>

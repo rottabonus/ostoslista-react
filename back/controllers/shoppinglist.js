@@ -7,13 +7,24 @@ morgan.token('body', function (request, response) {
   return JSON.stringify(request.body)})
 
 shopRouter.get('/', (request, response) => {
-  db.query('SELECT a.or_id, a.quantity, c.name, b.date \n' +
+  db.query('select a.or_id, g.name, a.quantity, b.name as brand, c.name as category, g.price\n' +
       'FROM order_row a \n' +
-      'INNER JOIN shoppinglist b \n' +
-      'ON a.shop_id = b.shop_id \n' +
-      'INNER JOIN groceries c \n' +
-      'ON c.gr_id = a.gr_id\n' +
-      'WHERE b.resolved = \'N\';', (err, results) => {
+      'INNER JOIN shoppinglist s ON s.shop_id=a.shop_id \n' +
+      'INNER JOIN groceries g ON g.gr_id=a.gr_id \n' +
+      'INNER JOIN brand b ON b.brand_id=g.brand_id \n ' +
+      'INNER JOIN category c ON c.cat_id=g.cat_id \n' +
+      'WHERE s.resolved = \'N\'', (err, results) => {
+    if(err){
+      console.log('Something went wrong: ', err)
+      response.status(404).end()
+    }
+    console.log('Data received')
+    response.json(results)
+  })
+})
+
+shopRouter.get('/history', (request, response) => {
+  db.query('select shop_id, date, resolved FROM shoppinglist', (err, results) => {
     if(err){
       console.log('Something went wrong: ', err)
       response.status(404).end()
@@ -25,12 +36,12 @@ shopRouter.get('/', (request, response) => {
 
 shopRouter.get('/:id', (request, response) => {
   const id = request.params.id
-  db.query('SELECT a.or_id, a.quantity, c.name, b.date \n' +
+  db.query('select a.or_id, g.name, a.quantity, b.name as brand, c.name as category, g.price\n' +
       'FROM order_row a \n' +
-      'INNER JOIN shoppinglist b \n' +
-      'ON a.shop_id = b.shop_id \n' +
-      'INNER JOIN groceries c \n' +
-      'ON c.gr_id = a.gr_id\n' +
+      'INNER JOIN shoppinglist s ON s.shop_id=a.shop_id \n' +
+      'INNER JOIN groceries g ON g.gr_id=a.gr_id \n' +
+      'INNER JOIN brand b ON b.brand_id=g.brand_id \n ' +
+      'INNER JOIN category c ON c.cat_id=g.cat_id \n' +
       'WHERE a.shop_id = ?', [id], function (err, results) {
     if (err){
       console.log('Something went wrong: ', err)
@@ -52,8 +63,8 @@ shopRouter.post('/', (request, response) => {
 
   db.query('INSERT INTO order_row (quantity, gr_id, shop_id) VALUES ('
     +db.escape(newItem.quantity)+', '+db.escape(newItem.gr_id)+
-    ", (SELECT shop_id FROM shoppinglist WHERE resolved = 'N'))", 
-    function (err, results) {
+    ', (SELECT shop_id FROM shoppinglist WHERE resolved = \'N\'))',
+  function (err, results) {
     if(err) throw err
     response.json(results.insertId)
   })
@@ -84,20 +95,31 @@ shopRouter.put('/:id', (request, response) => {
 })
 
 shopRouter.post('/resolve', (request, response) => {
-  if (request.body.length !== 0){
-      response.status(404).end
-  }
-db.query("update shoppinglist set resolved ='Y' WHERE resolved ='N'",
-  function (err, results) {
-    if (err){
-      console.log('Something went wrong:', err)
-      response.status(404).end()
-    }
-    console.log('Updated')
-    response.json(results)
-  })  
+
+  db.query('update shoppinglist set resolved =\'Y\' WHERE resolved =\'N\'',
+    function (err, results) {
+      if (err){
+        console.log('Something went wrong:', err)
+        response.status(404).end()
+      }
+      console.log('Updated')
+      response.json(results)
+    })
 })
-  
+
+shopRouter.post('/new', (request, response) => {
+  const body = request.body
+  const newItem = {
+    date: body.date,
+    resolved: body.resolved,
+  }
+
+  db.query('insert into shoppinglist SET ?', newItem, function (err, results) {
+    if(err) throw err
+    response.json(results.insertId)
+  })
+})
+
 
 
 module.exports = shopRouter

@@ -7,7 +7,10 @@ morgan.token('body', function (request, response) {
   return JSON.stringify(request.body)})
 
 groceriesRouter.get('/', (request, response) => {
-  db.query('select * from groceries', (err, results) => {
+  db.query('select a.gr_id, a.name, b.name as brand, c.name as category, a.price, a.amount ' +
+      'FROM groceries a ' +
+      'INNER JOIN brand b ON b.brand_id=a.brand_id ' +
+      'INNER JOIN category c ON c.cat_id = a.cat_id;', (err, results) => {
     if(err){
       console.log('Something went wrong: ', err)
       response.status(404).end()

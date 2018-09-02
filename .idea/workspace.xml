@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34241cbe-d2ec-4e99-94d8-9126b25566f5" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/dbconnection.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/dbconnection.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -59,20 +58,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dbconnection.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dbconnection.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/back/dbconnection.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+            <state relative-caret-position="72">
+              <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+            <state relative-caret-position="36">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -155,8 +154,8 @@
         <option value="$PROJECT_DIR$/front/src/components/ListArchive.js" />
         <option value="$PROJECT_DIR$/front/src/components/Shoppinglist.js" />
         <option value="$PROJECT_DIR$/front/src/App.js" />
-        <option value="$PROJECT_DIR$/back/dbconnection.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/back/dbconnection.js" />
       </list>
     </option>
   </component>
@@ -296,12 +295,12 @@
       <workItem from="1535865364432" duration="732000" />
       <workItem from="1535867397428" duration="17000" />
       <workItem from="1535868244354" duration="2565000" />
-      <workItem from="1535877361326" duration="2474000" />
+      <workItem from="1535877361326" duration="2847000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57461000" />
+    <option name="totallyTimeSpent" value="57834000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
@@ -667,17 +666,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/back/dbconnection.js">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+        <state relative-caret-position="36">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/back/dbconnection.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        <state relative-caret-position="72">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
         </state>
       </provider>
     </entry>

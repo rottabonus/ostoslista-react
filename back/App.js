@@ -8,6 +8,7 @@ const shopRouter = require('./controllers/shoppinglist')
 const cors = require('cors')
 
 app.use(cors())
+app.use(express.static('dist'))
 app.use(bodyParser.json())
 app.use('/api/groceries', groceriesRouter)
 app.use('/api/brands', brandsRouter)

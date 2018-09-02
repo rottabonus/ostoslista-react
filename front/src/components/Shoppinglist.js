@@ -23,11 +23,16 @@ const Shoppinglist = ({ list, remove,  resolve, newList, changeField, history })
           :
           <form onSubmit={resolve}>
             <table>
+              <thead>
+                <tr className="tableHeaders">
+                  <th>name</th><th>brand</th><th>category</th><th>price</th><th>quantity</th>
+                </tr>
+              </thead>
               <tbody>
                 {
                   list.map(item => <ListItem item={item} remove={remove} key={item.or_id}></ListItem>)
                 }
-                <tr><td><p>estimated price {estimatedPrice} €</p></td></tr>
+                <tr><td><p>estimated price</p></td><td><p> {estimatedPrice.toFixed(2)} €</p></td></tr>
                 <tr><td><button type="submit">resolve</button></td></tr>
               </tbody>
             </table>

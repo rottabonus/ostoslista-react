@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const ArchiveItem = ({ item, getOld }) => {
   return (
     <tr onClick={(e) => getOld(e, item.shop_id)}>
@@ -23,9 +22,9 @@ const ListArchive = ({ history, getOld, old }) => {
             </tbody>
           </table>
         </div>
-        <div>
+        <div className="oldList">
           {
-            old.length === 0 ? null : old.map(item => <div key={item.gr_id}>{item.name}</div>)
+            old.length === 0 ? null : old.map(item => <div key={item.or_id}>{item.name}</div>)
           }
         </div>
       </div>

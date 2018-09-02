@@ -18,12 +18,20 @@
 	justify-content: space-around;
 }
 
-.shopItem {
-    margin-bottom: 10;
-    padding-bottom: 10;
-}
-
 .archiveDivs {
     display: flex;
     flex-direction: row;
+}
+
+
+.numberInput {
+    width: 30%;
+}
+
+.oldList {
+    background-color: cyan;
+}
+
+.tableHeaders {
+    text-align: left;
 }

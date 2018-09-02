@@ -3,7 +3,7 @@ import React from 'react'
 const ListItem = ({ item, remove }) => {
 
   return (
-    <tr className="shopItem">
+    <tr>
       <td>{item.name}</td>
       <td>{item.brand}</td>
       <td>{item.category}</td>

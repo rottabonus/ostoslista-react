@@ -20,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/back/dbconnection.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
-              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -289,12 +289,12 @@
       <workItem from="1535867397428" duration="17000" />
       <workItem from="1535868244354" duration="2565000" />
       <workItem from="1535877361326" duration="4745000" />
-      <workItem from="1535889058090" duration="6006000" />
+      <workItem from="1535889058090" duration="6158000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65738000" />
+    <option name="totallyTimeSpent" value="65890000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -643,7 +643,7 @@
     <entry file="file://$PROJECT_DIR$/back/dbconnection.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
         </state>
       </provider>
     </entry>

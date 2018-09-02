@@ -222,18 +222,23 @@ class App extends React.Component {
     event.stopPropagation()
     console.log('clicked addToList', maximized.name)
     const quantity = parseInt(this.state.quantity)
-    const newListItem = {
-      quantity,
-      gr_id: maximized.gr_id
-    }
-    console.log(newListItem)
-    await shopService.add(newListItem)
-    const updatedShoppinglist = await shopService.getAll()
-    this.setState({
-      listItems: updatedShoppinglist,
-      maximize: '',
-      quantity: ''
-    })
+      console.log(quantity)
+      if(quantity <= 0 || isNaN(quantity)){
+            window.confirm('must have quantity!')
+      } else {
+          const newListItem = {
+              quantity,
+              gr_id: maximized.gr_id
+          }
+          console.log(newListItem)
+          await shopService.add(newListItem)
+          const updatedShoppinglist = await shopService.getAll()
+          this.setState({
+              listItems: updatedShoppinglist,
+              maximize: '',
+              quantity: ''
+          })
+      }
   }
 
   removeFromList = async (event, item) => {
@@ -253,8 +258,10 @@ class App extends React.Component {
           console.log('resolve submitted')
           const resolver = {}
           await shopService.resolveList(resolver)
+          const history = await shopService.getHistory()
           this.setState({
-              listItems: []
+              listItems: [],
+              history
           })
       }
   }
@@ -271,8 +278,10 @@ class App extends React.Component {
           const newItem = { date: this.state.date,
                         resolved: 'N'}
           await shopService.newlist(newItem)
+          const history = await shopService.getHistory()
           this.setState({
-              listItems: []
+              listItems: [],
+              history
           })
           history.push('/')
       }

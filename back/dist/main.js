@@ -24189,9 +24189,9 @@ var _shoppinglist = __webpack_require__(/*! ./services/shoppinglist */ "./src/se
 
 var _shoppinglist2 = _interopRequireDefault(_shoppinglist);
 
-var _history = __webpack_require__(/*! ./history/history */ "./src/history/history.js");
+var _history3 = __webpack_require__(/*! ./history/history */ "./src/history/history.js");
 
-var _history2 = _interopRequireDefault(_history);
+var _history4 = _interopRequireDefault(_history3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24282,7 +24282,7 @@ var App = function (_React$Component) {
                   amount: '',
                   price: ''
                 });
-                _history2.default.push('/');
+                _history4.default.push('/');
 
               case 11:
               case 'end':
@@ -24329,7 +24329,7 @@ var App = function (_React$Component) {
                   brands: updatedBrands,
                   newName: ''
                 });
-                _history2.default.push('/b&c');
+                _history4.default.push('/b&c');
                 _context2.next = 25;
                 break;
 
@@ -24354,7 +24354,7 @@ var App = function (_React$Component) {
                   categories: updatedCategories,
                   newName: ''
                 });
-                _history2.default.push('/b&c');
+                _history4.default.push('/b&c');
                 _context2.next = 25;
                 break;
 
@@ -24419,7 +24419,7 @@ var App = function (_React$Component) {
                   price: '',
                   maximize: ''
                 });
-                _history2.default.push('/');
+                _history4.default.push('/');
 
               case 15:
               case 'end':
@@ -24471,7 +24471,7 @@ var App = function (_React$Component) {
                   newName: '',
                   maximize: ''
                 });
-                _history2.default.push('/b&c');
+                _history4.default.push('/b&c');
                 _context4.next = 26;
                 break;
 
@@ -24496,7 +24496,7 @@ var App = function (_React$Component) {
                   newName: '',
                   maximize: ''
                 });
-                _history2.default.push('/b&c');
+                _history4.default.push('/b&c');
 
               case 26:
               case 'end':
@@ -24620,20 +24620,33 @@ var App = function (_React$Component) {
                 event.stopPropagation();
                 console.log('clicked addToList', maximized.name);
                 quantity = parseInt(_this.state.quantity);
+
+                console.log(quantity);
+
+                if (!(quantity <= 0 || isNaN(quantity))) {
+                  _context7.next = 8;
+                  break;
+                }
+
+                window.confirm('must have quantity!');
+                _context7.next = 16;
+                break;
+
+              case 8:
                 newListItem = {
                   quantity: quantity,
                   gr_id: maximized.gr_id
                 };
 
                 console.log(newListItem);
-                _context7.next = 7;
+                _context7.next = 12;
                 return _shoppinglist2.default.add(newListItem);
 
-              case 7:
-                _context7.next = 9;
+              case 12:
+                _context7.next = 14;
                 return _shoppinglist2.default.getAll();
 
-              case 9:
+              case 14:
                 updatedShoppinglist = _context7.sent;
 
                 _this.setState({
@@ -24642,7 +24655,7 @@ var App = function (_React$Component) {
                   quantity: ''
                 });
 
-              case 11:
+              case 16:
               case 'end':
                 return _context7.stop();
             }
@@ -24694,7 +24707,8 @@ var App = function (_React$Component) {
 
     _this.resolve = function () {
       var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(event) {
-        var resolver;
+        var resolver, _history;
+
         return regeneratorRuntime.wrap(function _callee9$(_context9) {
           while (1) {
             switch (_context9.prev = _context9.next) {
@@ -24702,7 +24716,7 @@ var App = function (_React$Component) {
                 event.preventDefault();
 
                 if (!window.confirm('Are you sure you want to resolve the shoppinglist?')) {
-                  _context9.next = 7;
+                  _context9.next = 10;
                   break;
                 }
 
@@ -24712,11 +24726,18 @@ var App = function (_React$Component) {
                 return _shoppinglist2.default.resolveList(resolver);
 
               case 6:
+                _context9.next = 8;
+                return _shoppinglist2.default.getHistory();
+
+              case 8:
+                _history = _context9.sent;
+
                 _this.setState({
-                  listItems: []
+                  listItems: [],
+                  history: _history
                 });
 
-              case 7:
+              case 10:
               case 'end':
                 return _context9.stop();
             }
@@ -24731,7 +24752,8 @@ var App = function (_React$Component) {
 
     _this.newShoppingList = function () {
       var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(event) {
-        var reg, matches, newItem;
+        var reg, matches, newItem, _history2;
+
         return regeneratorRuntime.wrap(function _callee10$(_context10) {
           while (1) {
             switch (_context10.prev = _context10.next) {
@@ -24749,7 +24771,7 @@ var App = function (_React$Component) {
                 }
 
                 window.confirm('did not match pattern yyyy-mm-dd');
-                _context10.next = 14;
+                _context10.next = 17;
                 break;
 
               case 9:
@@ -24759,12 +24781,19 @@ var App = function (_React$Component) {
                 return _shoppinglist2.default.newlist(newItem);
 
               case 12:
-                _this.setState({
-                  listItems: []
-                });
-                _history2.default.push('/');
+                _context10.next = 14;
+                return _shoppinglist2.default.getHistory();
 
               case 14:
+                _history2 = _context10.sent;
+
+                _this.setState({
+                  listItems: [],
+                  history: _history2
+                });
+                _history2.push('/');
+
+              case 17:
               case 'end':
                 return _context10.stop();
             }
@@ -24877,7 +24906,7 @@ var App = function (_React$Component) {
 
       return _react2.default.createElement(
         _reactRouterDom.Router,
-        { history: _history2.default },
+        { history: _history4.default },
         _react2.default.createElement(
           'div',
           null,
@@ -25907,7 +25936,7 @@ var Shoppinglist = function Shoppinglist(_ref) {
 
   var isResolved = history.filter(function (list) {
     return list.resolved !== 'Y';
-  });
+  }).length;
 
   var priceOfRows = list.map(function (row) {
     return row.quantity * parseFloat(row.price.replace(',', '.'));
@@ -25924,7 +25953,7 @@ var Shoppinglist = function Shoppinglist(_ref) {
       null,
       'Shoppinglist'
     ),
-    { isResolved: isResolved } === 0 ? _react2.default.createElement(
+    isResolved === 0 ? _react2.default.createElement(
       'form',
       { onSubmit: newList },
       _react2.default.createElement(

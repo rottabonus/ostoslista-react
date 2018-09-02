@@ -3,7 +3,7 @@ import ListItem from './ListItem'
 
 const Shoppinglist = ({ list, remove,  resolve, newList, changeField, history }) => {
 
-  const isResolved = history.filter(list => list.resolved !== 'Y')
+  const isResolved = history.filter(list => list.resolved !== 'Y').length
 
   const priceOfRows = list.map(row => row.quantity * parseFloat(row.price.replace(',', '.')))
   const estimatedPrice = priceOfRows.reduce((acc, curr) => {
@@ -14,7 +14,7 @@ const Shoppinglist = ({ list, remove,  resolve, newList, changeField, history })
     <div>
       <h2>Shoppinglist</h2>
       {
-        { isResolved } === 0 ?
+        isResolved === 0 ?
           <form onSubmit={newList}>
             <h3>create new</h3>
             <p>date<input type="text" onChange={changeField} name="date" defaultValue="yyyy-mm-dd"/></p>

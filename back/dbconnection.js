@@ -7,6 +7,13 @@ const connection = mysql.createConnection({
   database: 'heroku_95f2a39531c6609'
 });
 
+/*const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'shopper',
+    password: 'f-4!adA3!2s+S6Juis#234fg',
+    database: 'mkatushopping'
+});*/
+
 connection.connect((err) => {
   if (err){
     console.log('Error connecting to database')

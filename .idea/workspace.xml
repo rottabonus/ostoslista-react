@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34241cbe-d2ec-4e99-94d8-9126b25566f5" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/dbconnection.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/dbconnection.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -41,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dbconnection.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dbconnection.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/back/dbconnection.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="252">
+              <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -75,7 +74,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back/App.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="378">
@@ -148,9 +147,9 @@
         <option value="$PROJECT_DIR$/front/src/components/Shoppinglist.js" />
         <option value="$PROJECT_DIR$/front/src/App.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/back/dbconnection.js" />
         <option value="$PROJECT_DIR$/back/package.json" />
         <option value="$PROJECT_DIR$/back/App.js" />
+        <option value="$PROJECT_DIR$/back/dbconnection.js" />
       </list>
     </option>
   </component>
@@ -291,16 +290,15 @@
       <workItem from="1535865364432" duration="732000" />
       <workItem from="1535867397428" duration="17000" />
       <workItem from="1535868244354" duration="2565000" />
-      <workItem from="1535877361326" duration="3919000" />
+      <workItem from="1535877361326" duration="4745000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58906000" />
+    <option name="totallyTimeSpent" value="59732000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="85" y="24" width="974" height="1047" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49944994" visible="true" weight="0.2596154" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -627,13 +625,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/back/dbconnection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/back/mkatuShoppingAlustus.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
@@ -667,6 +658,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back/dbconnection.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
         </state>
       </provider>
     </entry>

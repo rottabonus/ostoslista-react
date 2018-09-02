@@ -7,27 +7,37 @@ morgan.token('body', function (request, response) {
   return JSON.stringify(request.body)})
 
 brandsRouter.get('/', (request, response) => {
-  db.query('select * from brand', (err, rows) => {
-    if(err){
-      console.log('Something went wrong: ', err)
-      response.status(404).end()
-    }
-    console.log('Data received')
-    response.json(rows)
+  db.getConnection(function (err, connection){
+    if (err) throw err
+    connection.query('select * from brand', (err, rows) => {
+      connection.release()
+      if(err){
+        console.log('Something went wrong: ', err)
+        response.status(404).end()
+      }
+      console.log('Data received')
+      response.json(rows)
+    })
   })
 })
 
+
 brandsRouter.get('/:id', (request, response) => {
   const id = request.params.id
-  db.query('select * from `brand` WHERE `brand_id` = ?', [id], function (err, results) {
-    if (err){
-      console.log('Something went wrong: ', err)
-      response.status(404).end()
-    }
-    console.log('Data received')
-    response.json(results)
+  db.getConnection(function (err, connection) {
+    if(err) throw err
+    connection.query('select * from `brand` WHERE `brand_id` = ?', [id], function (err, results) {
+      connection.release()
+      if (err){
+        console.log('Something went wrong: ', err)
+        response.status(404).end()
+      }
+      console.log('Data received')
+      response.json(results)
+    })
   })
 })
+
 
 brandsRouter.post('/', (request, response) => {
   const name = request.body.name
@@ -36,37 +46,52 @@ brandsRouter.post('/', (request, response) => {
     return response.status(400).json({ error: 'name missing' })
   }
 
-  db.query('insert into brand SET name = ?', name, function (err, results) {
-    if(err){
-      console.log('Something went wrong:', err)
-      response.status(404).end()
-    }
-    response.json(results)
+  db.getConnection(function (err, connection) {
+    if(err) throw err
+    connection.query('insert into brand SET name = ?', name, function (err, results) {
+      connection.release()
+      if(err){
+        console.log('Something went wrong:', err)
+        response.status(404).end()
+      }
+      response.json(results)
+    })
   })
 })
+
 
 brandsRouter.put('/:id', (request, response) => {
   const name = request.body.name
   const id = request.params.id
 
-  db.query('update brand SET name = ? WHERE brand_id = ?', [name, id],
-    function (err, results) {
-      if (err){
-        console.log('Something went wrong:', err)
-        response.status(404).end()
-      }
-      console.log('Updated')
-      response.json(results)
-    })
+  db.getConnection(function (err, connection) {
+    if(err) throw err
+    connection.query('update brand SET name = ? WHERE brand_id = ?', [name, id],
+      function (err, results) {
+        connection.release()
+        if (err){
+          console.log('Something went wrong:', err)
+          response.status(404).end()
+        }
+        console.log('Updated')
+        response.json(results)
+      })
+  })
 })
+
 
 brandsRouter.delete('/:id', (request, response) => {
   const id = request.params.id
 
-  db.query('delete from brand where brand_id = ?', [id], function (err, results) {
-    if(err) throw err
-    response.json(results)
+  db.getConnection(function (err, connection) {
+    if (err) throw err
+    connection.query('delete from brand where brand_id = ?', [id], function (err, results) {
+      connection.release()
+      if(err) throw err
+      response.json(results)
+    })
   })
 })
+
 
 module.exports = brandsRouter

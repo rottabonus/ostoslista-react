@@ -7,28 +7,36 @@ morgan.token('body', function (request, response) {
   return JSON.stringify(request.body)})
 
 groceriesRouter.get('/', (request, response) => {
-  db.query('select a.gr_id, a.name, b.name as brand, c.name as category, a.price, a.amount ' +
+  db.getConnection(function (err, connection) {
+    if(err) throw err;
+    connection.query('select a.gr_id, a.name, b.name as brand, c.name as category, a.price, a.amount ' +
       'FROM groceries a ' +
       'INNER JOIN brand b ON b.brand_id=a.brand_id ' +
       'INNER JOIN category c ON c.cat_id = a.cat_id;', (err, results) => {
-    if(err){
-      console.log('Something went wrong: ', err)
-      response.status(404).end()
-    }
-    console.log('Data received')
-    response.json(results)
+      connection.release()
+      if (err) {
+        console.log('Something went wrong: ', err)
+        response.status(404).end()
+      }
+      console.log('Data received')
+      response.json(results)
+    })
   })
 })
 
 groceriesRouter.get('/:id', (request, response) => {
-  const id = request.params.id
-  db.query('select * from `groceries` WHERE `gr_id` = ?', [id], function (err, results) {
-    if (err){
-      console.log('Something went wrong: ', err)
-      response.status(404).end()
-    }
-    console.log('Data received')
-    response.json(results)
+  db.getConnection(function (err, connection) {
+    if(err) throw err;
+    const id = request.params.id
+    connection.query('select * from `groceries` WHERE `gr_id` = ?', [id], function (err, results) {
+      connection.release()
+      if (err){
+        console.log('Something went wrong: ', err)
+        response.status(404).end()
+      }
+      console.log('Data received')
+      response.json(results)
+    })
   })
 })
 
@@ -42,9 +50,13 @@ groceriesRouter.post('/', (request, response) => {
     brand_id: body.brand_id
   }
 
-  db.query('insert into groceries SET ?', newItem, function (err, results) {
-    if(err) throw err
-    response.json(results.insertId)
+  db.getConnection(function (err, connection) {
+    if(err) throw err;
+    connection.query('insert into groceries SET ?', newItem, function (err, results) {
+      connection.release()
+      if(err) throw err
+      response.json(results.insertId)
+    })
   })
 })
 
@@ -60,25 +72,33 @@ groceriesRouter.put('/:id', (request, response) => {
     cat_id: body.cat_id,
     brand_id: body.brand_id
   }
-
-  db.query('update groceries SET ? WHERE gr_id = ?', [item, id], function (err, results) {
-    if (err){
-      console.log('Something went wrong:', err)
-      response.status(404).end()
-    }
-    console.log('Updated')
-    response.json(results)
+  db.getConnection(function (err, connection) {
+    if(err) throw err;
+    connection.query('update groceries SET ? WHERE gr_id = ?', [item, id], function (err, results) {
+      connection.release()
+      if (err){
+        console.log('Something went wrong:', err)
+        response.status(404).end()
+      }
+      console.log('Updated')
+      response.json(results)
+    })
   })
 })
 
 groceriesRouter.delete('/:id', (request, response) => {
   const id = request.params.id
 
-  db.query('delete from groceries where gr_id = ?', [id], function (err, results) {
-    if(err) throw err
-    response.json(results)
+  db.getConnection(function (err, connection) {
+    if(err) throw err;
+    connection.query('delete from groceries where gr_id = ?', [id], function (err, results) {
+      connection.release()
+      if(err) throw err
+      response.json(results)
+    })
   })
 })
+
 
 
 module.exports = groceriesRouter

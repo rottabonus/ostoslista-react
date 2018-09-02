@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "nodemon App.js",
-    "start": "App.js"
+    "start": "node App.js"
   },
   "keywords": [],
   "author": "Felix Hallenberg",

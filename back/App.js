@@ -5,6 +5,7 @@ const groceriesRouter = require('./controllers/groceries')
 const brandsRouter = require('./controllers/brands')
 const categoryRouter = require('./controllers/categories')
 const shopRouter = require('./controllers/shoppinglist')
+const loginRouter = require('./controllers/users')
 const cors = require('cors')
 
 app.use(cors())
@@ -14,6 +15,7 @@ app.use('/api/groceries', groceriesRouter)
 app.use('/api/brands', brandsRouter)
 app.use('/api/categories', categoryRouter)
 app.use('/api/shoppinglist', shopRouter)
+app.use('/api/users', loginRouter)
 
 app.get('/', (request, response) => {
   response.send('<h1>Welcome to shoppinglist /api/</h1>')

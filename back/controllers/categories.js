@@ -3,11 +3,11 @@ const db = require('../dbconnection')
 const morgan = require('morgan')
 
 categoryRouter.use(morgan(':method :url :body :status :res[content-length] :res[header] :response-time ms'))
-morgan.token('body', function (request, response) {
+morgan.token('body',  (request, response) => {
   return JSON.stringify(request.body)})
 
 categoryRouter.get('/', (request, response) => {
-  db.getConnection(function (err, connection) {
+  db.getConnection((err, connection) => {
     if(err) throw err
     connection.query('select * from category', (err, rows) => {
       connection.release()
@@ -24,9 +24,9 @@ categoryRouter.get('/', (request, response) => {
 
 categoryRouter.get('/:id', (request, response) => {
   const id = request.params.id
-  db.getConnection(function (err, connection) {
+  db.getConnection((err, connection) => {
     if(err) throw err
-    connection.query('select * from `category` WHERE `cat_id` = ?', [id], function (err, results) {
+    connection.query('select * from `category` WHERE `cat_id` = ?', [id], (err, results) => {
       connection.release()
       if (err){
         console.log('Something went wrong: ', err)
@@ -42,9 +42,9 @@ categoryRouter.get('/:id', (request, response) => {
 categoryRouter.post('/', (request, response) => {
   const name = request.body.name
 
-  db.getConnection(function (err, connection) {
+  db.getConnection((err, connection) => {
     if (err) throw err
-    connection.query('insert into category SET name = ?', name, function (err, results) {
+    connection.query('insert into category SET name = ?', name, (err, results) => {
       connection.release()
       if(err) throw err
       response.json(results)
@@ -57,10 +57,10 @@ categoryRouter.put('/:id', (request, response) => {
   const name = request.body.name
   const id = request.params.id
 
-  db.getConnection(function (err, connection) {
+  db.getConnection((err, connection) => {
     if(err) throw err
     connection.query('update category SET name = ? WHERE cat_id = ?', [name, id],
-      function (err, results) {
+      (err, results) => {
         connection.release()
         if (err){
           console.log('Something went wrong:', err)
@@ -76,9 +76,9 @@ categoryRouter.put('/:id', (request, response) => {
 categoryRouter.delete('/:id', (request, response) => {
   const id = request.params.id
 
-  db.getConnection(function (err, connection) {
+  db.getConnection((err, connection) => {
     if(err) throw err
-    connection.query('delete from category where cat_id = ?', [id], function (err, results) {
+    connection.query('delete from category where cat_id = ?', [id], (err, results) => {
       connection.release()
       if(err) throw err
       response.json(results)

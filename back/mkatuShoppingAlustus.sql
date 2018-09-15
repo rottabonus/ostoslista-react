@@ -78,3 +78,10 @@ INSERT INTO order_row (quantity, gr_id, shop_id) VALUES
 (5, 14, 1),
 (1, 18, 1),
 (2, 16, 1);
+
+CREATE TABLE users (
+id int(11) NOT NULL AUTO_INCREMENT,
+username varchar(100) NOT NULL,
+password varchar(255) NOT NULL,
+PRIMARY KEY (id)
+);

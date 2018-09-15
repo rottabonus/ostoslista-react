@@ -1,5 +1,6 @@
 const mysql = require('mysql')
 
+/*
 const pool = mysql.createPool({
   connectionLimit: 100,
   host: process.env.DATABASE_URL,
@@ -7,14 +8,14 @@ const pool = mysql.createPool({
   password: process.env.DATABASE_PW,
   database: process.env.DATABASE
 })
+*/
 
-
-/*const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'shopper',
-    password: 'f-4!adA3!2s+S6Juis#234fg',
-    database: 'mkatushopping'
-});*/
-
+const pool = mysql.createPool({
+  connectionLimit: 100,
+  host: 'localhost',
+  user: 'shopper',
+  password: 'f-4!adA3!2s+S6Juis#234fg',
+  database: 'mkatushopping'
+})
 
 module.exports = pool

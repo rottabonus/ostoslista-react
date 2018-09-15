@@ -3,11 +3,11 @@ const db = require('../dbconnection')
 const morgan = require('morgan')
 
 groceriesRouter.use(morgan(':method :url :body :status :res[content-length] :res[header] :response-time ms'))
-morgan.token('body', function (request, response) {
+morgan.token('body', (request, response) => {
   return JSON.stringify(request.body)})
 
 groceriesRouter.get('/', (request, response) => {
-  db.getConnection(function (err, connection) {
+  db.getConnection((err, connection) => {
     if(err) throw err;
     connection.query('select a.gr_id, a.name, b.name as brand, c.name as category, a.price, a.amount ' +
       'FROM groceries a ' +
@@ -24,11 +24,12 @@ groceriesRouter.get('/', (request, response) => {
   })
 })
 
+
 groceriesRouter.get('/:id', (request, response) => {
-  db.getConnection(function (err, connection) {
+  db.getConnection((err, connection) => {
     if(err) throw err;
     const id = request.params.id
-    connection.query('select * from `groceries` WHERE `gr_id` = ?', [id], function (err, results) {
+    connection.query('select * from `groceries` WHERE `gr_id` = ?', [id], (err, results) => {
       connection.release()
       if (err){
         console.log('Something went wrong: ', err)
@@ -40,6 +41,7 @@ groceriesRouter.get('/:id', (request, response) => {
   })
 })
 
+
 groceriesRouter.post('/', (request, response) => {
   const body = request.body
   const newItem = {
@@ -50,9 +52,9 @@ groceriesRouter.post('/', (request, response) => {
     brand_id: body.brand_id
   }
 
-  db.getConnection(function (err, connection) {
+  db.getConnection((err, connection) => {
     if(err) throw err;
-    connection.query('insert into groceries SET ?', newItem, function (err, results) {
+    connection.query('insert into groceries SET ?', newItem, (err, results) => {
       connection.release()
       if(err) throw err
       response.json(results.insertId)
@@ -72,9 +74,10 @@ groceriesRouter.put('/:id', (request, response) => {
     cat_id: body.cat_id,
     brand_id: body.brand_id
   }
-  db.getConnection(function (err, connection) {
+
+  db.getConnection((err, connection) => {
     if(err) throw err;
-    connection.query('update groceries SET ? WHERE gr_id = ?', [item, id], function (err, results) {
+    connection.query('update groceries SET ? WHERE gr_id = ?', [item, id], (err, results) => {
       connection.release()
       if (err){
         console.log('Something went wrong:', err)
@@ -86,12 +89,13 @@ groceriesRouter.put('/:id', (request, response) => {
   })
 })
 
+
 groceriesRouter.delete('/:id', (request, response) => {
   const id = request.params.id
 
-  db.getConnection(function (err, connection) {
+  db.getConnection((err, connection) => {
     if(err) throw err;
-    connection.query('delete from groceries where gr_id = ?', [id], function (err, results) {
+    connection.query('delete from groceries where gr_id = ?', [id], (err, results) => {
       connection.release()
       if(err) throw err
       response.json(results)

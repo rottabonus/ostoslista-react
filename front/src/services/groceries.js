@@ -5,8 +5,8 @@ const getAll = async () => {
   return request.data
 }
 
-const create = async (newItem) => {
-  const response = await axios.post('/api/groceries', newItem)
+const create = async (newItem, config) => {
+  const response = await axios.post('/api/groceries', newItem, config)
   return response.data
 }
 

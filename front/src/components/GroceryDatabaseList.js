@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const GroceryDatabaseList = ({ groceries, maximize, show, filter, changeFilter, toEdit, remove, quantity, add }) => {
 
   const filtered = groceries.filter((grocery) =>
-    grocery.name.toLowerCase().includes(filter.toLowerCase()))
+    grocery.name.toLowerCase().includes(filter.toLowerCase()) || grocery.brand.toLowerCase().includes(filter.toLowerCase()) || grocery.category.toLowerCase().includes(filter.toLowerCase()))
 
   return (
     <div>

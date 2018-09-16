@@ -2,6 +2,7 @@ const loginRouter = require('express').Router()
 const db = require('../dbconnection')
 const morgan = require('morgan')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 
 loginRouter.use(morgan(':method :url :body :status :res[content-length] :res[header] :response-time ms'))
@@ -48,7 +49,8 @@ loginRouter.post('/login', (request, response) => {
             if ( !(res) ) {
               response.send({ 'code': 204, 'success': 'username or password does not match' })
             } else {
-              response.send({ 'code': 200, 'success': 'login successfull' })
+              const token = jwt.sign({ username: user.username }, 'shhhhh')
+              response.send({ token })
             }
           })
         } else {
@@ -58,27 +60,6 @@ loginRouter.post('/login', (request, response) => {
     })
   })
 })
-
-/*db.getConnection(function (err, connection) {
-    if(err) throw err
-    connection.query('select * from users WHERE username = ?', [user.username], function (err, results) {
-      connection.release()
-      if(err){
-        throw err
-      } else {
-        if (results.length > 0) {
-          if (results[0].password === user.password) {
-            response.send({ 'code': 200, 'success': 'login successfull' })
-          } else {
-            response.send({ 'code': 204, 'success': 'username or password does not match' })
-          }
-        } else {
-          response.send({ 'code': 204, 'success': 'username or password does not match' })
-        }
-      }
-    })
-  })
-})*/
 
 
 module.exports = loginRouter

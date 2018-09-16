@@ -9,11 +9,13 @@ import BrandForm from './components/BrandForm'
 import EditBrand from './components/EditBrand'
 import Shoppinglist from './components/Shoppinglist'
 import ListArchive from './components/ListArchive'
+import LoginForm from './components/LoginForm'
 import { Router, Route, Link } from 'react-router-dom'
 import groceryService from './services/groceries'
 import categoryService from './services/categories'
 import brandService from './services/brands'
 import shopService from './services/shoppinglist'
+import loginService from './services/users'
 import history from './history/history'
 
 class App extends React.Component {
@@ -22,7 +24,7 @@ class App extends React.Component {
     this.state = {
       groceries: [], categories: [], brands: [], brand: '', category: '', price: '', amount: '',
         filter: '', maximize: '', newName: '', borc: '', listItems: [], quantity: '',
-        date: 'yyyy-mm-dd', history: [], listNum: '', oldList: []
+        date: 'yyyy-mm-dd', history: [], listNum: '', oldList: [], user: null, password: '', username: ''
     }
   }
 
@@ -39,8 +41,19 @@ class App extends React.Component {
       this.setState({ [event.target.name]: event.target.value })
   }
 
+  login = async (event) => {
+      event.preventDefault()
+      console.log('login clicked!')
+      const credentials = {
+          username: this.state.username,
+          password: this.state.password
+      }
+      const user = await loginService.login(credentials)
+      this.setState({ user })
+      console.log(user.token)
+  }
+
   show = (item) => {
-      console.log(item)
       if(this.state.maximize !== '') {
           this.setState({
               maximize: ''
@@ -71,7 +84,6 @@ class App extends React.Component {
 
   create = async (event) => {
       event.preventDefault()
-      console.log('create clicked!')
       const item = {
           name: this.state.newName,
           brand_id: parseInt(this.state.brand),
@@ -79,9 +91,11 @@ class App extends React.Component {
           price: this.state.price,
           amount: this.state.amount
       }
-      await groceryService.create(item)
+      const config = {
+          headers: {'Authorization': "bearer " + this.state.user.token}
+      }
+      await groceryService.create(item, config)
       const updatedGroceries = await groceryService.getAll()
-      console.log('item:',item)
     this.setState({
         groceries: updatedGroceries,
         newName: '',
@@ -93,7 +107,6 @@ class App extends React.Component {
 
   createBrandOrCategory = async (event) => {
     event.preventDefault()
-    console.log('createBrandOrCategory clicked!')
     const item = {
       name: this.state.newName
     }
@@ -108,7 +121,6 @@ class App extends React.Component {
       history.push('/b&c')
     }
     else if (this.state.borc === 'category'){
-      console.log('creating new category')
       await categoryService.create(item)
       const updatedCategories = await categoryService.getAll()
       this.setState({
@@ -123,7 +135,6 @@ class App extends React.Component {
 
   update = async (event) => {
       event.preventDefault()
-      console.log('update clicked!')
       if (this.state.brand === undefined || this.state.category === undefined) {
           console.log('cat or brand null')
       } else {
@@ -150,7 +161,6 @@ class App extends React.Component {
 
   updateBrandOrCategory = async (event) => {
     event.preventDefault()
-    console.log('updateBrandOrCategory clicked!')
     if(this.state.borc === 'brands') {
       console.log('brands!')
       const id = this.state.maximize.brand_id
@@ -158,7 +168,6 @@ class App extends React.Component {
         name: this.state.newName
       }
       await brandService.update(id, item)
-      console.log('id', id, 'name', item)
       const updatedBrands = await brandService.getAll()
       this.setState({
         brands: updatedBrands,
@@ -186,7 +195,6 @@ class App extends React.Component {
 
   delete = async (event, maximized) => {
       event.stopPropagation()
-      console.log('delete clicked!, to delete', maximized.name)
       const id = maximized.gr_id
       const groceries = this.state.groceries
       await groceryService.remove(id)
@@ -198,7 +206,6 @@ class App extends React.Component {
 
   deleteBrandOrCategory = async (event, maximized) => {
     event.stopPropagation()
-    console.log('deleteBrandOrCategory clicked! to delete:', maximized.name)
     if(this.state.borc === 'brands'){
       const id = maximized.brand_id
       await brandService.remove(id)
@@ -220,7 +227,6 @@ class App extends React.Component {
 
   addToList = async (event, maximized) => {
     event.stopPropagation()
-    console.log('clicked addToList', maximized.name)
     const quantity = parseInt(this.state.quantity)
       console.log(quantity)
       if(quantity <= 0 || isNaN(quantity)){
@@ -243,7 +249,6 @@ class App extends React.Component {
 
   removeFromList = async (event, item) => {
     event.preventDefault()
-    console.log('removeFromList clicked', item)
       const id = item.or_id
       await shopService.remove(id)
       const updatedListItems = await shopService.getAll()
@@ -255,7 +260,6 @@ class App extends React.Component {
   resolve = async (event) => {
       event.preventDefault()
       if(window.confirm('Are you sure you want to resolve the shoppinglist?')){
-          console.log('resolve submitted')
           const resolver = {}
           await shopService.resolveList(resolver)
           const history = await shopService.getHistory()
@@ -268,7 +272,6 @@ class App extends React.Component {
 
   newShoppingList = async (event) => {
       event.preventDefault()
-      console.log('new shoppingList!')
       const reg = /(\d{4}-\d{2}-\d{2})/
       const matches = this.state.date.match(reg)
       console.log(matches)
@@ -289,7 +292,6 @@ class App extends React.Component {
 
   getOldList = async (event, id) => {
       event.preventDefault()
-      console.log('pushed archiveItem', id)
       const oldList = await shopService.getOne(id)
       if (this.state.oldList.length === 0){
           this.setState({ oldList })
@@ -300,33 +302,34 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router history={history}>
-      <div>
-      <div className="header">   
-        <div><Link to="/about">About</Link></div>
-        <div><Link to="/shoppinglist">Shoppinglist</Link></div>
-        <div><Link to="/">Groceries</Link></div>
-          <div><Link to="/b&c">Brands&Categories</Link></div>
-          <div><Link to="/archive">Archive</Link></div>
-      </div>
+        <Router history={history}>
+        { !this.state.user ? <div><LoginForm password={this.state.password} username={this.state.username} changeField={this.handleFieldChange} login={this.login}/></div> :
 
-      <div className="container">
-        <Route exact path="/" render={() => <GroceryDatabaseList show={this.show} maximize={this.state.maximize} toEdit={this.toEdit} remove={this.delete} add={this.addToList}
-                                              groceries={this.state.groceries} changeFilter={this.handleFieldChange} filter={this.state.filter} quantity={this.state.quatity}/>}/>
-         <Route path="/about" render={() => <About />}/>
-         <Route path="/create" render={() => <GroceryForm changeField={this.handleFieldChange} create={this.create}
-                                              categories={this.state.categories} brands={this.state.brands}/>}/>
-          <Route path="/edit" render={() => <EditGrocery maximize={this.state.maximize} categories={this.state.categories} save={this.update}
-                                              brands={this.state.brands} changeField={this.handleFieldChange} />}/>
-          <Route path="/b&c" render={() => <BrandsAndCategories brands={this.state.brands} categories={this.state.categories} changeField={this.handleFieldChange} borc={this.state.borc} show={this.show}
-                                              toEdit={this.toEdit} maximize={this.state.maximize} remove={this.deleteBrandOrCategory}/>}/>
-          <Route path="/cb" render={() => <BrandForm create={this.createBrandOrCategory} changeField={this.handleFieldChange} newName={this.state.newName} borc={this.state.borc}/>}/>
-          <Route path="/editb&c" render={() => <EditBrand update={this.updateBrandOrCategory} newName={this.state.newName} changeField={this.handleFieldChange} />}/>
-          <Route path="/shoppinglist" render={() => <Shoppinglist history={this.state.history} list={this.state.listItems} remove={this.removeFromList} resolve={this.resolve} newList={this.newShoppingList} changeField={this.handleFieldChange}/>}/>
-          <Route path="/archive" render={() => <ListArchive history={this.state.history} getOld={this.getOldList} old={this.state.oldList}/>}/>
-      </div>
-      </div>
-      </Router>
+              <div>
+                  <div className="header">
+                      <div><Link to="/about">About</Link></div>
+                      <div><Link to="/shoppinglist">Shoppinglist</Link></div>
+                      <div><Link to="/">Groceries</Link></div>
+                      <div><Link to="/b&c">Brands&Categories</Link></div>
+                      <div><Link to="/archive">Archive</Link></div>
+                  </div>
+
+                  <div className="container">
+                      <div>
+                          <Route exact path="/" render={() => <GroceryDatabaseList show={this.show} maximize={this.state.maximize} toEdit={this.toEdit} remove={this.delete} add={this.addToList} groceries={this.state.groceries} changeFilter={this.handleFieldChange} filter={this.state.filter} quantity={this.state.quantity}/>}/>
+                          <Route path="/about" render={() => <About/>}/>
+                          <Route path="/create" render={() => <GroceryForm changeField={this.handleFieldChange} create={this.create} categories={this.state.categories} brands={this.state.brands}/>}/>
+                          <Route path="/edit" render={() => <EditGrocery maximize={this.state.maximize} categories={this.state.categories} save={this.update} brands={this.state.brands} changeField={this.handleFieldChange}/>}/>
+                          <Route path="/b&c" render={() => <BrandsAndCategories brands={this.state.brands} categories={this.state.categories} changeField={this.handleFieldChange} borc={this.state.borc} show={this.show} toEdit={this.toEdit} maximize={this.state.maximize} remove={this.deleteBrandOrCategory}/>}/>
+                          <Route path="/cb" render={() => <BrandForm create={this.createBrandOrCategory} changeField={this.handleFieldChange} newName={this.state.newName} borc={this.state.borc}/>}/>
+                          <Route path="/editb&c" render={() => <EditBrand update={this.updateBrandOrCategory} newName={this.state.newName} changeField={this.handleFieldChange}/>}/>
+                          <Route path="/shoppinglist" render={() => <Shoppinglist history={this.state.history} list={this.state.listItems} remove={this.removeFromList} resolve={this.resolve} newList={this.newShoppingList} changeField={this.handleFieldChange}/>}/>
+                          <Route path="/archive" render={() => <ListArchive history={this.state.history} getOld={this.getOldList} old={this.state.oldList}/>}/></div>
+                  </div>
+              </div>
+
+  }
+        </Router>
     )
   }
 }

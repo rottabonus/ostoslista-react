@@ -10,6 +10,7 @@ import EditBrand from './components/EditBrand'
 import Shoppinglist from './components/Shoppinglist'
 import ListArchive from './components/ListArchive'
 import LoginForm from './components/LoginForm'
+import SignupForm from './components/SignupForm'
 import { Router, Route, Link } from 'react-router-dom'
 import groceryService from './services/groceries'
 import categoryService from './services/categories'
@@ -23,8 +24,8 @@ class App extends React.Component {
     super()
     this.state = {
       groceries: [], categories: [], brands: [], brand: '', category: '', price: '', amount: '',
-        filter: '', maximize: '', newName: '', borc: '', listItems: [], quantity: '',
-        date: 'yyyy-mm-dd', history: [], listNum: '', oldList: [], user: null, password: '', username: ''
+        filter: '', maximize: '', newName: '', borc: '', listItems: [], quantity: '', secret: '',
+        date: 'yyyy-mm-dd', history: [], listNum: '', oldList: [], user: null, password: '', username: '', toggle: false
     }
   }
 
@@ -51,6 +52,18 @@ class App extends React.Component {
       const user = await loginService.login(credentials)
       this.setState({ user })
       console.log(user.token)
+  }
+
+  signup = async (event) => {
+    event.preventDefault()
+    console.log('signup clicked!')
+    const newUser = {
+      username: this.state.username,
+      password: this.state.password,
+      secret: this.state.secret
+    }
+    await loginService.signup(newUser)
+    this.setState({ username: '', password: '', secret: '', toggle: false })
   }
 
   show = (item) => {
@@ -300,10 +313,17 @@ class App extends React.Component {
       }
   }
 
+  toggleLogin = (event) => {
+    event.preventDefault()
+    console.log('logintoggle')
+    this.setState({toggle: !this.state.toggle })
+  }
+
   render() {
     return (
         <Router history={history}>
-        { !this.state.user ? <div><LoginForm password={this.state.password} username={this.state.username} changeField={this.handleFieldChange} login={this.login}/></div> :
+        { !this.state.user ? (!this.state.toggle ? <div><LoginForm toggle={this.toggleLogin} password={this.state.password} username={this.state.username} changeField={this.handleFieldChange} login={this.login}/></div> :
+          <div><SignupForm toggle={this.toggleLogin} password={this.state.password} username={this.state.username} changeField={this.handleFieldChange} secret={this.state.secret} signup={this.signup}/></div>) :
 
               <div>
                   <div className="header">
@@ -312,6 +332,7 @@ class App extends React.Component {
                       <div><Link to="/">Groceries</Link></div>
                       <div><Link to="/b&c">Brands&Categories</Link></div>
                       <div><Link to="/archive">Archive</Link></div>
+                      <div><p onClick={()=> this.setState({user: null})}>Logout</p></div>
                   </div>
 
                   <div className="container">

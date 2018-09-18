@@ -14,9 +14,13 @@ loginRouter.post('/signup', (request, response) => {
   const body = request.body
   let salt = bcrypt.genSaltSync(10)
   let hash = bcrypt.hashSync(body.password, salt)
+  const appSecret = 'salainen'
+  const secret = body.secret
+
+  if(appSecret === secret){
   const newUser = {
     username: body.username,
-    password: hash
+    password: hash,
   }
 
   db.getConnection((err, connection) => {
@@ -27,6 +31,9 @@ loginRouter.post('/signup', (request, response) => {
       response.json(results.insertId)
     })
   })
+} else {
+  response.status(401).json({error: 'wrong secret'})
+}
 })
 
 
@@ -47,14 +54,14 @@ loginRouter.post('/login', (request, response) => {
         if (results.length > 0) {
           bcrypt.compare(user.password, results[0].password, (err, res) => {
             if ( !(res) ) {
-              response.send({ 'code': 204, 'success': 'username or password does not match' })
+              response.status(401).json({ error: 'username or password does not match' })
             } else {
               const token = jwt.sign({ username: user.username }, 'shhhhh')
               response.send({ token })
             }
           })
         } else {
-          response.send({ 'code': 204, 'success': 'username or password does not match' })
+          response.status(401).json({ error: 'username or password does not match' })
         }
       }
     })

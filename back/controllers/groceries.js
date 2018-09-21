@@ -2,6 +2,7 @@ const groceriesRouter = require('express').Router()
 const db = require('../dbconnection')
 const morgan = require('morgan')
 const jwt = require('jsonwebtoken')
+const { verifyToken } = require('./token')
 
 groceriesRouter.use(morgan(':method :url :body :status :res[content-length] :res[header] :response-time ms'))
 morgan.token('body', (request, response) => {
@@ -74,6 +75,12 @@ groceriesRouter.post('/', (request, response) => {
 groceriesRouter.put('/:id', (request, response) => {
   const body = request.body
   const id = request.params.id
+  const token = verifyToken(request, response)
+  const decodedToken = jwt.verify(token, 'shhhhh')
+
+  if (!token || !decodedToken.username) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
 
   const item = {
     name: body.name,
@@ -100,6 +107,12 @@ groceriesRouter.put('/:id', (request, response) => {
 
 groceriesRouter.delete('/:id', (request, response) => {
   const id = request.params.id
+  const token = verifyToken(request, response)
+  const decodedToken = jwt.verify(token, 'shhhhh')
+
+  if (!token || !decodedToken.username) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
 
   db.getConnection((err, connection) => {
     if(err) throw err
@@ -110,18 +123,5 @@ groceriesRouter.delete('/:id', (request, response) => {
     })
   })
 })
-
-const verifyToken = (req, res) => {
-  const bearer = req.headers['authorization']
-  if(bearer !== 'undefined'){
-    const b = bearer.split(' ')
-    const bToken = b[1]
-    return bToken
-  } else {
-    res.status(401).send({ error: 'no authorization' })
-  }
-}
-
-
 
 module.exports = groceriesRouter

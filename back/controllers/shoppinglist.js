@@ -1,6 +1,8 @@
 const shopRouter = require('express').Router()
 const db = require('../dbconnection')
 const morgan = require('morgan')
+const jwt = require('jsonwebtoken')
+const { verifyToken } = require('./token')
 
 shopRouter.use(morgan(':method :url :body :status :res[content-length] :res[header] :response-time ms'))
 morgan.token('body', (request, response) => {
@@ -70,6 +72,13 @@ shopRouter.get('/:id', (request, response) => {
 // INSERT INTO order_row ( quantity, gr_id, shop_id )  VALUES (?, ?, (SELECT shop_id FROM shoppinglist WHERE resolved = 'N'));
 shopRouter.post('/', (request, response) => {
   const body = request.body
+  const token = verifyToken(request, response)
+  const decodedToken = jwt.verify(token, 'shhhhh')
+
+  if (!token || !decodedToken.username) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+
   const newItem = {
     quantity: body.quantity,
     gr_id: body.gr_id
@@ -91,6 +100,12 @@ shopRouter.post('/', (request, response) => {
 
 shopRouter.delete('/:id', (request, response) => {
   const id = request.params.id
+  const token = verifyToken(request, response)
+  const decodedToken = jwt.verify(token, 'shhhhh')
+
+  if (!token || !decodedToken.username) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
 
   db.getConnection((err, connection) => {
     if(err) throw err
@@ -106,6 +121,12 @@ shopRouter.delete('/:id', (request, response) => {
 shopRouter.put('/:id', (request, response) => {
   const quantity = request.body.quantity
   const id = request.params.id
+  const token = verifyToken(request, response)
+  const decodedToken = jwt.verify(token, 'shhhhh')
+
+  if (!token || !decodedToken.username) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
 
   db.getConnection((err, connection) => {
     if (err) throw err
@@ -125,6 +146,13 @@ shopRouter.put('/:id', (request, response) => {
 
 shopRouter.post('/resolve', (request, response) => {
 
+  const token = verifyToken(request, response)
+  const decodedToken = jwt.verify(token, 'shhhhh')
+
+  if (!token || !decodedToken.username) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+
   db.getConnection((err, connection) => {
     if(err) throw err
     connection.query('update shoppinglist set resolved =\'Y\' WHERE resolved =\'N\'',
@@ -142,6 +170,13 @@ shopRouter.post('/resolve', (request, response) => {
 
 shopRouter.post('/new', (request, response) => {
   const body = request.body
+  const token = verifyToken(request, response)
+  const decodedToken = jwt.verify(token, 'shhhhh')
+
+  if (!token || !decodedToken.username) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
+
   const newItem = {
     date: body.date,
     resolved: body.resolved,

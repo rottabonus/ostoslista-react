@@ -18,7 +18,7 @@ const ListArchive = ({ history, getOld, old }) => {
         <div>
           <table>
             <tbody>
-              {history.filter(list => list.resolved !== 'N').map(item => <ArchiveItem item={item} getOld={getOld} key={item.shop_id}></ArchiveItem>)}
+              {history.filter(list => list.resolved !== 'N').map((item, i) => <ArchiveItem key={i} item={item} getOld={getOld}></ArchiveItem>)}
             </tbody>
           </table>
         </div>

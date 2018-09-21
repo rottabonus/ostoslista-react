@@ -18,22 +18,22 @@ loginRouter.post('/signup', (request, response) => {
   const secret = body.secret
 
   if(appSecret === secret){
-  const newUser = {
-    username: body.username,
-    password: hash,
-  }
+    const newUser = {
+      username: body.username,
+      password: hash,
+    }
 
-  db.getConnection((err, connection) => {
-    if(err) throw err
-    connection.query('insert into users SET ?', newUser, (err, results) => {
-      connection.release()
+    db.getConnection((err, connection) => {
       if(err) throw err
-      response.json(results.insertId)
+      connection.query('insert into users SET ?', newUser, (err, results) => {
+        connection.release()
+        if(err) throw err
+        response.json(results.insertId)
+      })
     })
-  })
-} else {
-  response.status(401).json({error: 'wrong secret'})
-}
+  } else {
+    response.status(401).json({ error: 'wrong secret' })
+  }
 })
 
 

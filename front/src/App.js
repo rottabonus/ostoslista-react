@@ -62,8 +62,12 @@ class App extends React.Component {
       password: this.state.password,
       secret: this.state.secret
     }
-    await loginService.signup(newUser)
-    this.setState({ username: '', password: '', secret: '', toggle: false })
+      try {
+          await loginService.signup(newUser)
+          this.setState({username: '', password: '', secret: '', toggle: false})
+      } catch (e) {
+        console.log(e, "wrong secret m8")
+      }
   }
 
   show = (item) => {
@@ -120,12 +124,15 @@ class App extends React.Component {
 
   createBrandOrCategory = async (event) => {
     event.preventDefault()
+      const config = {
+          headers: {'Authorization': "bearer " + this.state.user.token}
+      }
     const item = {
       name: this.state.newName
     }
 
     if(this.state.borc === "brand"){
-      await brandService.create(item)
+      await brandService.create(item, config)
       const updatedBrands = await brandService.getAll()
       this.setState({
         brands: updatedBrands,
@@ -134,7 +141,7 @@ class App extends React.Component {
       history.push('/b&c')
     }
     else if (this.state.borc === 'category'){
-      await categoryService.create(item)
+      await categoryService.create(item, config)
       const updatedCategories = await categoryService.getAll()
       this.setState({
         categories: updatedCategories,
@@ -159,7 +166,10 @@ class App extends React.Component {
               price: this.state.price,
               amount: this.state.amount
           }
-          await groceryService.updateGrocery(id, updateItem)
+          const config = {
+              headers: {'Authorization': "bearer " + this.state.user.token}
+          }
+          await groceryService.updateGrocery(id, updateItem, config)
           const updatedGroceries = await groceryService.getAll()
           this.setState({
               groceries: updatedGroceries,
@@ -174,13 +184,16 @@ class App extends React.Component {
 
   updateBrandOrCategory = async (event) => {
     event.preventDefault()
+      const config = {
+          headers: {'Authorization': "bearer " + this.state.user.token}
+      }
     if(this.state.borc === 'brands') {
       console.log('brands!')
       const id = this.state.maximize.brand_id
       const item = {
         name: this.state.newName
       }
-      await brandService.update(id, item)
+      await brandService.update(id, item, config)
       const updatedBrands = await brandService.getAll()
       this.setState({
         brands: updatedBrands,
@@ -195,7 +208,7 @@ class App extends React.Component {
       const item = {
         name: this.state.newName
       }
-      await categoryService.update(id, item)
+      await categoryService.update(id, item, config)
       const updatedCategories = await categoryService.getAll()
       this.setState({
         categories: updatedCategories,
@@ -210,7 +223,10 @@ class App extends React.Component {
       event.stopPropagation()
       const id = maximized.gr_id
       const groceries = this.state.groceries
-      await groceryService.remove(id)
+      const config = {
+          headers: {'Authorization': "bearer " + this.state.user.token}
+      }
+      await groceryService.remove(id, config)
       this.setState({
           groceries: groceries.filter(g => g.gr_id !== id),
           maximize: ''
@@ -219,9 +235,12 @@ class App extends React.Component {
 
   deleteBrandOrCategory = async (event, maximized) => {
     event.stopPropagation()
+      const config = {
+          headers: {'Authorization': "bearer " + this.state.user.token}
+      }
     if(this.state.borc === 'brands'){
       const id = maximized.brand_id
-      await brandService.remove(id)
+      await brandService.remove(id, config)
       const updatedBrands = await brandService.getAll()
       this.setState({
         brands: updatedBrands,
@@ -229,7 +248,7 @@ class App extends React.Component {
       })
     } else {
       const id = maximized.cat_id
-      await categoryService.remove(id)
+      await categoryService.remove(id, config)
       const updatedCategories = await categoryService.getAll()
       this.setState({
         categories: updatedCategories,
@@ -240,8 +259,10 @@ class App extends React.Component {
 
   addToList = async (event, maximized) => {
     event.stopPropagation()
+      const config = {
+          headers: {'Authorization': "bearer " + this.state.user.token}
+      }
     const quantity = parseInt(this.state.quantity)
-      console.log(quantity)
       if(quantity <= 0 || isNaN(quantity)){
             window.confirm('must have quantity!')
       } else {
@@ -249,8 +270,7 @@ class App extends React.Component {
               quantity,
               gr_id: maximized.gr_id
           }
-          console.log(newListItem)
-          await shopService.add(newListItem)
+          await shopService.add(newListItem, config)
           const updatedShoppinglist = await shopService.getAll()
           this.setState({
               listItems: updatedShoppinglist,
@@ -262,8 +282,11 @@ class App extends React.Component {
 
   removeFromList = async (event, item) => {
     event.preventDefault()
+      const config = {
+          headers: {'Authorization': "bearer " + this.state.user.token}
+      }
       const id = item.or_id
-      await shopService.remove(id)
+      await shopService.remove(id, config)
       const updatedListItems = await shopService.getAll()
       this.setState({
           listItems: updatedListItems
@@ -272,9 +295,12 @@ class App extends React.Component {
 
   resolve = async (event) => {
       event.preventDefault()
+      const config = {
+          headers: {'Authorization': "bearer " + this.state.user.token}
+      }
       if(window.confirm('Are you sure you want to resolve the shoppinglist?')){
           const resolver = {}
-          await shopService.resolveList(resolver)
+          await shopService.resolveList(resolver, config)
           const history = await shopService.getHistory()
           this.setState({
               listItems: [],
@@ -285,6 +311,9 @@ class App extends React.Component {
 
   newShoppingList = async (event) => {
       event.preventDefault()
+      const config = {
+          headers: {'Authorization': "bearer " + this.state.user.token}
+      }
       const reg = /(\d{4}-\d{2}-\d{2})/
       const matches = this.state.date.match(reg)
       console.log(matches)
@@ -293,7 +322,7 @@ class App extends React.Component {
       } else {
           const newItem = { date: this.state.date,
                         resolved: 'N'}
-          await shopService.newlist(newItem)
+          await shopService.newlist(newItem, config)
           const history = await shopService.getHistory()
           this.setState({
               listItems: [],

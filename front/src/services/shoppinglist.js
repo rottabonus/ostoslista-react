@@ -5,28 +5,28 @@ const getAll = async () => {
   return request.data
 }
 
-const add = async (newItem) => {
-  const response = await axios.post('/api/shoppinglist', newItem)
+const add = async (newItem, config) => {
+  const response = await axios.post('/api/shoppinglist', newItem, config)
   return response.data
 }
 
-const updateAmount = async (id, item) => {
-  const response = await axios.put(`/api/shoppinglist/${id}`, item)
+const updateAmount = async (id, item, config) => {
+  const response = await axios.put(`/api/shoppinglist/${id}`, item, config)
   return response.data
 }
 
-const remove = async (id) => {
-  const response = await axios.delete(`/api/shoppinglist/${id}`)
+const remove = async (id, config) => {
+  const response = await axios.delete(`/api/shoppinglist/${id}`, config)
   return response.data
 }
 
-const resolveList = async (emptyobj) => {
-  const response = await axios.post('/api/shoppinglist/resolve', emptyobj)
+const resolveList = async (emptyobj, config) => {
+  const response = await axios.post('/api/shoppinglist/resolve', emptyobj, config)
   return response.data
 }
 
-const newlist = async (date) => {
-  const response = await axios.post('/api/shoppinglist/new', date)
+const newlist = async (date, config) => {
+  const response = await axios.post('/api/shoppinglist/new', date, config)
   return response.data
 }
 

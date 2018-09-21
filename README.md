@@ -23,6 +23,10 @@ back [body-parser](https://github.com/expressjs/body-parser)
 
 front [axios](https://www.npmjs.com/package/axios)
 
+back [bcryptjs](https://github.com/kelektiv/node.bcrypt.js#readme)
+
+back [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+
 ## dependencies for development
 
 back [nodemon](https://github.com/remy/nodemon)

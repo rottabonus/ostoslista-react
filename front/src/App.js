@@ -11,6 +11,7 @@ import Shoppinglist from './components/Shoppinglist'
 import ListArchive from './components/ListArchive'
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
+import Notification from './components/Notification'
 import { Router, Route, Link } from 'react-router-dom'
 import groceryService from './services/groceries'
 import categoryService from './services/categories'
@@ -23,7 +24,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      groceries: [], categories: [], brands: [], brand: '', category: '', price: '', amount: '',
+      groceries: [], categories: [], brands: [], brand: '', category: '', price: '', amount: '', error: null,
         filter: '', maximize: '', newName: '', borc: '', listItems: [], quantity: '', secret: '',
         date: 'yyyy-mm-dd', history: [], listNum: '', oldList: [], user: null, password: '', username: '', toggle: false
     }
@@ -117,9 +118,13 @@ class App extends React.Component {
         groceries: updatedGroceries,
         newName: '',
         amount: '',
-        price: ''
+        price: '',
+        error: `${item.name} created and added to groceries`
     })
       history.push('/')
+      setTimeout(() => {
+          this.setState({ error: null })
+      }, 5000)
   }
 
   createBrandOrCategory = async (event) => {
@@ -136,7 +141,8 @@ class App extends React.Component {
       const updatedBrands = await brandService.getAll()
       this.setState({
         brands: updatedBrands,
-        newName: ''
+        newName: '',
+          error: `${item.name} created and added to brands`
       })
       history.push('/b&c')
     }
@@ -145,12 +151,16 @@ class App extends React.Component {
       const updatedCategories = await categoryService.getAll()
       this.setState({
         categories: updatedCategories,
-        newName: ''
+        newName: '',
+          error: `${item.name} created and added to groceries`
       })
       history.push('/b&c')
     } else {
       alert('choose category or brand!')
     }
+    setTimeout(() => {
+        this.setState({ error: null })
+    }, 5000)
   }
 
   update = async (event) => {
@@ -164,7 +174,7 @@ class App extends React.Component {
               brand_id: parseInt(this.state.brand),
               cat_id: parseInt(this.state.category),
               price: this.state.price,
-              amount: this.state.amount
+              amount: this.state.amount,
           }
           const config = {
               headers: {'Authorization': "bearer " + this.state.user.token}
@@ -176,9 +186,13 @@ class App extends React.Component {
               newName: '',
               amount: '',
               price: '',
-              maximize: ''
+              maximize: '',
+              error: `${updateItem.name} was updated`
           })
           history.push('/')
+          setTimeout(() => {
+              this.setState({ error: null })
+          }, 5000)
       }
   }
 
@@ -198,7 +212,8 @@ class App extends React.Component {
       this.setState({
         brands: updatedBrands,
         newName: '',
-        maximize: ''
+        maximize: '',
+          error: `${item.name} updated`
       })
       history.push('/b&c')
     }
@@ -213,10 +228,14 @@ class App extends React.Component {
       this.setState({
         categories: updatedCategories,
         newName: '',
-        maximize: ''
+        maximize: '',
+          error: `${item.name} updated`
       })
       history.push('/b&c')
     }
+    setTimeout(() => {
+        this.setState({ error: null })
+    }, 5000)
   }
 
   delete = async (event, maximized) => {
@@ -229,8 +248,12 @@ class App extends React.Component {
       await groceryService.remove(id, config)
       this.setState({
           groceries: groceries.filter(g => g.gr_id !== id),
-          maximize: ''
+          maximize: '',
+          error: `${maximized.name} deleted`
       })
+      setTimeOut(() => {
+          this.setState({ error: null })
+      }, 5000)
   }
 
   deleteBrandOrCategory = async (event, maximized) => {
@@ -244,7 +267,8 @@ class App extends React.Component {
       const updatedBrands = await brandService.getAll()
       this.setState({
         brands: updatedBrands,
-        maximize: ''
+        maximize: '',
+          error: `${maximized.name} deleted`
       })
     } else {
       const id = maximized.cat_id
@@ -252,9 +276,13 @@ class App extends React.Component {
       const updatedCategories = await categoryService.getAll()
       this.setState({
         categories: updatedCategories,
-        maximize: ''
+        maximize: '',
+          error: `${maximized.name} deleted`
       })
     }
+    setTimeout(() => {
+        this.setState({ error: null })
+    }, 5000)
   }
 
   addToList = async (event, maximized) => {
@@ -275,8 +303,12 @@ class App extends React.Component {
           this.setState({
               listItems: updatedShoppinglist,
               maximize: '',
-              quantity: ''
+              quantity: '',
+              error: `${maximized.name} added to list`
           })
+          setTimeout(() => {
+              this.setState({ error: null })
+          }, 5000)
       }
   }
 
@@ -289,8 +321,12 @@ class App extends React.Component {
       await shopService.remove(id, config)
       const updatedListItems = await shopService.getAll()
       this.setState({
-          listItems: updatedListItems
+          listItems: updatedListItems,
+          error: `${item.name} removed from list`
       })
+      setTimeout(() => {
+          this.setState({ error: null })
+      }, 5000 )
   }
 
   resolve = async (event) => {
@@ -304,8 +340,12 @@ class App extends React.Component {
           const history = await shopService.getHistory()
           this.setState({
               listItems: [],
-              history
+              history,
+              error: `shoppinglist was resolved!`
           })
+          setTimeout(() => {
+              this.setState({ error: null })
+          }, 5000)
       }
   }
 
@@ -326,8 +366,12 @@ class App extends React.Component {
           const history = await shopService.getHistory()
           this.setState({
               listItems: [],
-              history
+              history,
+              error: 'new shoppinglist created'
           })
+          setTimeout(() => {
+              this.setState({ error: null })
+          }, 5000)
           history.push('/')
       }
   }
@@ -375,6 +419,7 @@ class App extends React.Component {
                           <Route path="/editb&c" render={() => <EditBrand update={this.updateBrandOrCategory} newName={this.state.newName} changeField={this.handleFieldChange}/>}/>
                           <Route path="/shoppinglist" render={() => <Shoppinglist history={this.state.history} list={this.state.listItems} remove={this.removeFromList} resolve={this.resolve} newList={this.newShoppingList} changeField={this.handleFieldChange}/>}/>
                           <Route path="/archive" render={() => <ListArchive history={this.state.history} getOld={this.getOldList} old={this.state.oldList}/>}/></div>
+                      <Notification message={this.state.error}/>
                   </div>
               </div>
 

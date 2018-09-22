@@ -11,7 +11,7 @@ const GroceryItem = ({ add, item, show, maximize, toEdit, remove, quantity, chan
         <td>{item.category}</td>
         <td>Price: {maximize.price} €</td>
         <td>Amount: {maximize.amount}</td>
-        <td><input className="numberInput" onClick={(e) => e.stopPropagation()} onChange={change} name="quantity" type="number" /></td>
+        <td><input className="numberInput" onClick={(e) => e.stopPropagation()} onChange={change} name="quantity" min="0" type="number" /></td>
         <td onClick={(e) => add(e, maximize)}><button>add to list</button></td>
         <td onClick={(e) => toEdit(e)}><Link to={'/edit'}><button>edit</button></Link></td>
         <td onClick={(e) => remove(e, maximize)}><button>delete</button></td>

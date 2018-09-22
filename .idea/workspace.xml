@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34241cbe-d2ec-4e99-94d8-9126b25566f5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/back/controllers/token.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/components/Notification.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/controllers/brands.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/controllers/brands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/controllers/categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/controllers/categories.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/controllers/groceries.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/controllers/groceries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/controllers/shoppinglist.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/controllers/shoppinglist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/controllers/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/controllers/users.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/ListArchive.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/ListArchive.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/services/brands.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/services/brands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/services/categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/services/categories.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/services/groceries.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/services/groceries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/services/shoppinglist.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/services/shoppinglist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/GroceryItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/GroceryItem.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,38 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="groceries.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/back/controllers/groceries.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back/controllers/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-48">
-              <caret line="26" column="2" lean-forward="true" selection-start-line="26" selection-start-column="2" selection-end-line="26" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="token.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/back/controllers/token.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="32" lean-forward="true" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="categories.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/back/controllers/categories.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+            <state relative-caret-position="-210">
+              <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -76,8 +40,26 @@
       <file leaf-file-name="shoppinglist.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/back/controllers/shoppinglist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3150">
-              <caret line="175" column="2" selection-start-line="175" selection-start-column="2" selection-end-line="175" selection-end-column="2" />
+            <state relative-caret-position="1872">
+              <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GroceryDatabaseList.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/src/components/GroceryDatabaseList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GroceryItem.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/src/components/GroceryItem.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="13" column="122" selection-start-line="13" selection-start-column="122" selection-end-line="13" selection-end-column="122" />
             </state>
           </provider>
         </entry>
@@ -94,8 +76,20 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/front/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="70" column="3" lean-forward="true" selection-start-line="70" selection-start-column="3" selection-end-line="70" selection-end-column="3" />
+            <state relative-caret-position="737">
+              <caret line="328" column="14" selection-start-line="328" selection-start-column="14" selection-end-line="328" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Notification.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/src/components/Notification.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -148,7 +142,6 @@
         <option value="$PROJECT_DIR$/front/webpack.config.js" />
         <option value="$PROJECT_DIR$/front/src/components/ShopListList.js" />
         <option value="$PROJECT_DIR$/back/controllers/oldlists.js" />
-        <option value="$PROJECT_DIR$/front/src/components/GroceryItem.js" />
         <option value="$PROJECT_DIR$/front/src/components/ListItem.js" />
         <option value="$PROJECT_DIR$/front/src/index.css" />
         <option value="$PROJECT_DIR$/front/src/components/Shoppinglist.js" />
@@ -175,6 +168,8 @@
         <option value="$PROJECT_DIR$/front/src/services/shoppinglist.js" />
         <option value="$PROJECT_DIR$/back/controllers/shoppinglist.js" />
         <option value="$PROJECT_DIR$/front/src/components/ListArchive.js" />
+        <option value="$PROJECT_DIR$/front/src/components/Notification.js" />
+        <option value="$PROJECT_DIR$/front/src/components/GroceryItem.js" />
         <option value="$PROJECT_DIR$/front/src/App.js" />
       </list>
     </option>
@@ -322,12 +317,12 @@
       <workItem from="1536868405857" duration="523000" />
       <workItem from="1536929485224" duration="644000" />
       <workItem from="1536954218782" duration="16918000" />
-      <workItem from="1537508222616" duration="2074000" />
+      <workItem from="1537508222616" duration="5408000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87671000" />
+    <option name="totallyTimeSpent" value="91005000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -364,13 +359,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/front/src/components/GroceryItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/back/controllers/categories.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -463,13 +451,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
           <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/src/components/GroceryItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -571,13 +552,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front/src/components/GroceryDatabaseList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front/src/services/groceries.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -596,13 +570,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="23" column="49" lean-forward="true" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/back/controllers/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-48">
-          <caret line="26" column="2" lean-forward="true" selection-start-line="26" selection-start-column="2" selection-end-line="26" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -634,13 +601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/back/controllers/shoppinglist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3150">
-          <caret line="175" column="2" selection-start-line="175" selection-start-column="2" selection-end-line="175" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front/src/services/shoppinglist.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
@@ -665,10 +625,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/back/controllers/shoppinglist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1872">
+          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back/controllers/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-210">
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/src/components/Notification.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/src/components/GroceryDatabaseList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/src/components/GroceryItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="13" column="122" selection-start-line="13" selection-start-column="122" selection-end-line="13" selection-end-column="122" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/front/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="70" column="3" lean-forward="true" selection-start-line="70" selection-start-column="3" selection-end-line="70" selection-end-column="3" />
+        <state relative-caret-position="737">
+          <caret line="328" column="14" selection-start-line="328" selection-start-column="14" selection-end-line="328" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

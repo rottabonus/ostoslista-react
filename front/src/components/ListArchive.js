@@ -1,4 +1,5 @@
 import React from 'react'
+import kokki from '../images/kokkeli.png'
 
 const ArchiveItem = ({ item, getOld }) => {
   return (
@@ -27,6 +28,7 @@ const ListArchive = ({ history, getOld, old }) => {
             old.length === 0 ? null : old.map(item => <div key={item.or_id}>{item.name}</div>)
           }
         </div>
+        <div><img src={kokki} /></div>
       </div>
     </div>
   )

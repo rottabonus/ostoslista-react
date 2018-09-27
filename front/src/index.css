@@ -23,7 +23,6 @@
     flex-direction: row;
 }
 
-
 .numberInput {
     width: 30%;
 }
@@ -34,4 +33,27 @@
 
 .tableHeaders {
     text-align: left;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+}
+
+.notification {
+  border-style: solid;
+  border-color: #778899;
+  border-width: 5px;
+  background-color: white;
+  margin-left: 70px;
+  margin-right: 70px;
+  margin: 20px;
+}
+
+.notificationFont {
+  font-size: large;
+  text-align: center;
+  font-color: #dee8e4;
+  margin: auto;
 }

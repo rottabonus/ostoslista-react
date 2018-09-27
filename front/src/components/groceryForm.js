@@ -1,8 +1,10 @@
 import React from 'react'
+import kalapelaaja from '../images/kalapelaaja.png'
 
 const GroceryForm = ({ categories, create, changeField, brands }) => {
 
   return (
+    <div className="listContainer">
     <div>
       <form onSubmit={create}>
         <h2>groceryForm</h2>
@@ -33,6 +35,8 @@ const GroceryForm = ({ categories, create, changeField, brands }) => {
         </div>
         <button type="submit">create</button>
       </form>
+      </div>
+      <div><img src={kalapelaaja} /></div>
     </div>
   )
 }

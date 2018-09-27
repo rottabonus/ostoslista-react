@@ -5,15 +5,17 @@ const Item = ({ item, show, maximize, toEdit, remove }) => {
 
   if(maximize.name === item.name) {
     return (
-      <div>
-        <div onClick={() => show(item)}>{item.name}</div>
-        <div onClick={(e) => toEdit(e)}><Link to={'/editb&c'}><button>edit</button></Link></div>
-        <div><button onClick={(e) => remove(e, item)}>remove</button></div>
-      </div>
+      <tr>
+        <td onClick={() => show(item)}>{item.name}</td>
+        <td onClick={(e) => toEdit(e)}><Link to={'/editb&c'}><button>edit</button></Link></td>
+        <td><button onClick={(e) => remove(e, item)}>remove</button></td>
+      </tr>
     )
   } else {
     return (
-      <div onClick={() => show(item)}>{item.name}</div>
+      <tr>
+      <td onClick={() => show(item)}>{item.name}</td>
+      </tr>
     )
   }
 }

@@ -25,8 +25,8 @@ class App extends React.Component {
     super()
     this.state = {
       groceries: [], categories: [], brands: [], brand: '', category: '', price: '', amount: '', error: null,
-        filter: '', maximize: '', newName: '', borc: '', listItems: [], quantity: '', secret: '',
-        date: 'yyyy-mm-dd', history: [], listNum: '', oldList: [], user: null, password: '', username: '', toggle: false
+        filter: '', maximize: '', newName: '', borc: '', listItems: [], quantity: '', secret: '', list: false,
+        date: 'yyyy-mm-dd', history: [], oldList: [], user: null, password: '', username: '', toggle: false
     }
   }
 
@@ -36,7 +36,11 @@ class App extends React.Component {
                 const brands = await brandService.getAll()
                   const listItems = await shopService.getAll()
                     const history = await shopService.getHistory()
-            this.setState({ groceries, categories, brands, listItems, history })
+                    if(history.filter(list => list.resolved !== 'Y').length !== 0){
+                      this.setState({ groceries, categories, brands, listItems, history, list:true })
+                    } else {
+                      this.setState({ groceries, categories, brands, listItems, history })
+                    }        
   }
 
   handleFieldChange = (event) => {
@@ -83,22 +87,16 @@ class App extends React.Component {
       }
   }
 
-  toEdit = (event) => {
+  toEdit = (event, item) => {
       event.stopPropagation()
-      if(this.state.maximize.gr_id !== undefined) {
           this.setState({
-          newName: this.state.maximize.name,
-          price: this.state.maximize.price,
-          amount: this.state.maximize.amount,
-          brand: this.state.maximize.brand_id,
-          category: this.state.maximize.cat_id
-      })
-    } else {
-      this.setState({
-        newName: this.state.maximize.name
+          newName: item.name,
+          price: item.price,
+          amount: item.amount,
+          brand: item.brand_id,
+          category: item.cat_id
       })
     }
-  }
 
   create = async (event) => {
       event.preventDefault()
@@ -152,7 +150,7 @@ class App extends React.Component {
       this.setState({
         categories: updatedCategories,
         newName: '',
-          error: `${item.name} created and added to groceries`
+          error: `${item.name} created and added to categories`
       })
       history.push('/b&c')
     } else {
@@ -166,7 +164,7 @@ class App extends React.Component {
   update = async (event) => {
       event.preventDefault()
       if (this.state.brand === undefined || this.state.category === undefined) {
-          console.log('cat or brand null')
+          this.setState({ error: 'Change category and brand!!'})
       } else {
           const id = this.state.maximize.gr_id
           const updateItem = {
@@ -292,7 +290,9 @@ class App extends React.Component {
       }
     const quantity = parseInt(this.state.quantity)
       if(quantity <= 0 || isNaN(quantity)){
-            window.confirm('must have quantity!')
+            this.setState({error: 'must have quantity before adding to list!'})
+      } else if (!this.state.list) {
+            this.setState({error: 'create a new list before adding items!'})
       } else {
           const newListItem = {
               quantity,
@@ -306,10 +306,10 @@ class App extends React.Component {
               quantity: '',
               error: `${maximized.name} added to list`
           })
+        }
           setTimeout(() => {
               this.setState({ error: null })
-          }, 5000)
-      }
+          }, 5000)    
   }
 
   removeFromList = async (event, item) => {
@@ -358,7 +358,7 @@ class App extends React.Component {
       const matches = this.state.date.match(reg)
       console.log(matches)
       if(matches === null){
-          window.confirm('did not match pattern yyyy-mm-dd')
+          this.setState({ error: 'did not match pattern yyyy-mm-dd' })
       } else {
           const newItem = { date: this.state.date,
                         resolved: 'N'}
@@ -369,11 +369,11 @@ class App extends React.Component {
               history,
               error: 'new shoppinglist created'
           })
-          setTimeout(() => {
-              this.setState({ error: null })
-          }, 5000)
           history.push('/')
       }
+      setTimeout(() => {
+              this.setState({ error: null })
+          }, 5000)
   }
 
   getOldList = async (event, id) => {
@@ -405,7 +405,7 @@ class App extends React.Component {
                       <div><Link to="/">Groceries</Link></div>
                       <div><Link to="/b&c">Brands&Categories</Link></div>
                       <div><Link to="/archive">Archive</Link></div>
-                      <div><p onClick={()=> this.setState({user: null})}>Logout</p></div>
+                      <div><a onClick={()=> this.setState({user: null})}>Logout</a></div>
                   </div>
 
                   <div className="container">
@@ -413,7 +413,7 @@ class App extends React.Component {
                           <Route exact path="/" render={() => <GroceryDatabaseList show={this.show} maximize={this.state.maximize} toEdit={this.toEdit} remove={this.delete} add={this.addToList} groceries={this.state.groceries} changeFilter={this.handleFieldChange} filter={this.state.filter} quantity={this.state.quantity}/>}/>
                           <Route path="/about" render={() => <About/>}/>
                           <Route path="/create" render={() => <GroceryForm changeField={this.handleFieldChange} create={this.create} categories={this.state.categories} brands={this.state.brands}/>}/>
-                          <Route path="/edit" render={() => <EditGrocery maximize={this.state.maximize} categories={this.state.categories} save={this.update} brands={this.state.brands} changeField={this.handleFieldChange}/>}/>
+                          <Route path="/edit" render={() => <EditGrocery newName={this.state.newName} categories={this.state.categories} save={this.update} brands={this.state.brands} price={this.state.price} amount={this.state.amount} changeField={this.handleFieldChange}/>}/>
                           <Route path="/b&c" render={() => <BrandsAndCategories brands={this.state.brands} categories={this.state.categories} changeField={this.handleFieldChange} borc={this.state.borc} show={this.show} toEdit={this.toEdit} maximize={this.state.maximize} remove={this.deleteBrandOrCategory}/>}/>
                           <Route path="/cb" render={() => <BrandForm create={this.createBrandOrCategory} changeField={this.handleFieldChange} newName={this.state.newName} borc={this.state.borc}/>}/>
                           <Route path="/editb&c" render={() => <EditBrand update={this.updateBrandOrCategory} newName={this.state.newName} changeField={this.handleFieldChange}/>}/>
@@ -422,7 +422,6 @@ class App extends React.Component {
                       <Notification message={this.state.error}/>
                   </div>
               </div>
-
   }
         </Router>
     )

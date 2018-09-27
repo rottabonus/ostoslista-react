@@ -1,5 +1,6 @@
 import React from 'react'
 import ListItem from './ListItem'
+import pippuriKaarme from '../images/pippuriKaarme.png'
 
 const Shoppinglist = ({ list, remove,  resolve, newList, changeField, history }) => {
 
@@ -11,8 +12,9 @@ const Shoppinglist = ({ list, remove,  resolve, newList, changeField, history })
   }, 0)
 
   return (
-    <div>
+    <div >
       <h2>Shoppinglist</h2>
+      <div className="listContainer">
       {
         isResolved === 0 ?
           <form onSubmit={newList}>
@@ -22,7 +24,7 @@ const Shoppinglist = ({ list, remove,  resolve, newList, changeField, history })
           </form>
           :
           <form onSubmit={resolve}>
-            <table>
+            <table class="table">
               <thead>
                 <tr className="tableHeaders">
                   <th>name</th><th>brand</th><th>category</th><th>price</th><th>quantity</th>
@@ -38,6 +40,8 @@ const Shoppinglist = ({ list, remove,  resolve, newList, changeField, history })
             </table>
           </form>
       }
+      <div><img src={pippuriKaarme} /></div>
+      </div>
     </div>
   )
 }

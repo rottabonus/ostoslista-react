@@ -14,7 +14,7 @@ const Item = ({ item, show, maximize, toEdit, remove }) => {
   } else {
     return (
       <tr>
-      <td onClick={() => show(item)}>{item.name}</td>
+        <td onClick={() => show(item)}>{item.name}</td>
       </tr>
     )
   }

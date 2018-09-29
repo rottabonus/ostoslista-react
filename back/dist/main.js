@@ -12792,7 +12792,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, ".container {\r\n  margin: 10;\r\n  background-color: #dee8e4\r\n}\r\n\r\n.groceryItem {\r\n  margin-bottom: 10;\r\n  padding-bottom: 10;\r\n}\r\n\r\n.defaultOption {\r\n  color: gray;\r\n}\r\n\r\n.header {\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n\tjustify-content: space-around;\r\n}\r\n\r\n.archiveDivs {\r\n    display: flex;\r\n    flex-direction: row;\r\n}\r\n\r\n\r\n.numberInput {\r\n    width: 30%;\r\n}\r\n\r\n.oldList {\r\n    background-color: cyan;\r\n}\r\n\r\n.tableHeaders {\r\n    text-align: left;\r\n}", ""]);
+exports.push([module.i, ".container {\r\n    margin: 10;\r\n    background-color: #dee8e4;\r\n    background-size: 35px 35px;\r\n    background-image: linear-gradient(to right, grey 1px, transparent 1px), linear-gradient(to bottom, grey 1px, transparent 1px);\r\n}\r\n\r\n.groceryItem {\r\n  margin-bottom: 10;\r\n  padding-bottom: 10;\r\n}\r\n\r\n.defaultOption {\r\n  color: gray;\r\n}\r\n\r\n.header {\r\n\tdisplay: flex;\r\n\tflex-direction: row;\r\n\tjustify-content: space-around;\r\n}\r\n\r\n.archiveDivs {\r\n    display: flex;\r\n    flex-direction: row;\r\n}\r\n\r\n.numberInput {\r\n    width: 30%;\r\n}\r\n\r\n.oldList {\r\n    background-color: cyan;\r\n}\r\n\r\n.tableHeaders {\r\n    text-align: left;\r\n}\r\n\r\n.listContainer {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center\r\n}\r\n\r\n.notification {\r\n  border-style: solid;\r\n  border-color: #778899;\r\n  border-width: 5px;\r\n  background-color: white;\r\n  margin-left: 70px;\r\n  margin-right: 70px;\r\n  margin: 20px;\r\n}\r\n\r\n.notificationFont {\r\n  font-size: large;\r\n  text-align: center;\r\n  font-color: #dee8e4;\r\n  margin: auto;\r\n}\r\n\r\ntd {\r\n    margin: 2px;\r\n    padding: 3px;\r\n}\r\n\r\nth {\r\n    margin: 2px;\r\n    padding: 3px;\r\n}", ""]);
 
 // exports
 
@@ -24124,7 +24124,7 @@ module.exports = function (module) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24171,6 +24171,18 @@ var _ListArchive = __webpack_require__(/*! ./components/ListArchive */ "./src/co
 
 var _ListArchive2 = _interopRequireDefault(_ListArchive);
 
+var _LoginForm = __webpack_require__(/*! ./components/LoginForm */ "./src/components/LoginForm.js");
+
+var _LoginForm2 = _interopRequireDefault(_LoginForm);
+
+var _SignupForm = __webpack_require__(/*! ./components/SignupForm */ "./src/components/SignupForm.js");
+
+var _SignupForm2 = _interopRequireDefault(_SignupForm);
+
+var _Notification = __webpack_require__(/*! ./components/Notification */ "./src/components/Notification.js");
+
+var _Notification2 = _interopRequireDefault(_Notification);
+
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
 var _groceries = __webpack_require__(/*! ./services/groceries */ "./src/services/groceries.js");
@@ -24189,6 +24201,10 @@ var _shoppinglist = __webpack_require__(/*! ./services/shoppinglist */ "./src/se
 
 var _shoppinglist2 = _interopRequireDefault(_shoppinglist);
 
+var _users = __webpack_require__(/*! ./services/users */ "./src/services/users.js");
+
+var _users2 = _interopRequireDefault(_users);
+
 var _history3 = __webpack_require__(/*! ./history/history */ "./src/history/history.js");
 
 var _history4 = _interopRequireDefault(_history3);
@@ -24206,800 +24222,977 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+    _inherits(App, _React$Component);
 
-  function App() {
-    var _this2 = this;
+    function App() {
+        var _this2 = this;
 
-    _classCallCheck(this, App);
+        _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
-    _this.handleFieldChange = function (event) {
-      _this.setState(_defineProperty({}, event.target.name, event.target.value));
-    };
+        _this.handleFieldChange = function (event) {
+            _this.setState(_defineProperty({}, event.target.name, event.target.value));
+        };
 
-    _this.show = function (item) {
-      console.log(item);
-      if (_this.state.maximize !== '') {
-        _this.setState({
-          maximize: ''
-        });
-      } else {
-        _this.setState({
-          maximize: item
-        });
-      }
-    };
+        _this.login = function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+                var credentials, user;
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                event.preventDefault();
+                                console.log('login clicked!');
+                                credentials = {
+                                    username: _this.state.username,
+                                    password: _this.state.password
+                                };
+                                _context.next = 5;
+                                return _users2.default.login(credentials);
 
-    _this.toEdit = function (event) {
-      event.stopPropagation();
-      if (_this.state.maximize.gr_id !== undefined) {
-        _this.setState({
-          newName: _this.state.maximize.name,
-          price: _this.state.maximize.price,
-          amount: _this.state.maximize.amount,
-          brand: _this.state.maximize.brand_id,
-          category: _this.state.maximize.cat_id
-        });
-      } else {
-        _this.setState({
-          newName: _this.state.maximize.name
-        });
-      }
-    };
+                            case 5:
+                                user = _context.sent;
 
-    _this.create = function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-        var item, updatedGroceries;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                event.preventDefault();
-                console.log('create clicked!');
-                item = {
-                  name: _this.state.newName,
-                  brand_id: parseInt(_this.state.brand),
-                  cat_id: parseInt(_this.state.category),
-                  price: _this.state.price,
-                  amount: _this.state.amount
-                };
-                _context.next = 5;
-                return _groceries2.default.create(item);
+                                _this.setState({ user: user });
+                                console.log(user.token);
 
-              case 5:
-                _context.next = 7;
-                return _groceries2.default.getAll();
+                            case 8:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, _this2);
+            }));
 
-              case 7:
-                updatedGroceries = _context.sent;
+            return function (_x) {
+                return _ref.apply(this, arguments);
+            };
+        }();
 
-                console.log('item:', item);
+        _this.signup = function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
+                var newUser;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                event.preventDefault();
+                                console.log('signup clicked!');
+                                newUser = {
+                                    username: _this.state.username,
+                                    password: _this.state.password,
+                                    secret: _this.state.secret
+                                };
+                                _context2.prev = 3;
+                                _context2.next = 6;
+                                return _users2.default.signup(newUser);
+
+                            case 6:
+                                _this.setState({ username: '', password: '', secret: '', toggle: false });
+                                _context2.next = 12;
+                                break;
+
+                            case 9:
+                                _context2.prev = 9;
+                                _context2.t0 = _context2['catch'](3);
+
+                                console.log(_context2.t0, "wrong secret m8");
+
+                            case 12:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, _this2, [[3, 9]]);
+            }));
+
+            return function (_x2) {
+                return _ref2.apply(this, arguments);
+            };
+        }();
+
+        _this.show = function (item) {
+            if (_this.state.maximize !== '') {
                 _this.setState({
-                  groceries: updatedGroceries,
-                  newName: '',
-                  amount: '',
-                  price: ''
+                    maximize: ''
                 });
-                _history4.default.push('/');
-
-              case 11:
-              case 'end':
-                return _context.stop();
+            } else {
+                _this.setState({
+                    maximize: item
+                });
             }
-          }
-        }, _callee, _this2);
-      }));
-
-      return function (_x) {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    _this.createBrandOrCategory = function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-        var item, updatedBrands, updatedCategories;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                event.preventDefault();
-                console.log('createBrandOrCategory clicked!');
-                item = {
-                  name: _this.state.newName
-                };
-
-                if (!(_this.state.borc === "brand")) {
-                  _context2.next = 13;
-                  break;
-                }
-
-                _context2.next = 6;
-                return _brands2.default.create(item);
-
-              case 6:
-                _context2.next = 8;
-                return _brands2.default.getAll();
-
-              case 8:
-                updatedBrands = _context2.sent;
-
-                _this.setState({
-                  brands: updatedBrands,
-                  newName: ''
-                });
-                _history4.default.push('/b&c');
-                _context2.next = 25;
-                break;
-
-              case 13:
-                if (!(_this.state.borc === 'category')) {
-                  _context2.next = 24;
-                  break;
-                }
-
-                console.log('creating new category');
-                _context2.next = 17;
-                return _categories2.default.create(item);
-
-              case 17:
-                _context2.next = 19;
-                return _categories2.default.getAll();
-
-              case 19:
-                updatedCategories = _context2.sent;
-
-                _this.setState({
-                  categories: updatedCategories,
-                  newName: ''
-                });
-                _history4.default.push('/b&c');
-                _context2.next = 25;
-                break;
-
-              case 24:
-                alert('choose category or brand!');
-
-              case 25:
-              case 'end':
-                return _context2.stop();
-            }
-          }
-        }, _callee2, _this2);
-      }));
-
-      return function (_x2) {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-
-    _this.update = function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(event) {
-        var id, updateItem, updatedGroceries;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                event.preventDefault();
-                console.log('update clicked!');
-
-                if (!(_this.state.brand === undefined || _this.state.category === undefined)) {
-                  _context3.next = 6;
-                  break;
-                }
-
-                console.log('cat or brand null');
-                _context3.next = 15;
-                break;
-
-              case 6:
-                id = _this.state.maximize.gr_id;
-                updateItem = {
-                  name: _this.state.newName,
-                  brand_id: parseInt(_this.state.brand),
-                  cat_id: parseInt(_this.state.category),
-                  price: _this.state.price,
-                  amount: _this.state.amount
-                };
-                _context3.next = 10;
-                return _groceries2.default.updateGrocery(id, updateItem);
-
-              case 10:
-                _context3.next = 12;
-                return _groceries2.default.getAll();
-
-              case 12:
-                updatedGroceries = _context3.sent;
-
-                _this.setState({
-                  groceries: updatedGroceries,
-                  newName: '',
-                  amount: '',
-                  price: '',
-                  maximize: ''
-                });
-                _history4.default.push('/');
-
-              case 15:
-              case 'end':
-                return _context3.stop();
-            }
-          }
-        }, _callee3, _this2);
-      }));
-
-      return function (_x3) {
-        return _ref3.apply(this, arguments);
-      };
-    }();
-
-    _this.updateBrandOrCategory = function () {
-      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(event) {
-        var id, item, updatedBrands, _id, _item, updatedCategories;
-
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                event.preventDefault();
-                console.log('updateBrandOrCategory clicked!');
-
-                if (!(_this.state.borc === 'brands')) {
-                  _context4.next = 16;
-                  break;
-                }
-
-                console.log('brands!');
-                id = _this.state.maximize.brand_id;
-                item = {
-                  name: _this.state.newName
-                };
-                _context4.next = 8;
-                return _brands2.default.update(id, item);
-
-              case 8:
-                console.log('id', id, 'name', item);
-                _context4.next = 11;
-                return _brands2.default.getAll();
-
-              case 11:
-                updatedBrands = _context4.sent;
-
-                _this.setState({
-                  brands: updatedBrands,
-                  newName: '',
-                  maximize: ''
-                });
-                _history4.default.push('/b&c');
-                _context4.next = 26;
-                break;
-
-              case 16:
-                console.log('categories!');
-                _id = _this.state.maximize.cat_id;
-                _item = {
-                  name: _this.state.newName
-                };
-                _context4.next = 21;
-                return _categories2.default.update(_id, _item);
-
-              case 21:
-                _context4.next = 23;
-                return _categories2.default.getAll();
-
-              case 23:
-                updatedCategories = _context4.sent;
-
-                _this.setState({
-                  categories: updatedCategories,
-                  newName: '',
-                  maximize: ''
-                });
-                _history4.default.push('/b&c');
-
-              case 26:
-              case 'end':
-                return _context4.stop();
-            }
-          }
-        }, _callee4, _this2);
-      }));
-
-      return function (_x4) {
-        return _ref4.apply(this, arguments);
-      };
-    }();
-
-    _this.delete = function () {
-      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(event, maximized) {
-        var id, groceries;
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                event.stopPropagation();
-                console.log('delete clicked!, to delete', maximized.name);
-                id = maximized.gr_id;
-                groceries = _this.state.groceries;
-                _context5.next = 6;
-                return _groceries2.default.remove(id);
-
-              case 6:
-                _this.setState({
-                  groceries: groceries.filter(function (g) {
-                    return g.gr_id !== id;
-                  }),
-                  maximize: ''
-                });
-
-              case 7:
-              case 'end':
-                return _context5.stop();
-            }
-          }
-        }, _callee5, _this2);
-      }));
-
-      return function (_x5, _x6) {
-        return _ref5.apply(this, arguments);
-      };
-    }();
-
-    _this.deleteBrandOrCategory = function () {
-      var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(event, maximized) {
-        var id, updatedBrands, _id2, updatedCategories;
-
-        return regeneratorRuntime.wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                event.stopPropagation();
-                console.log('deleteBrandOrCategory clicked! to delete:', maximized.name);
-
-                if (!(_this.state.borc === 'brands')) {
-                  _context6.next = 12;
-                  break;
-                }
-
-                id = maximized.brand_id;
-                _context6.next = 6;
-                return _brands2.default.remove(id);
-
-              case 6:
-                _context6.next = 8;
-                return _brands2.default.getAll();
-
-              case 8:
-                updatedBrands = _context6.sent;
-
-                _this.setState({
-                  brands: updatedBrands,
-                  maximize: ''
-                });
-                _context6.next = 19;
-                break;
-
-              case 12:
-                _id2 = maximized.cat_id;
-                _context6.next = 15;
-                return _categories2.default.remove(_id2);
-
-              case 15:
-                _context6.next = 17;
-                return _categories2.default.getAll();
-
-              case 17:
-                updatedCategories = _context6.sent;
-
-                _this.setState({
-                  categories: updatedCategories,
-                  maximize: ''
-                });
-
-              case 19:
-              case 'end':
-                return _context6.stop();
-            }
-          }
-        }, _callee6, _this2);
-      }));
-
-      return function (_x7, _x8) {
-        return _ref6.apply(this, arguments);
-      };
-    }();
-
-    _this.addToList = function () {
-      var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(event, maximized) {
-        var quantity, newListItem, updatedShoppinglist;
-        return regeneratorRuntime.wrap(function _callee7$(_context7) {
-          while (1) {
-            switch (_context7.prev = _context7.next) {
-              case 0:
-                event.stopPropagation();
-                console.log('clicked addToList', maximized.name);
-                quantity = parseInt(_this.state.quantity);
-
-                console.log(quantity);
-
-                if (!(quantity <= 0 || isNaN(quantity))) {
-                  _context7.next = 8;
-                  break;
-                }
-
-                window.confirm('must have quantity!');
-                _context7.next = 16;
-                break;
-
-              case 8:
-                newListItem = {
-                  quantity: quantity,
-                  gr_id: maximized.gr_id
-                };
-
-                console.log(newListItem);
-                _context7.next = 12;
-                return _shoppinglist2.default.add(newListItem);
-
-              case 12:
-                _context7.next = 14;
-                return _shoppinglist2.default.getAll();
-
-              case 14:
-                updatedShoppinglist = _context7.sent;
-
-                _this.setState({
-                  listItems: updatedShoppinglist,
-                  maximize: '',
-                  quantity: ''
-                });
-
-              case 16:
-              case 'end':
-                return _context7.stop();
-            }
-          }
-        }, _callee7, _this2);
-      }));
-
-      return function (_x9, _x10) {
-        return _ref7.apply(this, arguments);
-      };
-    }();
-
-    _this.removeFromList = function () {
-      var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(event, item) {
-        var id, updatedListItems;
-        return regeneratorRuntime.wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                event.preventDefault();
-                console.log('removeFromList clicked', item);
-                id = item.or_id;
-                _context8.next = 5;
-                return _shoppinglist2.default.remove(id);
-
-              case 5:
-                _context8.next = 7;
-                return _shoppinglist2.default.getAll();
-
-              case 7:
-                updatedListItems = _context8.sent;
-
-                _this.setState({
-                  listItems: updatedListItems
-                });
-
-              case 9:
-              case 'end':
-                return _context8.stop();
-            }
-          }
-        }, _callee8, _this2);
-      }));
-
-      return function (_x11, _x12) {
-        return _ref8.apply(this, arguments);
-      };
-    }();
-
-    _this.resolve = function () {
-      var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(event) {
-        var resolver, _history;
-
-        return regeneratorRuntime.wrap(function _callee9$(_context9) {
-          while (1) {
-            switch (_context9.prev = _context9.next) {
-              case 0:
-                event.preventDefault();
-
-                if (!window.confirm('Are you sure you want to resolve the shoppinglist?')) {
-                  _context9.next = 10;
-                  break;
-                }
-
-                console.log('resolve submitted');
-                resolver = {};
-                _context9.next = 6;
-                return _shoppinglist2.default.resolveList(resolver);
-
-              case 6:
-                _context9.next = 8;
-                return _shoppinglist2.default.getHistory();
-
-              case 8:
-                _history = _context9.sent;
-
-                _this.setState({
-                  listItems: [],
-                  history: _history
-                });
-
-              case 10:
-              case 'end':
-                return _context9.stop();
-            }
-          }
-        }, _callee9, _this2);
-      }));
-
-      return function (_x13) {
-        return _ref9.apply(this, arguments);
-      };
-    }();
-
-    _this.newShoppingList = function () {
-      var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(event) {
-        var reg, matches, newItem, _history2;
-
-        return regeneratorRuntime.wrap(function _callee10$(_context10) {
-          while (1) {
-            switch (_context10.prev = _context10.next) {
-              case 0:
-                event.preventDefault();
-                console.log('new shoppingList!');
-                reg = /(\d{4}-\d{2}-\d{2})/;
-                matches = _this.state.date.match(reg);
-
-                console.log(matches);
-
-                if (!(matches === null)) {
-                  _context10.next = 9;
-                  break;
-                }
-
-                window.confirm('did not match pattern yyyy-mm-dd');
-                _context10.next = 17;
-                break;
-
-              case 9:
-                newItem = { date: _this.state.date,
-                  resolved: 'N' };
-                _context10.next = 12;
-                return _shoppinglist2.default.newlist(newItem);
-
-              case 12:
-                _context10.next = 14;
-                return _shoppinglist2.default.getHistory();
-
-              case 14:
-                _history2 = _context10.sent;
-
-                _this.setState({
-                  listItems: [],
-                  history: _history2
-                });
-                _history2.push('/');
-
-              case 17:
-              case 'end':
-                return _context10.stop();
-            }
-          }
-        }, _callee10, _this2);
-      }));
-
-      return function (_x14) {
-        return _ref10.apply(this, arguments);
-      };
-    }();
-
-    _this.getOldList = function () {
-      var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(event, id) {
-        var oldList;
-        return regeneratorRuntime.wrap(function _callee11$(_context11) {
-          while (1) {
-            switch (_context11.prev = _context11.next) {
-              case 0:
-                event.preventDefault();
-                console.log('pushed archiveItem', id);
-                _context11.next = 4;
-                return _shoppinglist2.default.getOne(id);
-
-              case 4:
-                oldList = _context11.sent;
-
-                if (_this.state.oldList.length === 0) {
-                  _this.setState({ oldList: oldList });
-                } else {
-                  _this.setState({ oldList: [] });
-                }
-
-              case 6:
-              case 'end':
-                return _context11.stop();
-            }
-          }
-        }, _callee11, _this2);
-      }));
-
-      return function (_x15, _x16) {
-        return _ref11.apply(this, arguments);
-      };
-    }();
-
-    _this.state = {
-      groceries: [], categories: [], brands: [], brand: '', category: '', price: '', amount: '',
-      filter: '', maximize: '', newName: '', borc: '', listItems: [], quantity: '',
-      date: 'yyyy-mm-dd', history: [], listNum: '', oldList: []
-    };
-    return _this;
-  }
-
-  _createClass(App, [{
-    key: 'componentDidMount',
-    value: function () {
-      var _ref12 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
-        var groceries, categories, brands, listItems, history;
-        return regeneratorRuntime.wrap(function _callee12$(_context12) {
-          while (1) {
-            switch (_context12.prev = _context12.next) {
-              case 0:
-                _context12.next = 2;
-                return _groceries2.default.getAll();
-
-              case 2:
-                groceries = _context12.sent;
-                _context12.next = 5;
-                return _categories2.default.getAll();
-
-              case 5:
-                categories = _context12.sent;
-                _context12.next = 8;
-                return _brands2.default.getAll();
-
-              case 8:
-                brands = _context12.sent;
-                _context12.next = 11;
-                return _shoppinglist2.default.getAll();
-
-              case 11:
-                listItems = _context12.sent;
-                _context12.next = 14;
-                return _shoppinglist2.default.getHistory();
-
-              case 14:
-                history = _context12.sent;
-
-                this.setState({ groceries: groceries, categories: categories, brands: brands, listItems: listItems, history: history });
-
-              case 16:
-              case 'end':
-                return _context12.stop();
-            }
-          }
-        }, _callee12, this);
-      }));
-
-      function componentDidMount() {
-        return _ref12.apply(this, arguments);
-      }
-
-      return componentDidMount;
-    }()
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      return _react2.default.createElement(
-        _reactRouterDom.Router,
-        { history: _history4.default },
-        _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            'div',
-            { className: 'header' },
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/about' },
-                'About'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/shoppinglist' },
-                'Shoppinglist'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/' },
-                'Groceries'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/b&c' },
-                'Brands&Categories'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/archive' },
-                'Archive'
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'container' },
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
-                return _react2.default.createElement(_GroceryDatabaseList2.default, { show: _this3.show, maximize: _this3.state.maximize, toEdit: _this3.toEdit, remove: _this3.delete, add: _this3.addToList,
-                  groceries: _this3.state.groceries, changeFilter: _this3.handleFieldChange, filter: _this3.state.filter, quantity: _this3.state.quatity });
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/about', render: function render() {
-                return _react2.default.createElement(_About2.default, null);
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/create', render: function render() {
-                return _react2.default.createElement(_groceryForm2.default, { changeField: _this3.handleFieldChange, create: _this3.create,
-                  categories: _this3.state.categories, brands: _this3.state.brands });
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/edit', render: function render() {
-                return _react2.default.createElement(_EditGrocery2.default, { maximize: _this3.state.maximize, categories: _this3.state.categories, save: _this3.update,
-                  brands: _this3.state.brands, changeField: _this3.handleFieldChange });
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/b&c', render: function render() {
-                return _react2.default.createElement(_BrandsAndCategories2.default, { brands: _this3.state.brands, categories: _this3.state.categories, changeField: _this3.handleFieldChange, borc: _this3.state.borc, show: _this3.show,
-                  toEdit: _this3.toEdit, maximize: _this3.state.maximize, remove: _this3.deleteBrandOrCategory });
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/cb', render: function render() {
-                return _react2.default.createElement(_BrandForm2.default, { create: _this3.createBrandOrCategory, changeField: _this3.handleFieldChange, newName: _this3.state.newName, borc: _this3.state.borc });
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/editb&c', render: function render() {
-                return _react2.default.createElement(_EditBrand2.default, { update: _this3.updateBrandOrCategory, newName: _this3.state.newName, changeField: _this3.handleFieldChange });
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/shoppinglist', render: function render() {
-                return _react2.default.createElement(_Shoppinglist2.default, { history: _this3.state.history, list: _this3.state.listItems, remove: _this3.removeFromList, resolve: _this3.resolve, newList: _this3.newShoppingList, changeField: _this3.handleFieldChange });
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/archive', render: function render() {
-                return _react2.default.createElement(_ListArchive2.default, { history: _this3.state.history, getOld: _this3.getOldList, old: _this3.state.oldList });
-              } })
-          )
-        )
-      );
+        };
+
+        _this.toEdit = function (event, item) {
+            event.stopPropagation();
+            _this.setState({
+                newName: item.name,
+                price: item.price,
+                amount: item.amount,
+                brand: item.brand_id,
+                category: item.cat_id
+            });
+        };
+
+        _this.create = function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(event) {
+                var item, config, updatedGroceries;
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                event.preventDefault();
+                                item = {
+                                    name: _this.state.newName,
+                                    brand_id: parseInt(_this.state.brand),
+                                    cat_id: parseInt(_this.state.category),
+                                    price: _this.state.price,
+                                    amount: _this.state.amount
+                                };
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+                                _context3.next = 5;
+                                return _groceries2.default.create(item, config);
+
+                            case 5:
+                                _context3.next = 7;
+                                return _groceries2.default.getAll();
+
+                            case 7:
+                                updatedGroceries = _context3.sent;
+
+                                _this.setState({
+                                    groceries: updatedGroceries,
+                                    newName: '',
+                                    amount: '',
+                                    price: '',
+                                    error: item.name + ' created and added to groceries'
+                                });
+                                _history4.default.push('/');
+                                setTimeout(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 11:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, _this2);
+            }));
+
+            return function (_x3) {
+                return _ref3.apply(this, arguments);
+            };
+        }();
+
+        _this.createBrandOrCategory = function () {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(event) {
+                var config, item, updatedBrands, updatedCategories;
+                return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
+                            case 0:
+                                event.preventDefault();
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+                                item = {
+                                    name: _this.state.newName
+                                };
+
+                                if (!(_this.state.borc === "brand")) {
+                                    _context4.next = 13;
+                                    break;
+                                }
+
+                                _context4.next = 6;
+                                return _brands2.default.create(item, config);
+
+                            case 6:
+                                _context4.next = 8;
+                                return _brands2.default.getAll();
+
+                            case 8:
+                                updatedBrands = _context4.sent;
+
+                                _this.setState({
+                                    brands: updatedBrands,
+                                    newName: '',
+                                    error: item.name + ' created and added to brands'
+                                });
+                                _history4.default.push('/b&c');
+                                _context4.next = 24;
+                                break;
+
+                            case 13:
+                                if (!(_this.state.borc === 'category')) {
+                                    _context4.next = 23;
+                                    break;
+                                }
+
+                                _context4.next = 16;
+                                return _categories2.default.create(item, config);
+
+                            case 16:
+                                _context4.next = 18;
+                                return _categories2.default.getAll();
+
+                            case 18:
+                                updatedCategories = _context4.sent;
+
+                                _this.setState({
+                                    categories: updatedCategories,
+                                    newName: '',
+                                    error: item.name + ' created and added to categories'
+                                });
+                                _history4.default.push('/b&c');
+                                _context4.next = 24;
+                                break;
+
+                            case 23:
+                                alert('choose category or brand!');
+
+                            case 24:
+                                setTimeout(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 25:
+                            case 'end':
+                                return _context4.stop();
+                        }
+                    }
+                }, _callee4, _this2);
+            }));
+
+            return function (_x4) {
+                return _ref4.apply(this, arguments);
+            };
+        }();
+
+        _this.update = function () {
+            var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(event) {
+                var id, updateItem, config, updatedGroceries;
+                return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                    while (1) {
+                        switch (_context5.prev = _context5.next) {
+                            case 0:
+                                event.preventDefault();
+
+                                if (!(_this.state.brand === undefined || _this.state.category === undefined)) {
+                                    _context5.next = 5;
+                                    break;
+                                }
+
+                                _this.setState({ error: 'Change category and brand!!' });
+                                _context5.next = 16;
+                                break;
+
+                            case 5:
+                                id = _this.state.maximize.gr_id;
+                                updateItem = {
+                                    name: _this.state.newName,
+                                    brand_id: parseInt(_this.state.brand),
+                                    cat_id: parseInt(_this.state.category),
+                                    price: _this.state.price,
+                                    amount: _this.state.amount
+                                };
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+                                _context5.next = 10;
+                                return _groceries2.default.updateGrocery(id, updateItem, config);
+
+                            case 10:
+                                _context5.next = 12;
+                                return _groceries2.default.getAll();
+
+                            case 12:
+                                updatedGroceries = _context5.sent;
+
+                                _this.setState({
+                                    groceries: updatedGroceries,
+                                    newName: '',
+                                    amount: '',
+                                    price: '',
+                                    maximize: '',
+                                    error: updateItem.name + ' was updated'
+                                });
+                                _history4.default.push('/');
+                                setTimeout(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 16:
+                            case 'end':
+                                return _context5.stop();
+                        }
+                    }
+                }, _callee5, _this2);
+            }));
+
+            return function (_x5) {
+                return _ref5.apply(this, arguments);
+            };
+        }();
+
+        _this.updateBrandOrCategory = function () {
+            var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(event) {
+                var config, id, item, updatedBrands, _id, _item, updatedCategories;
+
+                return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                    while (1) {
+                        switch (_context6.prev = _context6.next) {
+                            case 0:
+                                event.preventDefault();
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+
+                                if (!(_this.state.borc === 'brands')) {
+                                    _context6.next = 15;
+                                    break;
+                                }
+
+                                console.log('brands!');
+                                id = _this.state.maximize.brand_id;
+                                item = {
+                                    name: _this.state.newName
+                                };
+                                _context6.next = 8;
+                                return _brands2.default.update(id, item, config);
+
+                            case 8:
+                                _context6.next = 10;
+                                return _brands2.default.getAll();
+
+                            case 10:
+                                updatedBrands = _context6.sent;
+
+                                _this.setState({
+                                    brands: updatedBrands,
+                                    newName: '',
+                                    maximize: '',
+                                    error: item.name + ' updated'
+                                });
+                                _history4.default.push('/b&c');
+                                _context6.next = 25;
+                                break;
+
+                            case 15:
+                                console.log('categories!');
+                                _id = _this.state.maximize.cat_id;
+                                _item = {
+                                    name: _this.state.newName
+                                };
+                                _context6.next = 20;
+                                return _categories2.default.update(_id, _item, config);
+
+                            case 20:
+                                _context6.next = 22;
+                                return _categories2.default.getAll();
+
+                            case 22:
+                                updatedCategories = _context6.sent;
+
+                                _this.setState({
+                                    categories: updatedCategories,
+                                    newName: '',
+                                    maximize: '',
+                                    error: _item.name + ' updated'
+                                });
+                                _history4.default.push('/b&c');
+
+                            case 25:
+                                setTimeout(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 26:
+                            case 'end':
+                                return _context6.stop();
+                        }
+                    }
+                }, _callee6, _this2);
+            }));
+
+            return function (_x6) {
+                return _ref6.apply(this, arguments);
+            };
+        }();
+
+        _this.delete = function () {
+            var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(event, maximized) {
+                var id, groceries, config;
+                return regeneratorRuntime.wrap(function _callee7$(_context7) {
+                    while (1) {
+                        switch (_context7.prev = _context7.next) {
+                            case 0:
+                                event.stopPropagation();
+                                id = maximized.gr_id;
+                                groceries = _this.state.groceries;
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+                                _context7.next = 6;
+                                return _groceries2.default.remove(id, config);
+
+                            case 6:
+                                _this.setState({
+                                    groceries: groceries.filter(function (g) {
+                                        return g.gr_id !== id;
+                                    }),
+                                    maximize: '',
+                                    error: maximized.name + ' deleted'
+                                });
+                                setTimeOut(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 8:
+                            case 'end':
+                                return _context7.stop();
+                        }
+                    }
+                }, _callee7, _this2);
+            }));
+
+            return function (_x7, _x8) {
+                return _ref7.apply(this, arguments);
+            };
+        }();
+
+        _this.deleteBrandOrCategory = function () {
+            var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(event, maximized) {
+                var config, id, updatedBrands, _id2, updatedCategories;
+
+                return regeneratorRuntime.wrap(function _callee8$(_context8) {
+                    while (1) {
+                        switch (_context8.prev = _context8.next) {
+                            case 0:
+                                event.stopPropagation();
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+
+                                if (!(_this.state.borc === 'brands')) {
+                                    _context8.next = 12;
+                                    break;
+                                }
+
+                                id = maximized.brand_id;
+                                _context8.next = 6;
+                                return _brands2.default.remove(id, config);
+
+                            case 6:
+                                _context8.next = 8;
+                                return _brands2.default.getAll();
+
+                            case 8:
+                                updatedBrands = _context8.sent;
+
+                                _this.setState({
+                                    brands: updatedBrands,
+                                    maximize: '',
+                                    error: maximized.name + ' deleted'
+                                });
+                                _context8.next = 19;
+                                break;
+
+                            case 12:
+                                _id2 = maximized.cat_id;
+                                _context8.next = 15;
+                                return _categories2.default.remove(_id2, config);
+
+                            case 15:
+                                _context8.next = 17;
+                                return _categories2.default.getAll();
+
+                            case 17:
+                                updatedCategories = _context8.sent;
+
+                                _this.setState({
+                                    categories: updatedCategories,
+                                    maximize: '',
+                                    error: maximized.name + ' deleted'
+                                });
+
+                            case 19:
+                                setTimeout(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 20:
+                            case 'end':
+                                return _context8.stop();
+                        }
+                    }
+                }, _callee8, _this2);
+            }));
+
+            return function (_x9, _x10) {
+                return _ref8.apply(this, arguments);
+            };
+        }();
+
+        _this.addToList = function () {
+            var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(event, maximized) {
+                var config, quantity, newListItem, updatedShoppinglist;
+                return regeneratorRuntime.wrap(function _callee9$(_context9) {
+                    while (1) {
+                        switch (_context9.prev = _context9.next) {
+                            case 0:
+                                event.stopPropagation();
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+                                quantity = parseInt(_this.state.quantity);
+
+                                if (!(quantity <= 0 || isNaN(quantity))) {
+                                    _context9.next = 7;
+                                    break;
+                                }
+
+                                _this.setState({ error: 'must have quantity before adding to list!' });
+                                _context9.next = 18;
+                                break;
+
+                            case 7:
+                                if (_this.state.list) {
+                                    _context9.next = 11;
+                                    break;
+                                }
+
+                                _this.setState({ error: 'create a new list before adding items!' });
+                                _context9.next = 18;
+                                break;
+
+                            case 11:
+                                newListItem = {
+                                    quantity: quantity,
+                                    gr_id: maximized.gr_id
+                                };
+                                _context9.next = 14;
+                                return _shoppinglist2.default.add(newListItem, config);
+
+                            case 14:
+                                _context9.next = 16;
+                                return _shoppinglist2.default.getAll();
+
+                            case 16:
+                                updatedShoppinglist = _context9.sent;
+
+                                _this.setState({
+                                    listItems: updatedShoppinglist,
+                                    maximize: '',
+                                    quantity: '',
+                                    error: maximized.name + ' added to list'
+                                });
+
+                            case 18:
+                                setTimeout(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 19:
+                            case 'end':
+                                return _context9.stop();
+                        }
+                    }
+                }, _callee9, _this2);
+            }));
+
+            return function (_x11, _x12) {
+                return _ref9.apply(this, arguments);
+            };
+        }();
+
+        _this.removeFromList = function () {
+            var _ref10 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(event, item) {
+                var config, id, updatedListItems;
+                return regeneratorRuntime.wrap(function _callee10$(_context10) {
+                    while (1) {
+                        switch (_context10.prev = _context10.next) {
+                            case 0:
+                                event.preventDefault();
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+                                id = item.or_id;
+                                _context10.next = 5;
+                                return _shoppinglist2.default.remove(id, config);
+
+                            case 5:
+                                _context10.next = 7;
+                                return _shoppinglist2.default.getAll();
+
+                            case 7:
+                                updatedListItems = _context10.sent;
+
+                                _this.setState({
+                                    listItems: updatedListItems,
+                                    error: item.name + ' removed from list'
+                                });
+                                setTimeout(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 10:
+                            case 'end':
+                                return _context10.stop();
+                        }
+                    }
+                }, _callee10, _this2);
+            }));
+
+            return function (_x13, _x14) {
+                return _ref10.apply(this, arguments);
+            };
+        }();
+
+        _this.resolve = function () {
+            var _ref11 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11(event) {
+                var config, resolver, _history;
+
+                return regeneratorRuntime.wrap(function _callee11$(_context11) {
+                    while (1) {
+                        switch (_context11.prev = _context11.next) {
+                            case 0:
+                                event.preventDefault();
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+
+                                if (!window.confirm('Are you sure you want to resolve the shoppinglist?')) {
+                                    _context11.next = 11;
+                                    break;
+                                }
+
+                                resolver = {};
+                                _context11.next = 6;
+                                return _shoppinglist2.default.resolveList(resolver, config);
+
+                            case 6:
+                                _context11.next = 8;
+                                return _shoppinglist2.default.getHistory();
+
+                            case 8:
+                                _history = _context11.sent;
+
+                                _this.setState({
+                                    listItems: [],
+                                    history: _history,
+                                    error: 'shoppinglist was resolved!'
+                                });
+                                setTimeout(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 11:
+                            case 'end':
+                                return _context11.stop();
+                        }
+                    }
+                }, _callee11, _this2);
+            }));
+
+            return function (_x15) {
+                return _ref11.apply(this, arguments);
+            };
+        }();
+
+        _this.newShoppingList = function () {
+            var _ref12 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12(event) {
+                var config, reg, matches, newItem, _history2;
+
+                return regeneratorRuntime.wrap(function _callee12$(_context12) {
+                    while (1) {
+                        switch (_context12.prev = _context12.next) {
+                            case 0:
+                                event.preventDefault();
+                                config = {
+                                    headers: { 'Authorization': "bearer " + _this.state.user.token }
+                                };
+                                reg = /(\d{4}-\d{2}-\d{2})/;
+                                matches = _this.state.date.match(reg);
+
+                                console.log(matches);
+
+                                if (!(matches === null)) {
+                                    _context12.next = 9;
+                                    break;
+                                }
+
+                                _this.setState({ error: 'did not match pattern yyyy-mm-dd' });
+                                _context12.next = 17;
+                                break;
+
+                            case 9:
+                                newItem = { date: _this.state.date,
+                                    resolved: 'N' };
+                                _context12.next = 12;
+                                return _shoppinglist2.default.newlist(newItem, config);
+
+                            case 12:
+                                _context12.next = 14;
+                                return _shoppinglist2.default.getHistory();
+
+                            case 14:
+                                _history2 = _context12.sent;
+
+                                _this.setState({
+                                    listItems: [],
+                                    history: _history2,
+                                    error: 'new shoppinglist created'
+                                });
+                                _history2.push('/');
+
+                            case 17:
+                                setTimeout(function () {
+                                    _this.setState({ error: null });
+                                }, 5000);
+
+                            case 18:
+                            case 'end':
+                                return _context12.stop();
+                        }
+                    }
+                }, _callee12, _this2);
+            }));
+
+            return function (_x16) {
+                return _ref12.apply(this, arguments);
+            };
+        }();
+
+        _this.getOldList = function () {
+            var _ref13 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee13(event, id) {
+                var oldList;
+                return regeneratorRuntime.wrap(function _callee13$(_context13) {
+                    while (1) {
+                        switch (_context13.prev = _context13.next) {
+                            case 0:
+                                event.preventDefault();
+                                _context13.next = 3;
+                                return _shoppinglist2.default.getOne(id);
+
+                            case 3:
+                                oldList = _context13.sent;
+
+                                if (_this.state.oldList.length === 0) {
+                                    _this.setState({ oldList: oldList });
+                                } else {
+                                    _this.setState({ oldList: [] });
+                                }
+
+                            case 5:
+                            case 'end':
+                                return _context13.stop();
+                        }
+                    }
+                }, _callee13, _this2);
+            }));
+
+            return function (_x17, _x18) {
+                return _ref13.apply(this, arguments);
+            };
+        }();
+
+        _this.toggleLogin = function (event) {
+            event.preventDefault();
+            console.log('logintoggle');
+            _this.setState({ toggle: !_this.state.toggle });
+        };
+
+        _this.state = {
+            groceries: [], categories: [], brands: [], brand: '', category: '', price: '', amount: '', error: null,
+            filter: '', maximize: '', newName: '', borc: '', listItems: [], quantity: '', secret: '', list: false,
+            date: 'yyyy-mm-dd', history: [], oldList: [], user: null, password: '', username: '', toggle: false
+        };
+        return _this;
     }
-  }]);
 
-  return App;
+    _createClass(App, [{
+        key: 'componentDidMount',
+        value: function () {
+            var _ref14 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
+                var groceries, categories, brands, listItems, history;
+                return regeneratorRuntime.wrap(function _callee14$(_context14) {
+                    while (1) {
+                        switch (_context14.prev = _context14.next) {
+                            case 0:
+                                _context14.next = 2;
+                                return _groceries2.default.getAll();
+
+                            case 2:
+                                groceries = _context14.sent;
+                                _context14.next = 5;
+                                return _categories2.default.getAll();
+
+                            case 5:
+                                categories = _context14.sent;
+                                _context14.next = 8;
+                                return _brands2.default.getAll();
+
+                            case 8:
+                                brands = _context14.sent;
+                                _context14.next = 11;
+                                return _shoppinglist2.default.getAll();
+
+                            case 11:
+                                listItems = _context14.sent;
+                                _context14.next = 14;
+                                return _shoppinglist2.default.getHistory();
+
+                            case 14:
+                                history = _context14.sent;
+
+                                if (history.filter(function (list) {
+                                    return list.resolved !== 'Y';
+                                }).length !== 0) {
+                                    this.setState({ groceries: groceries, categories: categories, brands: brands, listItems: listItems, history: history, list: true });
+                                } else {
+                                    this.setState({ groceries: groceries, categories: categories, brands: brands, listItems: listItems, history: history });
+                                }
+
+                            case 16:
+                            case 'end':
+                                return _context14.stop();
+                        }
+                    }
+                }, _callee14, this);
+            }));
+
+            function componentDidMount() {
+                return _ref14.apply(this, arguments);
+            }
+
+            return componentDidMount;
+        }()
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this3 = this;
+
+            return _react2.default.createElement(
+                _reactRouterDom.Router,
+                { history: _history4.default },
+                !this.state.user ? !this.state.toggle ? _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_LoginForm2.default, { toggle: this.toggleLogin, password: this.state.password, username: this.state.username, changeField: this.handleFieldChange, login: this.login })
+                ) : _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_SignupForm2.default, { toggle: this.toggleLogin, password: this.state.password, username: this.state.username, changeField: this.handleFieldChange, secret: this.state.secret, signup: this.signup })
+                ) : _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'header' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/about' },
+                                'About'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/shoppinglist' },
+                                'Shoppinglist'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/' },
+                                'Groceries'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/b&c' },
+                                'Brands&Categories'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/archive' },
+                                'Archive'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { onClick: function onClick() {
+                                        return _this3.setState({ user: null });
+                                    } },
+                                'Logout'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container' },
+                        _react2.default.createElement(
+                            'div',
+                            null,
+                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
+                                    return _react2.default.createElement(_GroceryDatabaseList2.default, { show: _this3.show, maximize: _this3.state.maximize, toEdit: _this3.toEdit, remove: _this3.delete, add: _this3.addToList, groceries: _this3.state.groceries, changeFilter: _this3.handleFieldChange, filter: _this3.state.filter, quantity: _this3.state.quantity });
+                                } }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/about', render: function render() {
+                                    return _react2.default.createElement(_About2.default, null);
+                                } }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/create', render: function render() {
+                                    return _react2.default.createElement(_groceryForm2.default, { changeField: _this3.handleFieldChange, create: _this3.create, categories: _this3.state.categories, brands: _this3.state.brands });
+                                } }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/edit', render: function render() {
+                                    return _react2.default.createElement(_EditGrocery2.default, { newName: _this3.state.newName, categories: _this3.state.categories, save: _this3.update, brands: _this3.state.brands, price: _this3.state.price, amount: _this3.state.amount, changeField: _this3.handleFieldChange });
+                                } }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/b&c', render: function render() {
+                                    return _react2.default.createElement(_BrandsAndCategories2.default, { brands: _this3.state.brands, categories: _this3.state.categories, changeField: _this3.handleFieldChange, borc: _this3.state.borc, show: _this3.show, toEdit: _this3.toEdit, maximize: _this3.state.maximize, remove: _this3.deleteBrandOrCategory });
+                                } }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/cb', render: function render() {
+                                    return _react2.default.createElement(_BrandForm2.default, { create: _this3.createBrandOrCategory, changeField: _this3.handleFieldChange, newName: _this3.state.newName, borc: _this3.state.borc });
+                                } }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/editb&c', render: function render() {
+                                    return _react2.default.createElement(_EditBrand2.default, { update: _this3.updateBrandOrCategory, newName: _this3.state.newName, changeField: _this3.handleFieldChange });
+                                } }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/shoppinglist', render: function render() {
+                                    return _react2.default.createElement(_Shoppinglist2.default, { history: _this3.state.history, list: _this3.state.listItems, remove: _this3.removeFromList, resolve: _this3.resolve, newList: _this3.newShoppingList, changeField: _this3.handleFieldChange });
+                                } }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/archive', render: function render() {
+                                    return _react2.default.createElement(_ListArchive2.default, { history: _this3.state.history, getOld: _this3.getOldList, old: _this3.state.oldList });
+                                } })
+                        ),
+                        _react2.default.createElement(_Notification2.default, { message: this.state.error })
+                    )
+                )
+            );
+        }
+    }]);
+
+    return App;
 }(_react2.default.Component);
 
 exports.default = App;
@@ -25024,6 +25217,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _parsakaalibudda = __webpack_require__(/*! ../images/parsakaalibudda.png */ "./src/images/parsakaalibudda.png");
+
+var _parsakaalibudda2 = _interopRequireDefault(_parsakaalibudda);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var About = function About() {
@@ -25035,7 +25232,8 @@ var About = function About() {
       'h2',
       null,
       'About'
-    )
+    ),
+    _react2.default.createElement('img', { src: _parsakaalibudda2.default })
   );
 };
 
@@ -25061,6 +25259,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _matatonsieni = __webpack_require__(/*! ../images/matatonsieni.png */ "./src/images/matatonsieni.png");
+
+var _matatonsieni2 = _interopRequireDefault(_matatonsieni);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BrandForm = function BrandForm(_ref) {
@@ -25070,46 +25272,55 @@ var BrandForm = function BrandForm(_ref) {
       create = _ref.create;
 
   return _react2.default.createElement(
-    "div",
-    null,
+    'div',
+    { className: 'listContainer' },
     _react2.default.createElement(
-      "form",
-      { onSubmit: create },
+      'div',
+      null,
       _react2.default.createElement(
-        "h2",
-        null,
-        "Form"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "name",
-        _react2.default.createElement("input", { type: "text", onChange: changeField, value: newName, name: "newName" })
-      ),
-      _react2.default.createElement(
-        "select",
-        { onChange: changeField, name: "borc" },
+        'form',
+        { onSubmit: create },
         _react2.default.createElement(
-          "option",
-          { value: "", className: "defaultOption" },
-          "choose"
+          'h2',
+          null,
+          'Form'
         ),
         _react2.default.createElement(
-          "option",
-          { value: "brand" },
-          "brand"
+          'p',
+          null,
+          'name',
+          _react2.default.createElement('input', { type: 'text', onChange: changeField, value: newName, name: 'newName' })
         ),
         _react2.default.createElement(
-          "option",
-          { value: "category" },
-          "category"
+          'select',
+          { onChange: changeField, name: 'borc' },
+          _react2.default.createElement(
+            'option',
+            { value: '', className: 'defaultOption' },
+            'choose'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: 'brand' },
+            'brand'
+          ),
+          _react2.default.createElement(
+            'option',
+            { value: 'category' },
+            'category'
+          )
+        ),
+        _react2.default.createElement(
+          'button',
+          { type: 'submit' },
+          'create'
         )
-      ),
-      _react2.default.createElement(
-        "button",
-        { type: "submit" },
-        "create"
       )
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement('img', { src: _matatonsieni2.default })
     )
   );
 };
@@ -25142,6 +25353,14 @@ var _Item = __webpack_require__(/*! ./Item */ "./src/components/Item.js");
 
 var _Item2 = _interopRequireDefault(_Item);
 
+var _agenttitomaatti = __webpack_require__(/*! ../images/agenttitomaatti3.png */ "./src/images/agenttitomaatti3.png");
+
+var _agenttitomaatti2 = _interopRequireDefault(_agenttitomaatti);
+
+var _polkupyoranauris = __webpack_require__(/*! ../images/polkupyoranauris3.png */ "./src/images/polkupyoranauris3.png");
+
+var _polkupyoranauris2 = _interopRequireDefault(_polkupyoranauris);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BrandsAndCategories = function BrandsAndCategories(_ref) {
@@ -25170,7 +25389,11 @@ var BrandsAndCategories = function BrandsAndCategories(_ref) {
         _react2.default.createElement(
           _reactRouterDom.Link,
           { to: '/cb' },
-          'create brand or category'
+          _react2.default.createElement(
+            'button',
+            null,
+            'create brand or category'
+          )
         )
       ),
       _react2.default.createElement(
@@ -25196,6 +25419,11 @@ var BrandsAndCategories = function BrandsAndCategories(_ref) {
           'label',
           null,
           'brands'
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement('img', { src: _polkupyoranauris2.default })
         )
       )
     );
@@ -25217,7 +25445,11 @@ var BrandsAndCategories = function BrandsAndCategories(_ref) {
         _react2.default.createElement(
           _reactRouterDom.Link,
           { to: '/cb' },
-          'create brand or category'
+          _react2.default.createElement(
+            'button',
+            null,
+            'create brand or category'
+          )
         )
       )
     ),
@@ -25236,19 +25468,36 @@ var BrandsAndCategories = function BrandsAndCategories(_ref) {
         null,
         'brands'
       ),
-      borc === 'categories' ? categories.map(function (category) {
-        return _react2.default.createElement(
-          _Item2.default,
-          { toEdit: toEdit, maximize: maximize, item: category, show: show, key: category.cat_id, remove: remove },
-          category.name
-        );
-      }) : brands.map(function (brand) {
-        return _react2.default.createElement(
-          _Item2.default,
-          { toEdit: toEdit, item: brand, maximize: maximize, show: show, key: brand.brand_id, remove: remove },
-          brand.name
-        );
-      })
+      _react2.default.createElement(
+        'div',
+        { className: 'listContainer' },
+        _react2.default.createElement(
+          'table',
+          null,
+          _react2.default.createElement(
+            'tbody',
+            null,
+            borc === 'categories' ? categories.map(function (category) {
+              return _react2.default.createElement(
+                _Item2.default,
+                { toEdit: toEdit, maximize: maximize, item: category, show: show, key: category.cat_id, remove: remove },
+                category.name
+              );
+            }) : brands.map(function (brand) {
+              return _react2.default.createElement(
+                _Item2.default,
+                { toEdit: toEdit, item: brand, maximize: maximize, show: show, key: brand.brand_id, remove: remove },
+                brand.name
+              );
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement('img', { src: _agenttitomaatti2.default })
+        )
+      )
     )
   );
 };
@@ -25328,11 +25577,13 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var EditGrocery = function EditGrocery(_ref) {
-  var maximize = _ref.maximize,
-      changeField = _ref.changeField,
+  var changeField = _ref.changeField,
       categories = _ref.categories,
       brands = _ref.brands,
-      save = _ref.save;
+      save = _ref.save,
+      newName = _ref.newName,
+      price = _ref.price,
+      amount = _ref.amount;
 
 
   return _react2.default.createElement(
@@ -25353,7 +25604,7 @@ var EditGrocery = function EditGrocery(_ref) {
           "p",
           null,
           "name",
-          _react2.default.createElement("input", { defaultValue: maximize.name, type: "text", name: "newName", onChange: changeField })
+          _react2.default.createElement("input", { type: "text", defaultValue: newName, name: "newName", onChange: changeField })
         )
       ),
       _react2.default.createElement(
@@ -25363,7 +25614,7 @@ var EditGrocery = function EditGrocery(_ref) {
           "p",
           null,
           "price",
-          _react2.default.createElement("input", { defaultValue: maximize.price, type: "text", name: "price", onChange: changeField })
+          _react2.default.createElement("input", { type: "text", defaultValue: price, name: "price", onChange: changeField })
         )
       ),
       _react2.default.createElement(
@@ -25373,7 +25624,7 @@ var EditGrocery = function EditGrocery(_ref) {
           "p",
           null,
           "amount",
-          _react2.default.createElement("input", { defaultValue: maximize.amount, type: "text", name: "amount", onChange: changeField })
+          _react2.default.createElement("input", { type: "text", defaultValue: amount, name: "amount", onChange: changeField })
         )
       ),
       _react2.default.createElement(
@@ -25381,7 +25632,7 @@ var EditGrocery = function EditGrocery(_ref) {
         null,
         _react2.default.createElement(
           "select",
-          { onChange: changeField, defaultValue: maximize.cat_id, name: "category" },
+          { onChange: changeField, name: "category" },
           categories.map(function (item) {
             return _react2.default.createElement(
               "option",
@@ -25396,7 +25647,7 @@ var EditGrocery = function EditGrocery(_ref) {
         null,
         _react2.default.createElement(
           "select",
-          { onChange: changeField, defaultValue: maximize.brand_id, name: "brand" },
+          { onChange: changeField, name: "brand" },
           brands.map(function (item) {
             return _react2.default.createElement(
               "option",
@@ -25443,11 +25694,14 @@ var _GroceryItem2 = _interopRequireDefault(_GroceryItem);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
+var _porkkananainen = __webpack_require__(/*! ../images/porkkananainen.png */ "./src/images/porkkananainen.png");
+
+var _porkkananainen2 = _interopRequireDefault(_porkkananainen);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var GroceryDatabaseList = function GroceryDatabaseList(_ref) {
   var groceries = _ref.groceries,
-      maximize = _ref.maximize,
       show = _ref.show,
       filter = _ref.filter,
       changeFilter = _ref.changeFilter,
@@ -25458,7 +25712,7 @@ var GroceryDatabaseList = function GroceryDatabaseList(_ref) {
 
 
   var filtered = groceries.filter(function (grocery) {
-    return grocery.name.toLowerCase().includes(filter.toLowerCase());
+    return grocery.name.toLowerCase().includes(filter.toLowerCase()) || grocery.brand.toLowerCase().includes(filter.toLowerCase()) || grocery.category.toLowerCase().includes(filter.toLowerCase());
   });
 
   return _react2.default.createElement(
@@ -25475,7 +25729,11 @@ var GroceryDatabaseList = function GroceryDatabaseList(_ref) {
       _react2.default.createElement(
         _reactRouterDom.Link,
         { to: '/create' },
-        'Create'
+        _react2.default.createElement(
+          'button',
+          null,
+          'Create'
+        )
       )
     ),
     _react2.default.createElement(
@@ -25488,16 +25746,59 @@ var GroceryDatabaseList = function GroceryDatabaseList(_ref) {
       'table',
       null,
       _react2.default.createElement(
+        'thead',
+        null,
+        _react2.default.createElement(
+          'tr',
+          { className: 'tableHeaders' },
+          _react2.default.createElement(
+            'th',
+            null,
+            'name'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'brand'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'category'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'price'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'amount'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'quantity'
+          )
+        )
+      ),
+      _react2.default.createElement(
         'tbody',
         null,
         filtered.map(function (grocery) {
           return _react2.default.createElement(
             _GroceryItem2.default,
-            { key: grocery.gr_id, change: changeFilter, show: show, item: grocery, maximize: maximize, add: add, toEdit: toEdit, remove: remove, quantity: quantity },
+            { key: grocery.gr_id, change: changeFilter, show: show, item: grocery, add: add, toEdit: toEdit, remove: remove, quantity: quantity },
             ' '
           );
         })
       )
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement('img', { src: _porkkananainen2.default })
     )
   );
 };
@@ -25532,115 +25833,87 @@ var GroceryItem = function GroceryItem(_ref) {
   var add = _ref.add,
       item = _ref.item,
       show = _ref.show,
-      maximize = _ref.maximize,
       toEdit = _ref.toEdit,
       remove = _ref.remove,
-      quantity = _ref.quantity,
       change = _ref.change;
 
 
-  if (item.gr_id === maximize.gr_id) {
-    return _react2.default.createElement(
-      'tr',
-      { onClick: function onClick() {
-          return show(maximize);
+  return _react2.default.createElement(
+    'tr',
+    { onClick: function onClick() {
+        return show(item);
+      } },
+    _react2.default.createElement(
+      'td',
+      null,
+      item.name
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      item.brand
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      item.category
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      item.price,
+      ' \u20AC'
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      item.amount
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      _react2.default.createElement('input', { className: 'numberInput', onClick: function onClick(e) {
+          return e.stopPropagation();
+        }, onChange: change, name: 'quantity', min: '0', type: 'number' })
+    ),
+    _react2.default.createElement(
+      'td',
+      { onClick: function onClick(e) {
+          return add(e, item);
         } },
       _react2.default.createElement(
-        'td',
+        'button',
         null,
-        maximize.name
-      ),
+        'add'
+      )
+    ),
+    _react2.default.createElement(
+      'td',
+      { onClick: function onClick(e) {
+          return toEdit(e, item);
+        } },
       _react2.default.createElement(
-        'td',
-        null,
-        item.brand
-      ),
-      _react2.default.createElement(
-        'td',
-        null,
-        item.category
-      ),
-      _react2.default.createElement(
-        'td',
-        null,
-        'Price: ',
-        maximize.price,
-        ' \u20AC'
-      ),
-      _react2.default.createElement(
-        'td',
-        null,
-        'Amount: ',
-        maximize.amount
-      ),
-      _react2.default.createElement(
-        'td',
-        null,
-        _react2.default.createElement('input', { className: 'numberInput', onClick: function onClick(e) {
-            return e.stopPropagation();
-          }, onChange: change, name: 'quantity', type: 'number' })
-      ),
-      _react2.default.createElement(
-        'td',
-        { onClick: function onClick(e) {
-            return add(e, maximize);
-          } },
+        _reactRouterDom.Link,
+        { to: '/edit' },
         _react2.default.createElement(
           'button',
           null,
-          'add to list'
-        )
-      ),
-      _react2.default.createElement(
-        'td',
-        { onClick: function onClick(e) {
-            return toEdit(e);
-          } },
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/edit' },
-          _react2.default.createElement(
-            'button',
-            null,
-            'edit'
-          )
-        )
-      ),
-      _react2.default.createElement(
-        'td',
-        { onClick: function onClick(e) {
-            return remove(e, maximize);
-          } },
-        _react2.default.createElement(
-          'button',
-          null,
-          'delete'
+          'edit'
         )
       )
-    );
-  } else {
-    return _react2.default.createElement(
-      'tr',
-      { onClick: function onClick() {
-          return show(item);
+    ),
+    _react2.default.createElement(
+      'td',
+      { onClick: function onClick(e) {
+          return remove(e, item);
         } },
       _react2.default.createElement(
-        'td',
+        'button',
         null,
-        item.name
-      ),
-      _react2.default.createElement(
-        'td',
-        null,
-        item.brand
-      ),
-      _react2.default.createElement(
-        'td',
-        null,
-        item.category
+        'delete'
       )
-    );
-  }
+    )
+  );
 };
 
 exports.default = GroceryItem;
@@ -25679,17 +25952,17 @@ var Item = function Item(_ref) {
 
   if (maximize.name === item.name) {
     return _react2.default.createElement(
-      'div',
+      'tr',
       null,
       _react2.default.createElement(
-        'div',
+        'td',
         { onClick: function onClick() {
             return show(item);
           } },
         item.name
       ),
       _react2.default.createElement(
-        'div',
+        'td',
         { onClick: function onClick(e) {
             return toEdit(e);
           } },
@@ -25704,7 +25977,7 @@ var Item = function Item(_ref) {
         )
       ),
       _react2.default.createElement(
-        'div',
+        'td',
         null,
         _react2.default.createElement(
           'button',
@@ -25717,11 +25990,15 @@ var Item = function Item(_ref) {
     );
   } else {
     return _react2.default.createElement(
-      'div',
-      { onClick: function onClick() {
-          return show(item);
-        } },
-      item.name
+      'tr',
+      null,
+      _react2.default.createElement(
+        'td',
+        { onClick: function onClick() {
+            return show(item);
+          } },
+        item.name
+      )
     );
   }
 };
@@ -25747,6 +26024,10 @@ Object.defineProperty(exports, "__esModule", {
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
+
+var _kokkeli = __webpack_require__(/*! ../images/kokkeli.png */ "./src/images/kokkeli.png");
+
+var _kokkeli2 = _interopRequireDefault(_kokkeli);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25804,8 +26085,8 @@ var ListArchive = function ListArchive(_ref2) {
             null,
             history.filter(function (list) {
               return list.resolved !== 'N';
-            }).map(function (item) {
-              return _react2.default.createElement(ArchiveItem, { item: item, getOld: getOld, key: item.shop_id });
+            }).map(function (item, i) {
+              return _react2.default.createElement(ArchiveItem, { key: i, item: item, getOld: getOld });
             })
           )
         )
@@ -25820,6 +26101,11 @@ var ListArchive = function ListArchive(_ref2) {
             item.name
           );
         })
+      ),
+      _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('img', { src: _kokkeli2.default })
       )
     )
   );
@@ -25901,6 +26187,131 @@ exports.default = ListItem;
 
 /***/ }),
 
+/***/ "./src/components/LoginForm.js":
+/*!*************************************!*\
+  !*** ./src/components/LoginForm.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _rappiRotta = __webpack_require__(/*! ../images/rappiRotta.png */ "./src/images/rappiRotta.png");
+
+var _rappiRotta2 = _interopRequireDefault(_rappiRotta);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var LoginForm = function LoginForm(_ref) {
+  var username = _ref.username,
+      changeField = _ref.changeField,
+      password = _ref.password,
+      login = _ref.login,
+      toggle = _ref.toggle;
+
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'container' },
+    _react2.default.createElement(
+      'div',
+      { className: 'listContainer' },
+      _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          { onSubmit: login },
+          _react2.default.createElement(
+            'div',
+            null,
+            ' username ',
+            _react2.default.createElement('input', { type: 'text', name: 'username', value: username, onChange: changeField })
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            ' password ',
+            _react2.default.createElement('input', { type: 'password', name: 'password', value: password, onChange: changeField })
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            ' login '
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('img', { src: _rappiRotta2.default, alt: 'rappiRotta' })
+      )
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick(e) {
+          return toggle(e);
+        } },
+      ' switch to signup'
+    )
+  );
+};
+
+exports.default = LoginForm;
+
+/***/ }),
+
+/***/ "./src/components/Notification.js":
+/*!****************************************!*\
+  !*** ./src/components/Notification.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Notification = function Notification(_ref) {
+  var message = _ref.message;
+
+
+  if (message === null) {
+    return null;
+  }
+  return _react2.default.createElement(
+    "div",
+    { className: "notification" },
+    _react2.default.createElement(
+      "p",
+      { className: "notificationFont" },
+      message
+    )
+  );
+};
+
+exports.default = Notification;
+
+/***/ }),
+
 /***/ "./src/components/Shoppinglist.js":
 /*!****************************************!*\
   !*** ./src/components/Shoppinglist.js ***!
@@ -25922,6 +26333,10 @@ var _react2 = _interopRequireDefault(_react);
 var _ListItem = __webpack_require__(/*! ./ListItem */ "./src/components/ListItem.js");
 
 var _ListItem2 = _interopRequireDefault(_ListItem);
+
+var _pippuriKaarme = __webpack_require__(/*! ../images/pippuriKaarme.png */ "./src/images/pippuriKaarme.png");
+
+var _pippuriKaarme2 = _interopRequireDefault(_pippuriKaarme);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25953,114 +26368,213 @@ var Shoppinglist = function Shoppinglist(_ref) {
       null,
       'Shoppinglist'
     ),
-    isResolved === 0 ? _react2.default.createElement(
-      'form',
-      { onSubmit: newList },
-      _react2.default.createElement(
-        'h3',
-        null,
-        'create new'
-      ),
-      _react2.default.createElement(
-        'p',
-        null,
-        'date',
-        _react2.default.createElement('input', { type: 'text', onChange: changeField, name: 'date', defaultValue: 'yyyy-mm-dd' })
-      ),
-      _react2.default.createElement(
-        'button',
-        { type: 'submit' },
-        'create'
-      )
-    ) : _react2.default.createElement(
-      'form',
-      { onSubmit: resolve },
-      _react2.default.createElement(
-        'table',
-        null,
+    _react2.default.createElement(
+      'div',
+      { className: 'listContainer' },
+      isResolved === 0 ? _react2.default.createElement(
+        'form',
+        { onSubmit: newList },
         _react2.default.createElement(
-          'thead',
+          'h3',
           null,
-          _react2.default.createElement(
-            'tr',
-            { className: 'tableHeaders' },
-            _react2.default.createElement(
-              'th',
-              null,
-              'name'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'brand'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'category'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'price'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'quantity'
-            )
-          )
+          'create new'
         ),
         _react2.default.createElement(
-          'tbody',
+          'p',
           null,
-          list.map(function (item) {
-            return _react2.default.createElement(_ListItem2.default, { item: item, remove: remove, key: item.or_id });
-          }),
+          'date',
+          _react2.default.createElement('input', { type: 'text', onChange: changeField, name: 'date', defaultValue: 'yyyy-mm-dd' })
+        ),
+        _react2.default.createElement(
+          'button',
+          { type: 'submit' },
+          'create'
+        )
+      ) : _react2.default.createElement(
+        'form',
+        { onSubmit: resolve },
+        _react2.default.createElement(
+          'table',
+          null,
           _react2.default.createElement(
-            'tr',
+            'thead',
             null,
             _react2.default.createElement(
-              'td',
-              null,
+              'tr',
+              { className: 'tableHeaders' },
               _react2.default.createElement(
-                'p',
+                'th',
                 null,
-                'estimated price'
-              )
-            ),
-            _react2.default.createElement(
-              'td',
-              null,
+                'name'
+              ),
               _react2.default.createElement(
-                'p',
+                'th',
                 null,
-                ' ',
-                estimatedPrice.toFixed(2),
-                ' \u20AC'
+                'brand'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'category'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'price'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'quantity'
               )
             )
           ),
           _react2.default.createElement(
-            'tr',
+            'tbody',
             null,
+            list.map(function (item) {
+              return _react2.default.createElement(_ListItem2.default, { item: item, remove: remove, key: item.or_id });
+            }),
             _react2.default.createElement(
-              'td',
+              'tr',
               null,
               _react2.default.createElement(
-                'button',
-                { type: 'submit' },
-                'resolve'
+                'td',
+                null,
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'estimated price'
+                )
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  ' ',
+                  estimatedPrice.toFixed(2),
+                  ' \u20AC'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                _react2.default.createElement(
+                  'button',
+                  { type: 'submit' },
+                  'resolve'
+                )
               )
             )
           )
         )
+      ),
+      _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('img', { src: _pippuriKaarme2.default })
       )
     )
   );
 };
 
 exports.default = Shoppinglist;
+
+/***/ }),
+
+/***/ "./src/components/SignupForm.js":
+/*!**************************************!*\
+  !*** ./src/components/SignupForm.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _bird = __webpack_require__(/*! ../images/bird.png */ "./src/images/bird.png");
+
+var _bird2 = _interopRequireDefault(_bird);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SignupForm = function SignupForm(_ref) {
+  var username = _ref.username,
+      changeField = _ref.changeField,
+      password = _ref.password,
+      secret = _ref.secret,
+      signup = _ref.signup,
+      toggle = _ref.toggle;
+
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'container' },
+    _react2.default.createElement(
+      'div',
+      { className: 'listContainer' },
+      _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          { onSubmit: signup },
+          _react2.default.createElement(
+            'div',
+            null,
+            ' username ',
+            _react2.default.createElement('input', { type: 'text', name: 'username', value: username, onChange: changeField })
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            ' password ',
+            _react2.default.createElement('input', { type: 'password', name: 'password', value: password, onChange: changeField })
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            ' secret ',
+            _react2.default.createElement('input', { type: 'text', name: 'secret', value: secret, onChange: changeField })
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            ' signup '
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('img', { src: _bird2.default, alt: 'rappiKana' })
+      )
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick(e) {
+          return toggle(e);
+        } },
+      'switch to login'
+    )
+  );
+};
+
+exports.default = SignupForm;
 
 /***/ }),
 
@@ -26082,6 +26596,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _kalapelaaja = __webpack_require__(/*! ../images/kalapelaaja.png */ "./src/images/kalapelaaja.png");
+
+var _kalapelaaja2 = _interopRequireDefault(_kalapelaaja);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var GroceryForm = function GroceryForm(_ref) {
@@ -26092,91 +26610,100 @@ var GroceryForm = function GroceryForm(_ref) {
 
 
   return _react2.default.createElement(
-    "div",
-    null,
+    'div',
+    { className: 'listContainer' },
     _react2.default.createElement(
-      "form",
-      { onSubmit: create },
+      'div',
+      null,
       _react2.default.createElement(
-        "h2",
-        null,
-        "groceryForm"
-      ),
-      _react2.default.createElement(
-        "div",
-        null,
+        'form',
+        { onSubmit: create },
         _react2.default.createElement(
-          "p",
+          'h2',
           null,
-          "name",
-          _react2.default.createElement("input", { type: "text", name: "newName", onChange: changeField })
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        null,
+          'groceryForm'
+        ),
         _react2.default.createElement(
-          "p",
+          'div',
           null,
-          "price",
-          _react2.default.createElement("input", { type: "text", name: "price", onChange: changeField })
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
-          "p",
-          null,
-          "amount",
-          _react2.default.createElement("input", { type: "text", name: "amount", onChange: changeField })
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
-          "select",
-          { onChange: changeField, defaultValue: "choose", name: "category" },
           _react2.default.createElement(
-            "option",
-            { className: "defaultOption", value: "" },
-            "choose"
-          ),
-          categories.map(function (item) {
-            return _react2.default.createElement(
-              "option",
-              { key: item.cat_id, value: item.cat_id },
-              item.name
-            );
-          })
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        null,
+            'p',
+            null,
+            'name',
+            _react2.default.createElement('input', { type: 'text', name: 'newName', onChange: changeField })
+          )
+        ),
         _react2.default.createElement(
-          "select",
-          { onChange: changeField, name: "brand" },
+          'div',
+          null,
           _react2.default.createElement(
-            "option",
-            { className: "defaultOption", value: "" },
-            "choose"
-          ),
-          brands.map(function (item) {
-            return _react2.default.createElement(
-              "option",
-              { key: item.brand_id, value: item.brand_id },
-              item.name
-            );
-          })
+            'p',
+            null,
+            'price',
+            _react2.default.createElement('input', { type: 'text', name: 'price', onChange: changeField })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'p',
+            null,
+            'amount',
+            _react2.default.createElement('input', { type: 'text', name: 'amount', onChange: changeField })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'select',
+            { onChange: changeField, defaultValue: 'choose', name: 'category' },
+            _react2.default.createElement(
+              'option',
+              { className: 'defaultOption', value: '' },
+              'choose'
+            ),
+            categories.map(function (item) {
+              return _react2.default.createElement(
+                'option',
+                { key: item.cat_id, value: item.cat_id },
+                item.name
+              );
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'select',
+            { onChange: changeField, name: 'brand' },
+            _react2.default.createElement(
+              'option',
+              { className: 'defaultOption', value: '' },
+              'choose'
+            ),
+            brands.map(function (item) {
+              return _react2.default.createElement(
+                'option',
+                { key: item.brand_id, value: item.brand_id },
+                item.name
+              );
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'button',
+          { type: 'submit' },
+          'create'
         )
-      ),
-      _react2.default.createElement(
-        "button",
-        { type: "submit" },
-        "create"
       )
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement('img', { src: _kalapelaaja2.default })
     )
   );
 };
@@ -26202,6 +26729,116 @@ Object.defineProperty(exports, "__esModule", {
 var _history = __webpack_require__(/*! history */ "./node_modules/history/es/index.js");
 
 exports.default = (0, _history.createBrowserHistory)();
+
+/***/ }),
+
+/***/ "./src/images/agenttitomaatti3.png":
+/*!*****************************************!*\
+  !*** ./src/images/agenttitomaatti3.png ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/3dbd48139a1d917d7c53896a1ce33d6b-agenttitomaatti3.png";
+
+/***/ }),
+
+/***/ "./src/images/bird.png":
+/*!*****************************!*\
+  !*** ./src/images/bird.png ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/6350cbc0ae0c5515d904f9d1d393df08-bird.png";
+
+/***/ }),
+
+/***/ "./src/images/kalapelaaja.png":
+/*!************************************!*\
+  !*** ./src/images/kalapelaaja.png ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/8da0464bc37bce738d6f64c80a256467-kalapelaaja.png";
+
+/***/ }),
+
+/***/ "./src/images/kokkeli.png":
+/*!********************************!*\
+  !*** ./src/images/kokkeli.png ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/6b628f20c32fab1e6e46986b12e863cb-kokkeli.png";
+
+/***/ }),
+
+/***/ "./src/images/matatonsieni.png":
+/*!*************************************!*\
+  !*** ./src/images/matatonsieni.png ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/aee2d3db966b930a14bf3909ecc86279-matatonsieni.png";
+
+/***/ }),
+
+/***/ "./src/images/parsakaalibudda.png":
+/*!****************************************!*\
+  !*** ./src/images/parsakaalibudda.png ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/280fe4329b1fb05d181b319306b147e5-parsakaalibudda.png";
+
+/***/ }),
+
+/***/ "./src/images/pippuriKaarme.png":
+/*!**************************************!*\
+  !*** ./src/images/pippuriKaarme.png ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/0a191d5b48b8bbb2d17826145df74888-pippuriKaarme.png";
+
+/***/ }),
+
+/***/ "./src/images/polkupyoranauris3.png":
+/*!******************************************!*\
+  !*** ./src/images/polkupyoranauris3.png ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/d2aaf33a8e6a6ae19859fbd73540fc11-polkupyoranauris3.png";
+
+/***/ }),
+
+/***/ "./src/images/porkkananainen.png":
+/*!***************************************!*\
+  !*** ./src/images/porkkananainen.png ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/a6bdb29ae862473cacd44453016ba53e-porkkananainen.png";
+
+/***/ }),
+
+/***/ "./src/images/rappiRotta.png":
+/*!***********************************!*\
+  !*** ./src/images/rappiRotta.png ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/3993a7f0ba0e7aadf20abbbfc4f586f6-rappiRotta.png";
 
 /***/ }),
 
@@ -26313,14 +26950,14 @@ var getAll = function () {
 }();
 
 var create = function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(newItem) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(newItem, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return _axios2.default.post('/api/brands', newItem);
+            return _axios2.default.post('/api/brands', newItem, config);
 
           case 2:
             response = _context2.sent;
@@ -26334,20 +26971,20 @@ var create = function () {
     }, _callee2, undefined);
   }));
 
-  return function create(_x) {
+  return function create(_x, _x2) {
     return _ref2.apply(this, arguments);
   };
 }();
 
 var update = function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id, item) {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id, item, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return _axios2.default.put('/api/brands/' + id, item);
+            return _axios2.default.put('/api/brands/' + id, item, config);
 
           case 2:
             response = _context3.sent;
@@ -26361,20 +26998,20 @@ var update = function () {
     }, _callee3, undefined);
   }));
 
-  return function update(_x2, _x3) {
+  return function update(_x3, _x4, _x5) {
     return _ref3.apply(this, arguments);
   };
 }();
 
 var remove = function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id) {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.next = 2;
-            return _axios2.default.delete('/api/brands/' + id);
+            return _axios2.default.delete('/api/brands/' + id, config);
 
           case 2:
             response = _context4.sent;
@@ -26388,7 +27025,7 @@ var remove = function () {
     }, _callee4, undefined);
   }));
 
-  return function remove(_x4) {
+  return function remove(_x6, _x7) {
     return _ref4.apply(this, arguments);
   };
 }();
@@ -26447,14 +27084,14 @@ var getAll = function () {
 }();
 
 var create = function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(newItem) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(newItem, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return _axios2.default.post('/api/categories', newItem);
+            return _axios2.default.post('/api/categories', newItem, config);
 
           case 2:
             response = _context2.sent;
@@ -26468,20 +27105,20 @@ var create = function () {
     }, _callee2, undefined);
   }));
 
-  return function create(_x) {
+  return function create(_x, _x2) {
     return _ref2.apply(this, arguments);
   };
 }();
 
 var update = function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id, item) {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id, item, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return _axios2.default.put('/api/categories/' + id, item);
+            return _axios2.default.put('/api/categories/' + id, item, config);
 
           case 2:
             response = _context3.sent;
@@ -26495,20 +27132,20 @@ var update = function () {
     }, _callee3, undefined);
   }));
 
-  return function update(_x2, _x3) {
+  return function update(_x3, _x4, _x5) {
     return _ref3.apply(this, arguments);
   };
 }();
 
 var remove = function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id) {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.next = 2;
-            return _axios2.default.delete('/api/categories/' + id);
+            return _axios2.default.delete('/api/categories/' + id, config);
 
           case 2:
             response = _context4.sent;
@@ -26522,7 +27159,7 @@ var remove = function () {
     }, _callee4, undefined);
   }));
 
-  return function remove(_x4) {
+  return function remove(_x6, _x7) {
     return _ref4.apply(this, arguments);
   };
 }();
@@ -26581,14 +27218,14 @@ var getAll = function () {
 }();
 
 var create = function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(newItem) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(newItem, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return _axios2.default.post('/api/groceries', newItem);
+            return _axios2.default.post('/api/groceries', newItem, config);
 
           case 2:
             response = _context2.sent;
@@ -26602,20 +27239,20 @@ var create = function () {
     }, _callee2, undefined);
   }));
 
-  return function create(_x) {
+  return function create(_x, _x2) {
     return _ref2.apply(this, arguments);
   };
 }();
 
 var updateGrocery = function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id, item) {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id, item, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return _axios2.default.put('/api/groceries/' + id, item);
+            return _axios2.default.put('/api/groceries/' + id, item, config);
 
           case 2:
             response = _context3.sent;
@@ -26629,20 +27266,20 @@ var updateGrocery = function () {
     }, _callee3, undefined);
   }));
 
-  return function updateGrocery(_x2, _x3) {
+  return function updateGrocery(_x3, _x4, _x5) {
     return _ref3.apply(this, arguments);
   };
 }();
 
 var remove = function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id) {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.next = 2;
-            return _axios2.default.delete('/api/groceries/' + id);
+            return _axios2.default.delete('/api/groceries/' + id, config);
 
           case 2:
             response = _context4.sent;
@@ -26656,7 +27293,7 @@ var remove = function () {
     }, _callee4, undefined);
   }));
 
-  return function remove(_x4) {
+  return function remove(_x6, _x7) {
     return _ref4.apply(this, arguments);
   };
 }();
@@ -26714,14 +27351,14 @@ var getAll = function () {
 }();
 
 var add = function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(newItem) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(newItem, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return _axios2.default.post('/api/shoppinglist', newItem);
+            return _axios2.default.post('/api/shoppinglist', newItem, config);
 
           case 2:
             response = _context2.sent;
@@ -26735,20 +27372,20 @@ var add = function () {
     }, _callee2, undefined);
   }));
 
-  return function add(_x) {
+  return function add(_x, _x2) {
     return _ref2.apply(this, arguments);
   };
 }();
 
 var updateAmount = function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id, item) {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id, item, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.next = 2;
-            return _axios2.default.put('/api/shoppinglist/' + id, item);
+            return _axios2.default.put('/api/shoppinglist/' + id, item, config);
 
           case 2:
             response = _context3.sent;
@@ -26762,20 +27399,20 @@ var updateAmount = function () {
     }, _callee3, undefined);
   }));
 
-  return function updateAmount(_x2, _x3) {
+  return function updateAmount(_x3, _x4, _x5) {
     return _ref3.apply(this, arguments);
   };
 }();
 
 var remove = function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id) {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(id, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.next = 2;
-            return _axios2.default.delete('/api/shoppinglist/' + id);
+            return _axios2.default.delete('/api/shoppinglist/' + id, config);
 
           case 2:
             response = _context4.sent;
@@ -26789,20 +27426,20 @@ var remove = function () {
     }, _callee4, undefined);
   }));
 
-  return function remove(_x4) {
+  return function remove(_x6, _x7) {
     return _ref4.apply(this, arguments);
   };
 }();
 
 var resolveList = function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(emptyobj) {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(emptyobj, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
             _context5.next = 2;
-            return _axios2.default.post('/api/shoppinglist/resolve', emptyobj);
+            return _axios2.default.post('/api/shoppinglist/resolve', emptyobj, config);
 
           case 2:
             response = _context5.sent;
@@ -26816,20 +27453,20 @@ var resolveList = function () {
     }, _callee5, undefined);
   }));
 
-  return function resolveList(_x5) {
+  return function resolveList(_x8, _x9) {
     return _ref5.apply(this, arguments);
   };
 }();
 
 var newlist = function () {
-  var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(date) {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(date, config) {
     var response;
     return regeneratorRuntime.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
             _context6.next = 2;
-            return _axios2.default.post('/api/shoppinglist/new', date);
+            return _axios2.default.post('/api/shoppinglist/new', date, config);
 
           case 2:
             response = _context6.sent;
@@ -26843,7 +27480,7 @@ var newlist = function () {
     }, _callee6, undefined);
   }));
 
-  return function newlist(_x6) {
+  return function newlist(_x10, _x11) {
     return _ref6.apply(this, arguments);
   };
 }();
@@ -26897,12 +27534,92 @@ var getOne = function () {
     }, _callee8, undefined);
   }));
 
-  return function getOne(_x7) {
+  return function getOne(_x12) {
     return _ref8.apply(this, arguments);
   };
 }();
 
 exports.default = { getAll: getAll, add: add, updateAmount: updateAmount, remove: remove, resolveList: resolveList, newlist: newlist, getHistory: getHistory, getOne: getOne };
+
+/***/ }),
+
+/***/ "./src/services/users.js":
+/*!*******************************!*\
+  !*** ./src/services/users.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var login = function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(credentials) {
+    var response;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return _axios2.default.post('api/users/login', credentials);
+
+          case 2:
+            response = _context.sent;
+            return _context.abrupt('return', response.data);
+
+          case 4:
+          case 'end':
+            return _context.stop();
+        }
+      }
+    }, _callee, undefined);
+  }));
+
+  return function login(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var signup = function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(credentials) {
+    var response;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return _axios2.default.post('api/users/signup', credentials);
+
+          case 2:
+            response = _context2.sent;
+            return _context2.abrupt('return', response.data);
+
+          case 4:
+          case 'end':
+            return _context2.stop();
+        }
+      }
+    }, _callee2, undefined);
+  }));
+
+  return function signup(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+exports.default = { login: login, signup: signup };
 
 /***/ }),
 

@@ -1,6 +1,8 @@
 .container {
-  margin: 10;
-  background-color: #dee8e4
+    margin: 10;
+    background-color: #dee8e4;
+    background-size: 35px 35px;
+    background-image: linear-gradient(to right, grey 1px, transparent 1px), linear-gradient(to bottom, grey 1px, transparent 1px);
 }
 
 .groceryItem {
@@ -56,4 +58,14 @@
   text-align: center;
   font-color: #dee8e4;
   margin: auto;
+}
+
+td {
+    margin: 2px;
+    padding: 3px;
+}
+
+th {
+    margin: 2px;
+    padding: 3px;
 }

@@ -30,16 +30,16 @@ const BrandsAndCategories = ({ brands, categories, changeField, borc, show, maxi
 
         <div className="listContainer">
 
-        <table><tbody>
-        {borc === 'categories'
-          ?
-          categories.map(category => <Item toEdit={toEdit} maximize={maximize} item={category} show={show} key={category.cat_id} remove={remove}>{category.name}</Item>)
-          :
-          brands.map(brand => <Item toEdit={toEdit} item={brand} maximize={maximize} show={show} key={brand.brand_id} remove={remove}>{brand.name}</Item>)}
-          
+          <table><tbody>
+            {borc === 'categories'
+              ?
+              categories.map(category => <Item toEdit={toEdit} maximize={maximize} item={category} show={show} key={category.cat_id} remove={remove}>{category.name}</Item>)
+              :
+              brands.map(brand => <Item toEdit={toEdit} item={brand} maximize={maximize} show={show} key={brand.brand_id} remove={remove}>{brand.name}</Item>)}
+
           </tbody></table>
-              <div><img src={agentti} /></div>
-          </div>
+          <div><img src={agentti} /></div>
+        </div>
       </div>
     </div>
   )

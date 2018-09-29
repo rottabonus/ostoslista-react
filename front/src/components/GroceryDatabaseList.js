@@ -14,15 +14,20 @@ const GroceryDatabaseList = ({ groceries, show, filter, changeFilter, toEdit, re
       <div><Link to="/create"><button>Create</button></Link></div>
 
       <p> Filter items <input type="text" name="filter" value={filter} onChange={changeFilter}/></p>
-      <table className="table">
+      <table>
+        <thead>
+          <tr className="tableHeaders">
+            <th>name</th><th>brand</th><th>category</th><th>price</th><th>amount</th><th>quantity</th>
+          </tr>
+        </thead>
         <tbody>
           {filtered.map(grocery =>
             <GroceryItem key={grocery.gr_id} change={changeFilter} show={show} item={grocery} add={add} toEdit={toEdit} remove={remove} quantity={quantity}> </GroceryItem>
           )}
         </tbody>
       </table>
-      <div><img src={nainen} /></div>
-    </div> 
+      <div><img src={nainen}/></div>
+    </div>
   )
 }
 

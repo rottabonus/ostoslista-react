@@ -1,6 +1,9 @@
 {
   "name": "mittarikatuShoppingList-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "engines": {
+    "node": "8.11.1"
+  },
   "description": "backend for mittarikatu-crew shoppinglist",
   "main": "App.js",
   "scripts": {

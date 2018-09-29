@@ -15,32 +15,32 @@ const Shoppinglist = ({ list, remove,  resolve, newList, changeField, history })
     <div >
       <h2>Shoppinglist</h2>
       <div className="listContainer">
-      {
-        isResolved === 0 ?
-          <form onSubmit={newList}>
-            <h3>create new</h3>
-            <p>date<input type="text" onChange={changeField} name="date" defaultValue="yyyy-mm-dd"/></p>
+        {
+          isResolved === 0 ?
+            <form onSubmit={newList}>
+              <h3>create new</h3>
+              <p>date<input type="text" onChange={changeField} name="date" defaultValue="yyyy-mm-dd"/></p>
 			  <button type="submit">create</button>
-          </form>
-          :
-          <form onSubmit={resolve}>
-            <table class="table">
-              <thead>
-                <tr className="tableHeaders">
-                  <th>name</th><th>brand</th><th>category</th><th>price</th><th>quantity</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  list.map(item => <ListItem item={item} remove={remove} key={item.or_id}></ListItem>)
-                }
-                <tr><td><p>estimated price</p></td><td><p> {estimatedPrice.toFixed(2)} €</p></td></tr>
-                <tr><td><button type="submit">resolve</button></td></tr>
-              </tbody>
-            </table>
-          </form>
-      }
-      <div><img src={pippuriKaarme} /></div>
+            </form>
+            :
+            <form onSubmit={resolve}>
+              <table>
+                <thead>
+                  <tr className="tableHeaders">
+                    <th>name</th><th>brand</th><th>category</th><th>price</th><th>quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    list.map(item => <ListItem item={item} remove={remove} key={item.or_id}></ListItem>)
+                  }
+                  <tr><td><p>estimated price</p></td><td><p> {estimatedPrice.toFixed(2)} €</p></td></tr>
+                  <tr><td><button type="submit">resolve</button></td></tr>
+                </tbody>
+              </table>
+            </form>
+        }
+        <div><img src={pippuriKaarme} /></div>
       </div>
     </div>
   )

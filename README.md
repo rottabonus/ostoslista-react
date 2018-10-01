@@ -1,7 +1,7 @@
 # ostoslista-react
 shoppinglist crud with nodejs backend and react frontend (under construction)
 
-[live demo in heroku](https://stormy-escarpment-74299.herokuapp.com/)
+[live demo in heroku](https://mittarikatu-ostoslista.herokuapp.com/)
 
 ## dependencies for production
 

@@ -3,6 +3,9 @@ shoppinglist crud with nodejs backend and react frontend (under construction)
 
 [live demo in heroku](https://mittarikatu-ostoslista.herokuapp.com/)
 
+user: test
+pw: shopper
+
 ## dependencies for production
 
 front [webpack](https://www.npmjs.com/package/webpack)
